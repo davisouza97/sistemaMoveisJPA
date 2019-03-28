@@ -30,7 +30,7 @@ public class Funcionario extends Pessoa implements Serializable {
         return FuncionarioDAO.getInstance().find(this.getId());
     }
     
-    public List<Funcionario> findAll(){
+    public static List<Funcionario> findAll(){
         return FuncionarioDAO.getInstance().findAll();
     } 
     

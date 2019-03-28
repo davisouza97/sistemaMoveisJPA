@@ -25,7 +25,7 @@ public class Ferramenta extends MaterialFerramenta {
         return FerramentaDAO.getInstance().find(this.getId());
     }
 
-    public List<Ferramenta> findAll() {
+    public static List<Ferramenta> findAll() {
         return FerramentaDAO.getInstance().findAll();
     }
 }
