@@ -18,6 +18,22 @@ public class Funcionario extends Pessoa implements Serializable {
     private String comissao;
     private String senha;
 
+    public void save() {
+        FuncionarioDAO.getInstance().save(this);
+    }
+
+    public void remove() {
+        FuncionarioDAO.getInstance().remove(this);
+    }
+    
+    public Funcionario find(){
+        return FuncionarioDAO.getInstance().find(this.getId());
+    }
+    
+    public List<Funcionario> findAll(){
+        return FuncionarioDAO.getInstance().findAll();
+    } 
+    
     public String getCargo() {
         return cargo;
     }

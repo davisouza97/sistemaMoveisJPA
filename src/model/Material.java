@@ -12,4 +12,19 @@ public class Material extends MaterialFerramenta {
     }
 
     
+    public void save() {
+        MaterialDAO.getInstance().save(this);
+    }
+
+    public void remove() {
+        MaterialDAO.getInstance().remove(this);
+    }
+    
+    public Material find(){
+        return MaterialDAO.getInstance().findMaterial(this.getId());
+    }
+    
+    public static List<Material> findAll(){
+        return MaterialDAO.getInstance().findAllMaterial();
+    } 
 }

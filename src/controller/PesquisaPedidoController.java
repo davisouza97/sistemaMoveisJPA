@@ -17,15 +17,9 @@ public class PesquisaPedidoController extends HttpServlet {
 
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException,IOException {
-        try{
-            request.setAttribute("pedidos", Pedido.obterTodosPedidos());
-            RequestDispatcher view = request.getRequestDispatcher("/gridPedido.jsp");
-            view.forward(request,response);
-        } catch (ClassNotFoundException e){
-            throw new ServletException(e);
-        } catch (SQLException e){
-            throw new ServletException(e);
-        }
+        request.setAttribute("pedidos", Pedido.findAll());
+        RequestDispatcher view = request.getRequestDispatcher("/gridPedido.jsp");
+        view.forward(request,response);
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);

@@ -13,10 +13,14 @@ public class FuncionarioDAO {
 
     private static FuncionarioDAO instance = new FuncionarioDAO();
 
-    private static FuncionarioDAO getInstance() {
+    public static FuncionarioDAO getInstance() {
         return instance;
     }
 
+    private FuncionarioDAO() {
+    }
+
+    
     public static void save(Funcionario funcionario) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();

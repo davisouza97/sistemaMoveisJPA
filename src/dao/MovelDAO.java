@@ -40,7 +40,7 @@ public class MovelDAO {
         }
     }
 
-    public void Remove(Movel movel) {
+    public void remove(Movel movel) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         try {
@@ -57,7 +57,7 @@ public class MovelDAO {
         }
     }
 
-    public Movel getMovel(Long id) {
+    public Movel findMovel(Long id) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         Movel movel = null;
@@ -76,7 +76,7 @@ public class MovelDAO {
         return movel;
     }
 
-    public List<Movel> getAllMovel() {
+    public List<Movel> findAllMovel() {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         List<Movel> moveis = null;
