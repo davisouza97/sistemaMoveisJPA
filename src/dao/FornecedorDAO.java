@@ -5,145 +5,94 @@ import model.Fornecedor;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 
 public class FornecedorDAO {
 
-    public static void gravar(Fornecedor fornecedor) throws SQLException, ClassNotFoundException {
-        Connection conexao = null;
-        PreparedStatement comando = null;
-        try {
-            conexao = BD.getConexao();
-            String sql = "insert into fornecedor (nome, cnpj, email,"
-                    + "cep, logradouro, numero, complemento, bairro,  uf, cidade, telefone, celular, idfornecedor)"
-                    + "values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
-            comando = conexao.prepareStatement(sql);
-            comando.setString(1, fornecedor.getNome());
-            comando.setString(2, fornecedor.getCnpj());
-            comando.setString(3, fornecedor.getEmail());
-            comando.setString(4, fornecedor.getCep());
-            comando.setString(5, fornecedor.getLogradouro());
-            comando.setString(6, fornecedor.getNumero());
-            comando.setString(7, fornecedor.getComplemento());
-            comando.setString(8, fornecedor.getBairro());
-            comando.setString(9, fornecedor.getUf());
-            comando.setString(10, fornecedor.getCidade());
-            comando.setString(11, fornecedor.getTelefone());
-            comando.setString(12, fornecedor.getCelular());
-            comando.setLong(13, fornecedor.getId());
-            comando.execute();
-            BD.fecharConexao(conexao, comando);
+    private static FornecedorDAO instance = new FornecedorDAO();
 
-        } catch (SQLException e) {
-            throw e;
-        }
+    private static FornecedorDAO getInstance() {
+        return instance;
     }
 
-    public static void alterar(Fornecedor fornecedor) throws SQLException, ClassNotFoundException {
-        Connection conexao = null;
-        PreparedStatement comando = null;
+    public static void save(Fornecedor fornecedor) {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
         try {
-            conexao = BD.getConexao();
-            String sql = ("UPDATE Fornecedor SET nome = ?, cnpj = ?,"
-                    + "email = ?, CEP = ?, logradouro = ?, numero = ?, complemento = ?, bairro = ?, uf = ?, cidade = ?, telefone = ?, celular = ?"
-                    + "WHERE idFornecedor = ?");
-
-            comando = conexao.prepareStatement(sql);
-
-            comando.setString(1, fornecedor.getNome());
-            comando.setString(2, fornecedor.getCnpj());
-            comando.setString(3, fornecedor.getEmail());
-            comando.setString(4, fornecedor.getCep());
-            comando.setString(5, fornecedor.getLogradouro());
-            comando.setString(6, fornecedor.getNumero());
-            comando.setString(7, fornecedor.getComplemento());
-            comando.setString(8, fornecedor.getBairro());
-            comando.setString(9, fornecedor.getUf());
-            comando.setString(10, fornecedor.getCidade());
-             comando.setString(11, fornecedor.getTelefone());
-            comando.setString(12, fornecedor.getCelular());
-            comando.setLong(13, fornecedor.getId());
-            comando.execute();
-            BD.fecharConexao(conexao, comando);
-
-        } catch (SQLException e) {
-            throw e;
-        }
-    }
-
-    public static void excluir(Fornecedor fornecedor) throws SQLException, ClassNotFoundException {
-        Connection conexao = null;
-        PreparedStatement comando = null;
-        try {
-            conexao = BD.getConexao();
-            String sql = "delete from Fornecedor WHERE idFornecedor=? ";
-            comando = conexao.prepareStatement(sql);
-            comando.setLong(1, fornecedor.getId());
-            comando.execute();
-
-        } catch (SQLException e) {
-            throw e;
+            tx.begin();
+            if (fornecedor.getId() != null) {
+                em.merge(fornecedor);
+            } else {
+                em.persist(fornecedor);
+            }
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
         } finally {
-            BD.fecharConexao(conexao, comando);
+            PersistenceUtil.close(em);
         }
     }
 
-    public static Fornecedor obterFornecedor(Long idFornecedor) throws ClassNotFoundException {
-        Connection conexao = null;
-        PreparedStatement comando = null;
+    public static void remove(Fornecedor fornecedor) {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        try {
+            tx.begin();
+            em.remove(em.getReference(Fornecedor.class, fornecedor.getId()));
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
+        } finally {
+            PersistenceUtil.close(em);
+        }
+
+    }
+
+    public static Fornecedor find(Long id) {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
         Fornecedor fornecedor = null;
         try {
-            conexao = BD.getConexao();
-            String sql = "SELECT * FROM Fornecedor WHERE idFornecedor = ?";
-            comando = conexao.prepareStatement(sql);
-            comando.setInt(1, Math.toIntExact(idFornecedor));
-            ResultSet rs = comando.executeQuery();
-            rs.first();
-            fornecedor = getFornecedor(rs);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            BD.fecharConexao(conexao, comando);
+            tx.begin();
+            fornecedor = em.find(Fornecedor.class, id);
+            tx.commit();       
+        } catch (Exception e) {
+            if(tx != null && tx.isActive()){
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
+        }finally{
+            PersistenceUtil.close(em);
         }
         return fornecedor;
     }
 
-    public static List<Fornecedor> obterTodosFornecedor() throws ClassNotFoundException {
-        Connection conexao = null;
-        Statement comando = null;
-        List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();//coloca o nome da lista no plural
+    public static List<Fornecedor> findAll(){
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        List<Fornecedor> fornecedores = null;
         try {
-            conexao = BD.getConexao();
-            comando = conexao.createStatement();
-            String sql = "SELECT * FROM Fornecedor";
-            ResultSet rs = comando.executeQuery(sql);
-            while (rs.next()) {
-                fornecedores.add(getFornecedor(rs));
+           tx.begin();
+           TypedQuery<Fornecedor> query = em.createQuery("select f From Fornecedor f", Fornecedor.class);
+           fornecedores = query.getResultList();
+         tx.commit();       
+        } catch (Exception e) {
+            if(tx != null && tx.isActive()){
+                tx.rollback();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            BD.fecharConexao(conexao, comando);
+            throw new RuntimeException(e);
+        }finally{
+            PersistenceUtil.close(em);
         }
-        return fornecedores;//retorna a lista
+        return fornecedores;
     }
 
-    private final static Fornecedor getFornecedor(ResultSet rs) throws SQLException {
-        return new Fornecedor(
-                rs.getLong("idFornecedor"),
-                rs.getString("nome"),
-                rs.getString("cnpj"),
-                rs.getString("email"),
-                rs.getString("cep"),
-                rs.getString("logradouro"),
-                rs.getString("numero"),
-                rs.getString("complemento"),
-                rs.getString("bairro"),
-                rs.getString("uf"),
-                rs.getString("cidade"),
-                rs.getString("telefone"),
-                rs.getString("celular"));
-    }
-    
-    
 }
