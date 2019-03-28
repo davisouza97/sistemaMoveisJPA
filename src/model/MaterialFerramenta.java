@@ -36,6 +36,11 @@ public abstract class MaterialFerramenta {
         this.idFornecedor = 0l;
     }
 
+    public MaterialFerramenta() {
+    }
+
+    
+    
     public void setFornecedor(Fornecedor fornecedor) {
         this.fornecedor = fornecedor;
     }

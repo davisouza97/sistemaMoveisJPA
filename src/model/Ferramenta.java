@@ -13,6 +13,11 @@ public class Ferramenta extends MaterialFerramenta {
         super(nome, tipo, valorUnitario, qtdEstoque, unidade, fornecedor);
     }
 
+    public Ferramenta() {
+    }
+    
+    
+    
     public void save() {
         FerramentaDAO.getInstance().save(this);
     }
