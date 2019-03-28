@@ -14,15 +14,9 @@ import java.sql.SQLException;
 public class PesquisaClienteController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            request.setAttribute("clientes", Cliente.obterTodosClientes());
-            RequestDispatcher view = request.getRequestDispatcher("gridCliente.jsp");
-            view.forward(request, response);
-        } catch (ClassNotFoundException e) {
-            throw new ServletException(e);
-        } catch (SQLException e) {
-            throw new ServletException(e);
-        }
+        request.setAttribute("clientes", Cliente.findAll());
+        RequestDispatcher view = request.getRequestDispatcher("gridCliente.jsp");
+        view.forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

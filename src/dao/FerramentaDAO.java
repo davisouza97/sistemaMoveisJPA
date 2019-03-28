@@ -11,11 +11,14 @@ import model.Cliente;
 public class FerramentaDAO {
 
     private static FerramentaDAO instance = new FerramentaDAO();
-    private static FerramentaDAO getInstance(){
+    public static FerramentaDAO getInstance(){
         return instance;
     }
+    private FerramentaDAO(){
+        
+    }
 
-    public static void save(Ferramenta ferramenta)  {
+    public void save(Ferramenta ferramenta)  {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         try {
@@ -36,7 +39,7 @@ public class FerramentaDAO {
         }
        
     }
-    public static void remove(Ferramenta ferramenta) {
+    public void remove(Ferramenta ferramenta) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         try {
@@ -53,7 +56,7 @@ public class FerramentaDAO {
         }
     }
 
-    public static Ferramenta find(Long id) {
+    public Ferramenta find(Long id) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         Ferramenta ferramenta = null;
@@ -72,7 +75,7 @@ public class FerramentaDAO {
         return ferramenta;
         
     }
-    public static List<Ferramenta> findAll(){
+    public List<Ferramenta> findAll(){
        EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         List<Ferramenta> ferramentas = null;

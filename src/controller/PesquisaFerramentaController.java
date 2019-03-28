@@ -22,15 +22,9 @@ import model.Ferramenta;
 public class PesquisaFerramentaController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-         try{
-            request.setAttribute("ferramentas", Ferramenta.obterTodasFerramentas());
-            RequestDispatcher view = request.getRequestDispatcher("gridFerramenta.jsp");
-            view.forward(request, response);
-        }catch (ClassNotFoundException e){
-            throw  new ServletException(e);
-        }catch (SQLException e){
-            throw new ServletException(e);
-        }
+        request.setAttribute("ferramentas", Ferramenta.findAll());
+        RequestDispatcher view = request.getRequestDispatcher("gridFerramenta.jsp");
+        view.forward(request, response);
     }
    
 

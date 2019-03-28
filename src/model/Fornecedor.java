@@ -1,6 +1,7 @@
 package model;
 
 import dao.FornecedorDAO;
+import java.io.Serializable;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -10,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Fornecedor {
+public class Fornecedor implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -42,7 +43,21 @@ public class Fornecedor {
         this.telefone = telefone;
         this.celular = celular;
     }
-    
+    public void save() {
+        FornecedorDAO.getInstance().save(this);
+    }
+
+    public void remove() {
+        FornecedorDAO.getInstance().remove(this);
+    }
+
+    public Fornecedor find() {
+        return FornecedorDAO.getInstance().find(this.getId());
+    }
+
+    public static List<Fornecedor> findAll() {
+        return FornecedorDAO.getInstance().findAll();
+    }
 
     public Long getId() {
         return id;

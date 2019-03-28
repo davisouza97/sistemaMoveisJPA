@@ -13,11 +13,14 @@ public class FornecedorDAO {
 
     private static FornecedorDAO instance = new FornecedorDAO();
 
-    private static FornecedorDAO getInstance() {
+    public static FornecedorDAO getInstance() {
         return instance;
     }
+    private FornecedorDAO(){
+        
+    }
 
-    public static void save(Fornecedor fornecedor) {
+    public void save(Fornecedor fornecedor) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         try {
@@ -38,7 +41,7 @@ public class FornecedorDAO {
         }
     }
 
-    public static void remove(Fornecedor fornecedor) {
+    public void remove(Fornecedor fornecedor) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         try {
@@ -56,7 +59,7 @@ public class FornecedorDAO {
 
     }
 
-    public static Fornecedor find(Long id) {
+    public Fornecedor find(Long id) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         Fornecedor fornecedor = null;
@@ -75,7 +78,7 @@ public class FornecedorDAO {
         return fornecedor;
     }
 
-    public static List<Fornecedor> findAll(){
+    public List<Fornecedor> findAll(){
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         List<Fornecedor> fornecedores = null;

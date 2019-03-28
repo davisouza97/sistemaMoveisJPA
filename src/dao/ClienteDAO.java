@@ -9,8 +9,11 @@ import javax.persistence.TypedQuery;
 
 public class ClienteDAO {
     private static ClienteDAO instance = new ClienteDAO();
-    private static ClienteDAO getInstance(){
+    public static ClienteDAO getInstance(){
         return instance;
+    }
+    private ClienteDAO(){
+        
     }
 
     public static void save(Cliente cliente)  {
@@ -34,7 +37,7 @@ public class ClienteDAO {
         }
        
     }
-    public static void remove(Cliente cliente) {
+    public void remove(Cliente cliente) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         try {
@@ -51,7 +54,7 @@ public class ClienteDAO {
         }
     }
 
-    public static Cliente find(Long id) {
+    public Cliente find(Long id) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         Cliente cliente = null;
@@ -70,7 +73,7 @@ public class ClienteDAO {
         return cliente;
         
     }
-    public static List<Cliente> findAll(){
+    public List<Cliente> findAll(){
        EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         List<Cliente> clientes = null;

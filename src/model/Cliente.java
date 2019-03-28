@@ -14,4 +14,16 @@ public class Cliente extends Pessoa implements Serializable{
         super(nome, cpf, dataNascimento, email, cep, logradouro, numero, complemento, bairro, uf, cidade, telefone, celular);
     }
     
+    public void save(){
+        ClienteDAO.getInstance().save(this);
+    }
+    public void remove(){
+        ClienteDAO.getInstance().remove(this);
+    }
+    public Cliente find(){
+        return ClienteDAO.getInstance().find(this.getId());
+    }
+    public static List<Cliente> findAll(){
+        return ClienteDAO.getInstance().findAll();
+    }
 }
