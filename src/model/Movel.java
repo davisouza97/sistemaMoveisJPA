@@ -1,14 +1,23 @@
 package model;
 
 import dao.MovelDAO;
+import java.io.Serializable;
 
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
-public class Movel {
-
+@Entity
+public class Movel implements Serializable{
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idMovel;
     private String nome;
     private Double preco;
@@ -18,13 +27,13 @@ public class Movel {
     private Double comprimento;
     private String acabamento;
     private Double peso;
+    @ManyToOne
     private Material material;
-    private Long idMaterial;
-    private Long idPedido;
-   
+    @ManyToOne
+    private Pedido pedido;
 
-    public Movel(Long idMovel, String nome, double preco, String tipo, double altura, double largura, double comprimento, String acabamento, double peso, Material material) {
-        this.idMovel = idMovel;
+    public Movel(String nome, Double preco, String tipo, Double altura, Double largura, Double comprimento, String acabamento, Double peso, Material material, Pedido pedido) {
+        
         this.nome = nome;
         this.preco = preco;
         this.tipo = tipo;
@@ -34,15 +43,99 @@ public class Movel {
         this.acabamento = acabamento;
         this.peso = peso;
         this.material = material;
-        this.idMaterial = 0l;   
+        this.pedido = pedido;
     }
 
-    public Movel(Long idMovel, String nome) {
+    public Long getIdMovel() {
+        return idMovel;
+    }
+
+    public void setIdMovel(Long idMovel) {
         this.idMovel = idMovel;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
-   
+    public Double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(Double preco) {
+        this.preco = preco;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public Double getAltura() {
+        return altura;
+    }
+
+    public void setAltura(Double altura) {
+        this.altura = altura;
+    }
+
+    public Double getLargura() {
+        return largura;
+    }
+
+    public void setLargura(Double largura) {
+        this.largura = largura;
+    }
+
+    public Double getComprimento() {
+        return comprimento;
+    }
+
+    public void setComprimento(Double comprimento) {
+        this.comprimento = comprimento;
+    }
+
+    public String getAcabamento() {
+        return acabamento;
+    }
+
+    public void setAcabamento(String acabamento) {
+        this.acabamento = acabamento;
+    }
+
+    public Double getPeso() {
+        return peso;
+    }
+
+    public void setPeso(Double peso) {
+        this.peso = peso;
+    }
+
+    public Material getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(Material material) {
+        this.material = material;
+    }
+
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
+
+
+    
     public void gravar() throws SQLException, ClassNotFoundException {
         MovelDAO.gravar(this);
     }
@@ -63,95 +156,4 @@ public class Movel {
         return MovelDAO.obterTodosMoveis();
     }
 
-    public Long getIdMovel() {
-        return idMovel;
-    }
-
-    public void setIdMovel(long idMovel) {
-        this.idMovel = idMovel;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(double preco) {
-        this.preco = preco;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public double getAltura() {
-        return altura;
-    }
-
-    public void setAltura(double altura) {
-        this.altura = altura;
-    }
-
-    public double getLargura() {
-        return largura;
-    }
-
-    public void setLargura(double largura) {
-        this.largura = largura;
-    }
-
-    public double getComprimento() {
-        return comprimento;
-    }
-
-    public void setComprimento(double comprimento) {
-        this.comprimento = comprimento;
-    }
-
-    public String getAcabamento() {
-        return acabamento;
-    }
-
-    public void setAcabamento(String acabamento) {
-        this.acabamento = acabamento;
-    }
-
-    public double getPeso() {
-        return peso;
-    }
-
-    public void setPeso(double peso) {
-        this.peso = peso;
-    }
-
-    public void setIdMovel(Long id) {       //COLOCAR EM TODOS QUE TEM CHAVE ESTRANGEIRA
-        this.idMovel = id;
-    }
-
-    public Material getMaterial() {
-        return material;
-    }
-
-    public void setMaterial(Material material) {
-        this.material = material;
-    }
-
-    public Long getIdMaterial() {
-        return idMaterial;
-    }
-
-    public void setIdMaterial(Long idMaterial) {
-        this.idMaterial = idMaterial;
-    }
 }

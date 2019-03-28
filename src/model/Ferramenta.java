@@ -4,26 +4,14 @@ import dao.FerramentaDAO;
 
 import java.sql.SQLException;
 import java.util.List;
-
+import javax.persistence.Entity;
+@Entity
 public class Ferramenta extends MaterialFerramenta {
 
-    private Long idFerramenta;
-
-    public Ferramenta() {
-    }
-
-    public Ferramenta(Long idFerramenta, String nome) {
-        this.setIdFerramenta(idFerramenta);
-        this.setNome(nome);
-       
-    }
-
-    public Ferramenta(Long idFerramenta, String nome, String tipo, double valorUnitario,
-                      double qtdEstoque, String unidade, Fornecedor fornecedor) {
+    public Ferramenta(String nome, String tipo, double valorUnitario, double qtdEstoque, String unidade, Fornecedor fornecedor) {
         super(nome, tipo, valorUnitario, qtdEstoque, unidade, fornecedor);
-       this.idFerramenta = idFerramenta;
-
     }
+    
     public  void  gravar() throws SQLException, ClassNotFoundException{
         FerramentaDAO.gravar(this);
     }
@@ -44,11 +32,4 @@ public class Ferramenta extends MaterialFerramenta {
         return FerramentaDAO.obterTodasFerramentas();
     }
 
-    public Long getIdFerramenta() {
-        return idFerramenta;
-    }
-
-    public void setIdFerramenta(Long idFerramenta) {
-        this.idFerramenta = idFerramenta;
-    }
 }
