@@ -5,144 +5,94 @@ import model.Cliente;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceUtil;
+import javax.persistence.TypedQuery;
 
 public class ClienteDAO {
+    private static ClienteDAO instance = new ClienteDAO();
+    private static ClienteDAO getInstance(){
+        return instance;
+    }
 
-    public static void gravar(Cliente cliente) throws SQLException, ClassNotFoundException {
-        Connection conexao = null;
-        PreparedStatement comando = null;
-
+    public static void save(Cliente cliente)  {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
         try {
-            conexao = BD.getConexao();
-            String sql = "insert into cliente (nome ,cpf,dataNascimento,email,cep,logradouro,numero,complemento,"
-                    + "bairro,uf,cidade,telefone, celular, idCliente) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-            comando = conexao.prepareStatement(sql);
-            comando.setString(1, cliente.getNome());
-            comando.setString(2, cliente.getCpf());
-            comando.setString(3, cliente.getDataNascimento());
-            comando.setString(4, cliente.getEmail());
-            comando.setString(5, cliente.getCep());
-            comando.setString(6, cliente.getLogradouro());
-            comando.setString(7, cliente.getNumero());
-            comando.setString(8, cliente.getComplemento());
-            comando.setString(9, cliente.getBairro());
-            comando.setString(10, cliente.getUf());
-            comando.setString(11, cliente.getCidade());
-            comando.setString(12, cliente.getTelefone());
-            comando.setString(13, cliente.getCelular());
-            comando.setLong(14, cliente.getIdCliente());
-            
-            comando.execute();
-            BD.fecharConexao(conexao, comando);
-        } catch (SQLException e) {
-            BD.fecharConexao(conexao, comando);
-            throw e;
+            tx.begin();
+            if(cliente.getId()!= null){
+                em.merge(cliente);
+            }else{
+            em.persist(cliente);
+        }
+         tx.commit();       
+        } catch (Exception e) {
+            if(tx != null && tx.isActive()){
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
+        }finally{
+            PersistenceUtil.close(em);
+        }
+       
+    }
+    public static void remove(Cliente cliente) {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        try {
+            tx.begin();
+            em.remove(em.getReference(Cliente.class, cliente.getIdCliente()));
+            tx.commit();       
+        } catch (Exception e) {
+            if(tx != null && tx.isActive()){
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
+        }finally{
+            PersistenceUtil.close(em);
         }
     }
 
-    public static void alterar(Cliente cliente) throws SQLException, ClassNotFoundException {
-        Connection conexao = null;
-        PreparedStatement comando = null;
-        try {
-            conexao = BD.getConexao();
-            String sql = ("UPDATE Cliente SET nome = ?, cpf=?, dataNascimento=?,email=?, cep=?, logradouro=?,"
-                    + " numero=?, complemento = ?, bairro=?, uf=?, cidade = ?, telefone = ?, celular = ? WHERE idCliente = ?");
-            comando = conexao.prepareStatement(sql);
-
-            comando.setString(1, cliente.getNome());
-            comando.setString(2, cliente.getCpf());
-            comando.setString(3, cliente.getDataNascimento());
-            comando.setString(4, cliente.getEmail());
-            comando.setString(5, cliente.getCep());
-            comando.setString(6, cliente.getLogradouro());
-            comando.setString(7, cliente.getNumero());
-            comando.setString(8, cliente.getComplemento());
-            comando.setString(9, cliente.getBairro());
-            comando.setString(10, cliente.getUf());
-            comando.setString(11, cliente.getCidade());
-            comando.setString(12, cliente.getTelefone());
-            comando.setString(13, cliente.getCelular());
-            comando.setLong(14, cliente.getIdCliente());
-            comando.execute();
-            BD.fecharConexao(conexao, comando);
-        } catch (SQLException e) {
-            throw e;
-        }
-    }
-
-    public static void excluir(Cliente cliente) throws SQLException, ClassNotFoundException {
-        Connection conexao = null;
-        PreparedStatement comando = null;
-        try {
-            conexao = BD.getConexao();
-            String sql = "delete from Cliente WHERE idCliente=? ";
-            comando = conexao.prepareStatement(sql);
-            comando.setLong(1, cliente.getIdCliente());
-            comando.execute();
-        } catch (SQLException e) {
-            throw e;
-        } finally {
-            BD.fecharConexao(conexao, comando);
-        }
-    }
-
-    public static Cliente obterCLiente(Long idCliente) throws ClassNotFoundException {
-        Connection conexao = null;
-        PreparedStatement comando = null;
+    public static Cliente find(Long idCliente) {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
         Cliente cliente = null;
         try {
-            conexao = BD.getConexao();
-            String sql = "SELECT * FROM Cliente WHERE idCliente = ?";
-            comando = conexao.prepareStatement(sql);
-            comando.setLong(1, idCliente);
-            ResultSet rs = comando.executeQuery();
-            rs.first();
-            cliente = createUser(rs);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            BD.fecharConexao(conexao, comando);
+            tx.begin();
+            cliente = em.find(Cliente.class, idCliente);
+            tx.commit();       
+        } catch (Exception e) {
+            if(tx != null && tx.isActive()){
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
+        }finally{
+            PersistenceUtil.close(em);
         }
         return cliente;
+        
     }
-
-    public static List<Cliente> obterTodosClientes() throws ClassNotFoundException {
-        Connection conexao = null;
-        Statement comando = null;
-        List<Cliente> clientes = new ArrayList<Cliente>();
+    public static ArrayList<Cliente>findAll(){
+       EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        ArrayList<Cliente> clientes = null;
         try {
-            conexao = BD.getConexao();
-            comando = conexao.createStatement();
-            String sql = "SELECT * FROM cliente";
-            ResultSet rs = comando.executeQuery(sql);
-            while (rs.next()) {
-                clientes.add(createUser(rs));
+           tx.begin();
+           TypedQuery<Cliente> query = em.createQuery("select c From Cliente c", Cliente.class);
+           clientes = query.getResultList();
+         tx.commit();       
+        } catch (Exception e) {
+            if(tx != null && tx.isActive()){
+                tx.rollback();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            BD.fecharConexao(conexao, comando);
+            throw new RuntimeException(e);
+        }finally{
+            PersistenceUtil.close(em);
         }
         return clientes;
+        
     }
 
-    private static Cliente createUser(ResultSet rs) throws SQLException {
-        return new Cliente(
-                rs.getLong("idCliente"),
-                rs.getString("nome"),
-                rs.getString("cpf"),
-                rs.getString("dataNascimento"),
-                rs.getString("email"),
-                rs.getString("cep"),
-                rs.getString("logradouro"),
-                rs.getString("numero"),
-                rs.getString("complemento"),
-                rs.getString("bairro"),
-                rs.getString("uf"),
-                rs.getString("cidade"),
-                rs.getString("telefone"),
-                rs.getString("celular"));    //A ordem daqui tem que ser igual ao do construtor (antes o id tava em primeiro mas na classe é o ultimo)
-    }
-
+    
 }
