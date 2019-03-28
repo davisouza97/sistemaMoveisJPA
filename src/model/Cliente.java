@@ -14,23 +14,4 @@ public class Cliente extends Pessoa implements Serializable{
         super(nome, cpf, dataNascimento, email, cep, logradouro, numero, complemento, bairro, uf, cidade, telefone, celular);
     }
     
-    public  void  gravar() throws SQLException, ClassNotFoundException{
-        ClienteDAO.gravar(this);
-    }
-
-    public void alterar() throws  SQLException, ClassNotFoundException{
-        ClienteDAO.alterar(this);
-    }
-
-    public  void excluir() throws  SQLException, ClassNotFoundException{
-        ClienteDAO.excluir(this);
-    }
-
-    public static Cliente obterCliente(Long idCliente) throws  SQLException, ClassNotFoundException{
-        return ClienteDAO.obterCLiente(idCliente);
-    }
-
-    public static List<Cliente> obterTodosClientes() throws ClassNotFoundException, SQLException{
-        return ClienteDAO.obterTodosClientes();
-    }
 }

@@ -25,9 +25,6 @@ public abstract class MaterialFerramenta {
     private Fornecedor fornecedor;
     private Long idFornecedor;
 
-    public MaterialFerramenta() {
-    }
-
     public MaterialFerramenta(String nome, String tipo, double valorUnitario, double qtdEstoque, String unidade, Fornecedor fornecedor) {
         this.nome = nome;
         this.tipo = tipo;
@@ -36,20 +33,6 @@ public abstract class MaterialFerramenta {
         this.unidade = unidade;
         this.fornecedor = fornecedor;
         this.idFornecedor = 0l;
-    }
-
-    public Fornecedor getFornecedor() {
-        if (idFornecedor != 0 && fornecedor == null) {
-
-            try {
-                fornecedor = Fornecedor.obterFornecedor(idFornecedor);
-            } catch (SQLException ex) {
-                Logger.getLogger(MaterialFerramenta.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(MaterialFerramenta.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        return fornecedor;
     }
 
     public void setFornecedor(Fornecedor fornecedor) {
