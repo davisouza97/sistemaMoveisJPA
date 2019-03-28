@@ -134,26 +134,4 @@ public class Movel implements Serializable{
         this.pedido = pedido;
     }
 
-
-    
-    public void gravar() throws SQLException, ClassNotFoundException {
-        MovelDAO.gravar(this);
-    }
-
-    public void alterar() throws SQLException, ClassNotFoundException {
-        MovelDAO.alterar(this);
-    }
-
-    public void excluir() throws SQLException, ClassNotFoundException {
-        MovelDAO.excluir(this);
-    }
-
-    public static Movel obterMovel(Long idMovel) throws SQLException, ClassNotFoundException {
-        return MovelDAO.obterMovel(idMovel);
-    }
-
-    public static List< Movel> obterTodosMovel() throws ClassNotFoundException, SQLException {
-        return MovelDAO.obterTodosMoveis();
-    }
-
 }
