@@ -51,13 +51,13 @@ public class ClienteDAO {
         }
     }
 
-    public static Cliente find(Long idCliente) {
+    public static Cliente find(Long id) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         Cliente cliente = null;
         try {
             tx.begin();
-            cliente = em.find(Cliente.class, idCliente);
+            cliente = em.find(Cliente.class, id);
             tx.commit();       
         } catch (Exception e) {
             if(tx != null && tx.isActive()){
