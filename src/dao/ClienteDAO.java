@@ -2,12 +2,10 @@ package dao;
 
 import model.Cliente;
 
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.persistence.PersistenceUtil;
+
 import javax.persistence.TypedQuery;
 
 public class ClienteDAO {
@@ -73,10 +71,10 @@ public class ClienteDAO {
         return cliente;
         
     }
-    public static ArrayList<Cliente>findAll(){
+    public static List<Cliente> findAll(){
        EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
-        ArrayList<Cliente> clientes = null;
+        List<Cliente> clientes = null;
         try {
            tx.begin();
            TypedQuery<Cliente> query = em.createQuery("select c From Cliente c", Cliente.class);
