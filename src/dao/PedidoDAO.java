@@ -48,7 +48,7 @@ public class PedidoDAO {
         }
     }
 
-    public void Remove(Pedido pedido) {
+    public void remove(Pedido pedido) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         try {
@@ -65,7 +65,7 @@ public class PedidoDAO {
         }
     }
 
-    public Pedido getPedido(Long id) {
+    public Pedido findPedido(Long id) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         Pedido pedido = null;
@@ -84,7 +84,7 @@ public class PedidoDAO {
         return pedido;
     }
 
-    public List<Pedido> getAllPedido() {
+    public List<Pedido> findAllPedido() {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         List<Pedido> pedidos = null;

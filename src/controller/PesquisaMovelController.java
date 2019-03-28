@@ -19,15 +19,9 @@ import model.Movel;
 public class PesquisaMovelController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        try{
-            request.setAttribute("moveis", Movel.obterTodosMovel());
-            RequestDispatcher view = request.getRequestDispatcher("gridMoveis.jsp");
-            view.forward(request, response);
-        }catch (ClassNotFoundException e){
-            throw  new ServletException(e);
-        }catch (SQLException e){
-            throw new ServletException(e);
-        }
+        request.setAttribute("moveis", Movel.findAll());
+        RequestDispatcher view = request.getRequestDispatcher("gridMoveis.jsp");
+        view.forward(request, response);
     }
 
     @Override

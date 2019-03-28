@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Pedido implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,12 +27,28 @@ public class Pedido implements Serializable {
     @ManyToOne
     private Funcionario funcionario;
 
-    public Pedido(Double valorTotal, Cliente cliente, Funcionario funcionario) {    
+    public Pedido(Double valorTotal, Cliente cliente, Funcionario funcionario) {
         this.valorTotal = valorTotal;
         this.cliente = cliente;
         this.funcionario = funcionario;
     }
 
+    public void save() {
+        PedidoDAO.getInstance().save(this);
+    }
+
+    public void remove() {
+        PedidoDAO.getInstance().remove(this);
+    }
+    
+    public Pedido find(){
+        return PedidoDAO.getInstance().findPedido(this.id);
+    }
+    
+    public static List<Pedido> findAll(){
+        return PedidoDAO.getInstance().findAllPedido();
+    } 
+    
     public Long getId() {
         return id;
     }
@@ -63,7 +80,6 @@ public class Pedido implements Serializable {
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
     }
-    
-    
 
+    
 }
