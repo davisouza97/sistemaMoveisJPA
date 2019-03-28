@@ -17,26 +17,39 @@ public class Funcionario extends Pessoa implements Serializable {
     private double salario;
     private String comissao;
     private String senha;
+
+    public String getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
+
+    public double getSalario() {
+        return salario;
+    }
+
+    public void setSalario(double salario) {
+        this.salario = salario;
+    }
+
+    public String getComissao() {
+        return comissao;
+    }
+
+    public void setComissao(String comissao) {
+        this.comissao = comissao;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
     
-    public  void  gravar() throws SQLException, ClassNotFoundException{
-        FuncionarioDAO.gravar(this);
-    }
-
-    public void alterar() throws  SQLException, ClassNotFoundException{
-        FuncionarioDAO.alterar(this);
-    }
-
-    public  void excluir() throws  SQLException, ClassNotFoundException{
-        FuncionarioDAO.excluir(this);
-    }
-
-    public static Funcionario obterFuncionario(Long idFuncionario) throws  SQLException, ClassNotFoundException{
-        return FuncionarioDAO.obterFuncionario(idFuncionario);
-    }
-
-    public static List<Funcionario> obterTodosFuncionarios() throws ClassNotFoundException, SQLException{
-        return FuncionarioDAO.obterTodosFuncionarios();
-    }
     
     
 }

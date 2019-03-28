@@ -43,25 +43,6 @@ public class Fornecedor {
         this.celular = celular;
     }
     
-    public void gravar() throws SQLException, ClassNotFoundException {
-        FornecedorDAO.gravar(this);
-    }
-
-    public void alterar() throws SQLException, ClassNotFoundException {
-        FornecedorDAO.alterar(this);
-    }
-
-    public void excluir() throws SQLException, ClassNotFoundException {
-        FornecedorDAO.excluir(this);
-    }
-
-    public static Fornecedor obterFornecedor(Long idFornecedor) throws SQLException, ClassNotFoundException {
-        return FornecedorDAO.obterFornecedor(idFornecedor);
-    }
-
-    public static List<Fornecedor> obterTodosFornecedor() throws ClassNotFoundException, SQLException {
-        return FornecedorDAO.obterTodosFornecedor();
-    }
 
     public Long getIdFornecedor() {
         return idFornecedor;

@@ -11,23 +11,5 @@ public class Material extends MaterialFerramenta {
         super(nome, tipo, valorUnitario, qtdEstoque, unidade, fornecedor);
     }
 
-    public  void  gravar() throws SQLException, ClassNotFoundException{
-        MaterialDAO.gravar(this);
-    }
-
-    public void alterar() throws  SQLException, ClassNotFoundException{
-        MaterialDAO.alterar(this);
-    }
-
-    public  void excluir() throws  SQLException, ClassNotFoundException{
-        MaterialDAO.excluir(this);
-    }
-
-    public static  Material obterMaterial(Long idMaterial) throws  SQLException, ClassNotFoundException{
-        return MaterialDAO.obterMaterial(idMaterial);
-    }
-
-    public static List< Material> obterTodosMateriais() throws ClassNotFoundException, SQLException{
-        return  MaterialDAO.obterTodosMateriais();
-    }
+    
 }
