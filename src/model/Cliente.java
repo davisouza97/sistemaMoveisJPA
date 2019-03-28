@@ -1,27 +1,19 @@
 package model;
 
 import dao.ClienteDAO;
+import java.io.Serializable;
 
 import java.sql.SQLException;
 import java.util.List;
+import javax.persistence.Entity;
 
-public class Cliente extends Pessoa {
-    private Long idCliente;
+@Entity
+public class Cliente extends Pessoa implements Serializable{
 
-    public Cliente(Long id,String nome ) {
-        this.setIdCliente(id);
-        this.setNome(nome);
-    }
-
-
-
-    public Cliente(Long id,String nome, String cpf, String dataNascimento, String email, String cep, String logradouro,
-                   String numero, String complemento, String bairro, String uf, String cidade, String telefone, String celular) {
+    public Cliente(String nome, String cpf, String dataNascimento, String email, String cep, String logradouro, String numero, String complemento, String bairro, String uf, String cidade, String telefone, String celular) {
         super(nome, cpf, dataNascimento, email, cep, logradouro, numero, complemento, bairro, uf, cidade, telefone, celular);
-        this.setIdCliente(id);
     }
-
-   
+    
     public  void  gravar() throws SQLException, ClassNotFoundException{
         ClienteDAO.gravar(this);
     }
@@ -41,14 +33,4 @@ public class Cliente extends Pessoa {
     public static List<Cliente> obterTodosClientes() throws ClassNotFoundException, SQLException{
         return ClienteDAO.obterTodosClientes();
     }
-
-
-    public Long getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(Long idCliente) {
-        this.idCliente = idCliente;
-    }
-    
 }

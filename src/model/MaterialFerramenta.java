@@ -3,8 +3,20 @@ package model;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class MaterialFerramenta {
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String nome;
     private String tipo;
     private double valorUnitario;
@@ -12,9 +24,11 @@ public abstract class MaterialFerramenta {
     private String unidade;
     private Fornecedor fornecedor;
     private Long idFornecedor;
-    public MaterialFerramenta(){}
 
-    public MaterialFerramenta( String nome, String tipo, double valorUnitario, double qtdEstoque, String unidade, Fornecedor fornecedor) {
+    public MaterialFerramenta() {
+    }
+
+    public MaterialFerramenta(String nome, String tipo, double valorUnitario, double qtdEstoque, String unidade, Fornecedor fornecedor) {
         this.nome = nome;
         this.tipo = tipo;
         this.valorUnitario = valorUnitario;
@@ -26,19 +40,18 @@ public abstract class MaterialFerramenta {
 
     public Fornecedor getFornecedor() {
         if (idFornecedor != 0 && fornecedor == null) {
-          
-        
-                 try {
-                     fornecedor = Fornecedor.obterFornecedor(idFornecedor);
-                 } catch (SQLException ex) {
-                     Logger.getLogger(MaterialFerramenta.class.getName()).log(Level.SEVERE, null, ex);
-                 } catch (ClassNotFoundException ex) {
-                     Logger.getLogger(MaterialFerramenta.class.getName()).log(Level.SEVERE, null, ex);
-                 }
+
+            try {
+                fornecedor = Fornecedor.obterFornecedor(idFornecedor);
+            } catch (SQLException ex) {
+                Logger.getLogger(MaterialFerramenta.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(MaterialFerramenta.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return fornecedor;
     }
-        
+
     public void setFornecedor(Fornecedor fornecedor) {
         this.fornecedor = fornecedor;
     }
@@ -50,7 +63,6 @@ public abstract class MaterialFerramenta {
     public void setIdFornecedor(Long idFornecedor) {
         this.idFornecedor = idFornecedor;
     }
-
 
     public String getNome() {
         return nome;
