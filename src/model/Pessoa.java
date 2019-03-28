@@ -1,6 +1,14 @@
 package model;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 public abstract class Pessoa {
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private String nome;
     private String cpf;
     private String dataNascimento;
@@ -51,6 +59,14 @@ public abstract class Pessoa {
 
     public String getDataNascimento() {
         return dataNascimento;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public void setDataNascimento(String dataNascimento) {
