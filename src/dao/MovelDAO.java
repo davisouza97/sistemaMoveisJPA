@@ -1,153 +1,98 @@
 package dao;
 
-import model.Movel;
-
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
+import model.Movel;
 
 public class MovelDAO {
 
-    public static void gravar(Movel movel) throws SQLException, ClassNotFoundException {
-        Connection conexao = null;
-        PreparedStatement comando = null;
+    
+    private static MovelDAO instance = new MovelDAO();
+
+    public static MovelDAO getInstance() {
+        return instance;
+    }
+
+    private MovelDAO() {
+    }
+
+    public void save(Movel movel) {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
         try {
-            conexao = BD.getConexao();
-            String sql = "insert into movel (idMovel,nome,preco,tipo, idMaterial, altura, largura, comprimento,acabamento,peso)"
-                    + "values (?,?,?,?,?,?,?,?,?,?)";
-            comando = conexao.prepareStatement(sql);
-            comando.setLong(1, movel.getId());
-            comando.setString(2, movel.getNome());
-            comando.setDouble(3, movel.getPreco());
-            comando.setString(4, movel.getTipo());
-            if(movel.getMaterial() == null){
-                comando.setNull(5, Types.NULL);
-            }else{
-                comando.setLong(5, movel.getMaterial().getIdMaterial());
+            tx.begin();
+            if (movel.getId() != null) {
+                em.merge(movel);
+            } else {
+                em.persist(movel);
             }
-            comando.setDouble(6, movel.getAltura());
-            comando.setDouble(7, movel.getLargura());
-            comando.setDouble(8, movel.getComprimento());
-            comando.setString(9, movel.getAcabamento());
-            comando.setDouble(10, movel.getPeso());
-          
-            comando.execute();
-            BD.fecharConexao(conexao, comando);
-        } catch (SQLException e) {
-            throw e;
-        } finally {
-            BD.fecharConexao(conexao, comando);
-        }
-    }
+            tx.commit();
 
-    public static void alterar(Movel movel) throws SQLException, ClassNotFoundException {
-        Connection conexao = null;
-        PreparedStatement comando = null;
-        try {
-            conexao = BD.getConexao();
-            String sql = ("UPDATE Movel SET nome=?, preco=?, tipo=?,"
-                    + " idMaterial=?, altura=?, largura=?, comprimento=?, acabamento=?, peso=? WHERE idMovel = ?");
-            comando = conexao.prepareStatement(sql);
-            comando.setString(1, movel.getNome());
-            comando.setDouble(2, movel.getPreco());
-            comando.setString(3, movel.getTipo());
-           if(movel.getMaterial() == null){
-                comando.setNull(4, Types.NULL);
-            }else{
-                comando.setLong(4, movel.getMaterial().getIdMaterial());
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
             }
-            comando.setDouble(5, movel.getAltura());
-            comando.setDouble(6, movel.getLargura());
-            comando.setDouble(7, movel.getComprimento());
-            comando.setString(8, movel.getAcabamento());
-            comando.setDouble(9, movel.getPeso());
-                        
-            comando.setLong(10, movel.getId());
-            comando.execute();
-        } catch (SQLException e) {
-            throw e;
+            throw new RuntimeException(e);
         } finally {
-            BD.fecharConexao(conexao, comando);
+            PersistenceUtil.close(em);
         }
-
     }
 
-    public static void excluir(Movel movel) throws SQLException, ClassNotFoundException {
-        Connection conexao = null;
-        PreparedStatement comando = null;
+    public void Remove(Movel movel) {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
         try {
-            conexao = BD.getConexao();
-            String sql = "delete from movel where idMovel = ?";
-            comando = conexao.prepareStatement(sql);
-            comando.setLong(1, movel.getId());
-            comando.execute();
-        } catch (SQLException e) {
-            throw e;
+            tx.begin();
+            em.remove(em.getReference(Movel.class, movel.getId()));
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
         } finally {
-            BD.fecharConexao(conexao, comando);
+            PersistenceUtil.close(em);
         }
-
     }
 
-    public static Movel obterMovel(Long idMovel) throws ClassNotFoundException {
-        Connection conexao = null;
-        PreparedStatement comando = null;
+    public Movel getMovel(Long id) {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
         Movel movel = null;
         try {
-            conexao = BD.getConexao();
-            String sql = "SELECT * FROM movel WHERE idMovel = ?";
-            comando = conexao.prepareStatement(sql);
-            comando.setLong(1, idMovel);
-            ResultSet rs = comando.executeQuery();
-            rs.first();
-            movel = new Movel(
-                    rs.getLong("idMovel"),
-                    rs.getString("nome"),
-                    rs.getDouble("preco"),
-                    rs.getString("tipo"),
-                    rs.getDouble("altura"),
-                    rs.getDouble("largura"),
-                    rs.getDouble("comprimento"),
-                    rs.getString("acabamento"),
-                    rs.getDouble("peso"),
-                    null);
-            movel.setIdMaterial(rs.getLong("idMaterial"));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }finally {
-            BD.fecharConexao(conexao, comando);
+            tx.begin();
+            movel = em.find(Movel.class, id);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
+        } finally {
+            PersistenceUtil.close(em);
         }
         return movel;
     }
 
-    public static List<Movel> obterTodosMoveis() throws ClassNotFoundException {
-        Connection conexao = null;
-        Statement comando = null;
-        List<Movel> moveis = new ArrayList<Movel>();
+    public List<Movel> getAllMovel() {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        List<Movel> moveis = null;
         try {
-            conexao = BD.getConexao();
-            comando = conexao.createStatement();
-            String sql = "SELECT * FROM movel";
-            ResultSet rs = comando.executeQuery(sql);
-            while (rs.next()) {
-                Movel movel = new Movel(
-                        rs.getLong("idMovel"),
-                        rs.getString("nome"),
-                        rs.getDouble("preco"),
-                        rs.getString("tipo"),
-                        rs.getDouble("altura"),
-                        rs.getDouble("largura"),
-                        rs.getDouble("comprimento"),
-                        rs.getString("acabamento"),
-                        rs.getDouble("peso"),
-                        null);
-                movel.setIdMaterial(rs.getLong("idMaterial"));
-                moveis.add(movel);
+            tx.begin();
+            TypedQuery<Movel> query
+                    = em.createQuery("select p from Movel p", Movel.class);
+            moveis = query.getResultList();
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         } finally {
-            BD.fecharConexao(conexao, comando);
+            PersistenceUtil.close(em);
         }
         return moveis;
     }
