@@ -5,7 +5,6 @@ import model.Cliente;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-
 import javax.persistence.TypedQuery;
 
 public class ClienteDAO {
@@ -19,7 +18,7 @@ public class ClienteDAO {
         EntityTransaction tx = em.getTransaction();
         try {
             tx.begin();
-            if(cliente.getId()!= null){
+            if(cliente.getId() != null){
                 em.merge(cliente);
             }else{
             em.persist(cliente);
@@ -40,7 +39,7 @@ public class ClienteDAO {
         EntityTransaction tx = em.getTransaction();
         try {
             tx.begin();
-            em.remove(em.getReference(Cliente.class, cliente.getIdCliente()));
+            em.remove(em.getReference(Cliente.class, cliente.getId()));
             tx.commit();       
         } catch (Exception e) {
             if(tx != null && tx.isActive()){
