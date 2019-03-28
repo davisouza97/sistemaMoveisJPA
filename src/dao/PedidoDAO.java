@@ -25,6 +25,7 @@ public class PedidoDAO {
             comando.setLong(1, pedido.getIdPedido());
             comando.setDouble(2, pedido.getValorTotal());
            
+            /*
             if(pedido.getMovel() == null){
                 comando.setNull(3, Types.NULL);
             }else{
@@ -35,7 +36,7 @@ public class PedidoDAO {
             }else{
                 comando.setLong(4, pedido.getFuncionario().getIdFuncionario());
             }
-            
+            */
             if ( pedido.getCliente() == null){
                 comando.setNull(5, Types.NULL);
             }else{

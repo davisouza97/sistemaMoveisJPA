@@ -1,38 +1,41 @@
 package model;
 
 import dao.PedidoDAO;
+import java.io.Serializable;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
-
-public class Pedido {
+@Entity
+public class Pedido implements Serializable {
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idPedido;
     private Double valorTotal;
+    @ManyToOne
     private Cliente cliente;
-    private Long idCliente;
-    private Movel movel;
-    private Long idMovel;
+    @ManyToOne
     private Funcionario funcionario;
-    private Long idFuncionario;
-
-    public Pedido(Long idPedido, Double valorTotal, Movel movel, Funcionario funcionario, Cliente cliente) {
+    
+    public Pedido(Long idPedido, Double valorTotal, List<Movel> moveis, Funcionario funcionario, Cliente cliente) {
         this.idPedido = idPedido;
         this.valorTotal = valorTotal;
         this.cliente = cliente;
         this.idCliente = 0l;
-        this.movel = movel;
-        this.idMovel = 0l;
         this.funcionario = funcionario;
         this.idFuncionario = 0l;
+        this.moveis = moveis;    
     }
     
- 
-   
-
     public  void  gravar() throws SQLException, ClassNotFoundException{
         PedidoDAO.gravar(this);
     }
@@ -97,32 +100,6 @@ public class Pedido {
         this.idCliente = id;
     }
 
-    public Movel getMovel() {
-        if(idMovel != 0 && movel == null){
-            try {
-                movel = Movel.obterMovel(idMovel);
-            } catch (SQLException ex) {
-                Logger.getLogger(Pedido.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Pedido.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-        }
-        return movel;
-    }
-
-    public void setMovel(Movel movel) {
-        this.movel = movel;
-    }
-
-    public Long getIdMovel() {
-        return idMovel;
-    }
-
-    public void setIdMovel(Long idMovel) {
-        this.idMovel = idMovel;
-    }
-
     public Funcionario getFuncionario() {
         if(idFuncionario != 0 && funcionario == null){
             try {
@@ -147,5 +124,12 @@ public class Pedido {
     public void setIdfuncionario(Long idfuncionaio) {
         this.idFuncionario = idfuncionaio;
     }
-    
+
+    public List<Movel> getMoveis() {
+        return moveis;
+    }
+
+    public void setMoveis(List<Movel> moveis) {
+        this.moveis = moveis;
+    }
 }

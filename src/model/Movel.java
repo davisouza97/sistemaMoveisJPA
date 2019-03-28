@@ -20,6 +20,7 @@ public class Movel {
     private Double peso;
     private Material material;
     private Long idMaterial;
+    private Long idPedido;
    
 
     public Movel(Long idMovel, String nome, double preco, String tipo, double altura, double largura, double comprimento, String acabamento, double peso, Material material) {
@@ -33,9 +34,7 @@ public class Movel {
         this.acabamento = acabamento;
         this.peso = peso;
         this.material = material;
-        this.idMaterial = 0l;
-        
-        
+        this.idMaterial = 0l;   
     }
 
     public Movel(Long idMovel, String nome) {
@@ -155,5 +154,4 @@ public class Movel {
     public void setIdMaterial(Long idMaterial) {
         this.idMaterial = idMaterial;
     }
-
 }
