@@ -30,7 +30,7 @@ public class FornecedorDAO {
             comando.setString(10, fornecedor.getCidade());
             comando.setString(11, fornecedor.getTelefone());
             comando.setString(12, fornecedor.getCelular());
-            comando.setLong(13, fornecedor.getIdFornecedor());
+            comando.setLong(13, fornecedor.getId());
             comando.execute();
             BD.fecharConexao(conexao, comando);
 
@@ -62,7 +62,7 @@ public class FornecedorDAO {
             comando.setString(10, fornecedor.getCidade());
              comando.setString(11, fornecedor.getTelefone());
             comando.setString(12, fornecedor.getCelular());
-            comando.setLong(13, fornecedor.getIdFornecedor());
+            comando.setLong(13, fornecedor.getId());
             comando.execute();
             BD.fecharConexao(conexao, comando);
 
@@ -78,7 +78,7 @@ public class FornecedorDAO {
             conexao = BD.getConexao();
             String sql = "delete from Fornecedor WHERE idFornecedor=? ";
             comando = conexao.prepareStatement(sql);
-            comando.setLong(1, fornecedor.getIdFornecedor());
+            comando.setLong(1, fornecedor.getId());
             comando.execute();
 
         } catch (SQLException e) {

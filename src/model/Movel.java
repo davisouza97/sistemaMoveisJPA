@@ -18,7 +18,7 @@ public class Movel implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idMovel;
+    private Long id;
     private String nome;
     private Double preco;
     private String tipo;
@@ -46,12 +46,12 @@ public class Movel implements Serializable{
         this.pedido = pedido;
     }
 
-    public Long getIdMovel() {
-        return idMovel;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdMovel(Long idMovel) {
-        this.idMovel = idMovel;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {

@@ -11,151 +11,98 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 
 public class PedidoDAO {
 
-    public static void gravar(Pedido pedido) throws SQLException, ClassNotFoundException {
-        Connection conexao = null;
-        PreparedStatement comando = null;
-        try {
-            conexao = BD.getConexao();
-            String sql = "insert into pedido(idPedido,valorTotal, idMovel, idFuncionario, idCliente)" +
-                    "VALUES (?,?,?,?,?)";
-            comando = conexao.prepareStatement(sql);
-            comando.setLong(1, pedido.getIdPedido());
-            comando.setDouble(2, pedido.getValorTotal());
-           
-            /*
-            if(pedido.getMovel() == null){
-                comando.setNull(3, Types.NULL);
-            }else{
-                comando.setLong(3, pedido.getMovel().getIdMovel());
-            }
-             if(pedido.getFuncionario() == null){
-                comando.setNull(4, Types.NULL);
-            }else{
-                comando.setLong(4, pedido.getFuncionario().getIdFuncionario());
-            }
-            */
-            if ( pedido.getCliente() == null){
-                comando.setNull(5, Types.NULL);
-            }else{
-                comando.setLong(5, pedido.getCliente().getIdCliente());
-            }
-            comando.execute();
-            BD.fecharConexao(conexao, comando);
-        } catch (SQLException e) {
-            throw e;
-        }finally {
-            BD.fecharConexao(conexao,comando);
-        }
+    private static PedidoDAO instance = new PedidoDAO();
+
+    public static PedidoDAO getInstance() {
+        return instance;
     }
 
-    public static void alterar(Pedido pedido) throws SQLException, ClassNotFoundException {
-        Connection conexao = null;
-        PreparedStatement comando = null;
-        try {
-            conexao = BD.getConexao();
-            String sql = ("UPDATE pedido SET  valorTotal=?, idMovel=?, idFuncionario=?, idCliente=? WHERE idPedido = ?");
-            comando = conexao.prepareStatement(sql);
-
-            comando.setDouble(1, pedido.getValorTotal());
-             if(pedido.getMovel() == null){
-                comando.setNull(2, Types.NULL);
-            }else{
-                comando.setLong(2, pedido.getMovel().getIdMovel());
-            }
-            if(pedido.getFuncionario() == null){
-                comando.setNull(3, Types.NULL);
-            }else{
-                comando.setLong(3, pedido.getFuncionario().getIdFuncionario());
-            }
-            if ( pedido.getCliente() == null){
-                comando.setNull(4, Types.NULL);
-            }else{
-                comando.setLong(4, pedido.getCliente().getIdCliente());
-            }
-            comando.setLong(5,pedido.getIdPedido());
-            comando.execute();
-        } catch (SQLException e) {
-            throw e;
-        }finally {
-            BD.fecharConexao(conexao,comando);
-        }
+    private PedidoDAO() {
     }
 
-    public static void excluir (Pedido pedido)throws SQLException, ClassNotFoundException {
-        Connection conexao = null;
-        PreparedStatement comando = null;
+    public void save(Pedido pedido) {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
         try {
-            conexao = BD.getConexao();
-            String sql = "delete from pedido where idPedido = ?";
-            comando = conexao.prepareStatement(sql);
-            comando.setLong(1, pedido.getIdPedido());
-            comando.execute();
-        } catch (SQLException e) {
-            throw e;
+            tx.begin();
+            if (pedido.getId() != null) {
+                em.merge(pedido);
+            } else {
+                em.persist(pedido);
+            }
+            tx.commit();
+
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
         } finally {
-            BD.fecharConexao(conexao, comando);
+            PersistenceUtil.close(em);
         }
     }
 
-    public static Pedido obterPedido(Long idPedido) throws ClassNotFoundException{
-        Connection conexao = null;
-        PreparedStatement comando = null;
+    public void Remove(Pedido pedido) {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        try {
+            tx.begin();
+            em.remove(em.getReference(Pedido.class, pedido.getId()));
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
+        } finally {
+            PersistenceUtil.close(em);
+        }
+    }
+
+    public Pedido getPedido(Long id) {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
         Pedido pedido = null;
-        try{
-            conexao = BD.getConexao();
-            String sql = "SELECT * FROM pedido WHERE pedido.idPedido = ?";
-            comando = conexao.prepareStatement(sql);
-            comando.setLong(1,Math.toIntExact(idPedido));
-            ResultSet rs = comando.executeQuery();
-            rs.first();
-            pedido = new Pedido(
-                    rs.getLong("idPedido"),
-                    rs.getDouble("valorTotal"),
-                    null,
-                    null,
-                    null);
-            pedido.setIdfuncionario(rs.getLong("idFuncionario"));
-            pedido.setIdMovel(rs.getLong("idMovel"));
-            pedido.setIdCliente(rs.getLong("idCliente"));
-            
-        }catch(SQLException e){
-            e.printStackTrace();
+        try {
+            tx.begin();
+            pedido = em.find(Pedido.class, id);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
         } finally {
-            BD.fecharConexao(conexao, comando);
+            PersistenceUtil.close(em);
         }
-
         return pedido;
     }
 
-    public static List<Pedido> obterTodosPedidos() throws ClassNotFoundException{
-        Connection conexao = null;
-        Statement comando = null;
-        List<Pedido> pedidos = new ArrayList<Pedido>();
+    public List<Pedido> getAllPedido() {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        List<Pedido> pedidos = null;
         try {
-            conexao = BD.getConexao();
-            comando = conexao.createStatement();
-            String sql = "SELECT * FROM pedido";
-            ResultSet rs = comando.executeQuery(sql);
-            while (rs.next()){
-                Pedido pedido = new Pedido(
-                        rs.getLong("idPedido"),
-                        rs.getDouble("valorTotal"),
-                        null,
-                        null,
-                        null);
-                pedido.setIdfuncionario(rs.getLong("idFuncionario"));
-                pedido.setIdMovel(rs.getLong("idMovel"));
-                pedido.setIdCliente(rs.getLong("idCliente"));
-                pedidos.add(pedido);
+            tx.begin();
+            TypedQuery<Pedido> query
+                    = em.createQuery("select p from Pedido p", Pedido.class);
+            pedidos = query.getResultList();
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
             }
-        }catch(SQLException e){
-            e.printStackTrace();
-        }finally {
-            BD.fecharConexao(conexao,comando);
+            throw new RuntimeException(e);
+        } finally {
+            PersistenceUtil.close(em);
         }
         return pedidos;
     }
+
 }

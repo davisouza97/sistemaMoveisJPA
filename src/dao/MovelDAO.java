@@ -16,7 +16,7 @@ public class MovelDAO {
             String sql = "insert into movel (idMovel,nome,preco,tipo, idMaterial, altura, largura, comprimento,acabamento,peso)"
                     + "values (?,?,?,?,?,?,?,?,?,?)";
             comando = conexao.prepareStatement(sql);
-            comando.setLong(1, movel.getIdMovel());
+            comando.setLong(1, movel.getId());
             comando.setString(2, movel.getNome());
             comando.setDouble(3, movel.getPreco());
             comando.setString(4, movel.getTipo());
@@ -62,7 +62,7 @@ public class MovelDAO {
             comando.setString(8, movel.getAcabamento());
             comando.setDouble(9, movel.getPeso());
                         
-            comando.setLong(10, movel.getIdMovel());
+            comando.setLong(10, movel.getId());
             comando.execute();
         } catch (SQLException e) {
             throw e;
@@ -79,7 +79,7 @@ public class MovelDAO {
             conexao = BD.getConexao();
             String sql = "delete from movel where idMovel = ?";
             comando = conexao.prepareStatement(sql);
-            comando.setLong(1, movel.getIdMovel());
+            comando.setLong(1, movel.getId());
             comando.execute();
         } catch (SQLException e) {
             throw e;

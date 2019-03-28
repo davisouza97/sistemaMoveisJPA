@@ -19,38 +19,51 @@ public class Pedido implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idPedido;
+    private Long id;
     private Double valorTotal;
     @ManyToOne
     private Cliente cliente;
     @ManyToOne
     private Funcionario funcionario;
 
-    public Pedido(Double valorTotal, Cliente cliente, Funcionario funcionario) {
-        
+    public Pedido(Double valorTotal, Cliente cliente, Funcionario funcionario) {    
         this.valorTotal = valorTotal;
         this.cliente = cliente;
         this.funcionario = funcionario;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Double getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(Double valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
     
-    public  void  gravar() throws SQLException, ClassNotFoundException{
-        PedidoDAO.gravar(this);
-    }
-
-    public void alterar() throws  SQLException, ClassNotFoundException{
-        PedidoDAO.alterar(this);
-    }
-
-    public  void excluir() throws  SQLException, ClassNotFoundException{
-        PedidoDAO.excluir(this);
-    }
-
-    public static  Pedido obterPedido(Long idPedido) throws  SQLException, ClassNotFoundException{
-        return PedidoDAO.obterPedido(idPedido);
-    }
-
-    public static List< Pedido> obterTodosPedidos() throws ClassNotFoundException, SQLException{
-        return  PedidoDAO.obterTodosPedidos();
-    }
+    
 
 }

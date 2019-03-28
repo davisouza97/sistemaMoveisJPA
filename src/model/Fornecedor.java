@@ -14,7 +14,7 @@ public class Fornecedor {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idFornecedor;
+    private Long id;
     private String nome;
     private String cnpj;
     private String email;
@@ -44,12 +44,12 @@ public class Fornecedor {
     }
     
 
-    public Long getIdFornecedor() {
-        return idFornecedor;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdFornecedor(Long idFornecedor) {
-        this.idFornecedor = idFornecedor;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
