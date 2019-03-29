@@ -46,6 +46,11 @@ public class Movel implements Serializable{
         this.pedido = pedido;
     }
 
+    public Movel() {
+    }
+
+    
+    
     public void save() {
         MovelDAO.getInstance().save(this);
     }

@@ -33,6 +33,11 @@ public class Pedido implements Serializable {
         this.funcionario = funcionario;
     }
 
+    public Pedido() {
+    }
+
+    
+    
     public void save() {
         PedidoDAO.getInstance().save(this);
     }
