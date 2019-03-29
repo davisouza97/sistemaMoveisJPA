@@ -43,6 +43,9 @@ public class Fornecedor implements Serializable{
         this.telefone = telefone;
         this.celular = celular;
     }
+    public Fornecedor(){
+        
+    }
     public void save() {
         FornecedorDAO.getInstance().save(this);
     }
