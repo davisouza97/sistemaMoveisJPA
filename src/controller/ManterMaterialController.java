@@ -41,10 +41,10 @@ public class ManterMaterialController extends HttpServlet {
     protected void prepararOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
         String operacao = request.getParameter("operacao");
         request.setAttribute("operacao", operacao);
-        request.setAttribute("fornecedores", Fornecedor.obterTodosFornecedor());
+        request.setAttribute("fornecedores", Fornecedor.findAll());
         if (!operacao.equals("Incluir")) {
-            Material material = Material.obterMaterial(Long.parseLong(request.getParameter("idMaterial")));
-            request.setAttribute("material", material);
+           // Material material = Material.obterMaterial(Long.parseLong(request.getParameter("idMaterial")));
+           // request.setAttribute("material", material);
           
         }
         request.getRequestDispatcher("cadastroMaterial.jsp").forward(request, response);
@@ -63,22 +63,18 @@ public class ManterMaterialController extends HttpServlet {
         try{
             Fornecedor fornecedor = null;
             if(idFornecedor != 0){
-                fornecedor = Fornecedor.obterFornecedor(idFornecedor);
+                //fornecedor = Fornecedor.obterFornecedor(idFornecedor);
             }
             Material material = new Material(idMaterial, nome,tipo, valorUnitario, qtdEstoque, unidade, fornecedor);
             if(operacao.equals("Incluir")){
-                material.gravar();
+                material.save();
             }else if(operacao.equals("Editar")){
-                material.alterar();
+                material.save();
             }else if(operacao.equals("Excluir")){
-                material.excluir();
+                material.remove();
             }
             request.getRequestDispatcher("PesquisaMaterialController").forward(request, response);
         }catch(IOException e){
-            throw new ServletException(e);
-        }catch(SQLException e){
-            throw new ServletException(e);
-        }catch(ClassNotFoundException e){
             throw new ServletException(e);
         }catch(ServletException e){
             throw e;

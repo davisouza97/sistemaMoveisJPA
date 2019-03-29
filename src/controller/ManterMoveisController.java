@@ -34,11 +34,11 @@ public class ManterMoveisController extends HttpServlet {
     public void prepararOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
         String operacao = request.getParameter("operacao");
         request.setAttribute("operacao", operacao);
-        request.setAttribute("pedidos", Pedido.obterTodosPedidos());
-        request.setAttribute("materiais", Material.obterTodosMateriais());
+        request.setAttribute("pedidos", Pedido.findAll());
+        request.setAttribute("materiais", Material.findAll());
         if (!operacao.equals("Incluir")) {
-            Movel movel = Movel.obterMovel(Long.parseLong(request.getParameter("idMovel")));
-            request.setAttribute("movel", movel);
+            //Movel movel = Movel.obterMovel(Long.parseLong(request.getParameter("idMovel")));
+            //request.setAttribute("movel", movel);
 
         }
         request.getRequestDispatcher("cadastroMoveis.jsp").forward(request, response);
@@ -63,24 +63,20 @@ public class ManterMoveisController extends HttpServlet {
         try {
             Material material = null;
             if(idMaterial != 0){
-                material = Material.obterMaterial(idMaterial);
+               // material = Material.obterMaterial(idMaterial);
             }
-            Movel movel = new Movel(idMovel, nome, preco, tipo, altura, largura, comprimento, acabamento, peso, material);
+            Movel movel = new Movel(nome, preco, tipo, altura, largura, comprimento, acabamento, peso, material);
             if (operacao.equals("Incluir")) {
-                movel.gravar();
+                movel.save();
             } else if (operacao.equals("Editar")) {
-                movel.alterar();
+                movel.save();
                 System.out.println("Bring edit");
             } else if (operacao.equals("Excluir")) {
-                movel.excluir();
+                movel.remove();
             }
             RequestDispatcher view = request.getRequestDispatcher("PesquisaMovelController");
             view.forward(request, response);
         } catch (IOException e) {
-            throw new ServletException(e);
-        } catch (SQLException e) {
-            throw new ServletException(e);
-        } catch (ClassNotFoundException e) {
             throw new ServletException(e);
         } catch (ServletException e) {
             throw e;

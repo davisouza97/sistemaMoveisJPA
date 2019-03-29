@@ -31,12 +31,12 @@ public class ManterPedidoController extends HttpServlet {
     public void prepararOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
         String operacao = Strings.getOperacao(request);
         request.setAttribute("operacao", operacao);
-        request.setAttribute("clientes", Cliente.obterTodosClientes());
-        request.setAttribute("moveis", Movel.obterTodosMovel());
-        request.setAttribute("funcionarios", Funcionario.obterTodosFuncionarios());
+        request.setAttribute("clientes", Cliente.findAll());
+        request.setAttribute("moveis", Movel.findAll());
+        request.setAttribute("funcionarios", Funcionario.findAll());
         if (!operacao.equals("Incluir")) {
-            Pedido pedido = Pedido.obterPedido(Long.parseLong(request.getParameter("idPedido")));
-            request.setAttribute("pedido", pedido);
+            //Pedido pedido = Pedido.obterPedido(Long.parseLong(request.getParameter("idPedido")));
+            //request.setAttribute("pedido", pedido);
         }
         request.getRequestDispatcher("cadastroPedido.jsp").forward(request, response);
     }
@@ -54,31 +54,27 @@ public class ManterPedidoController extends HttpServlet {
             Movel movel = null;
             Funcionario funcionario = null;
             if(idMovel != 0){
-                movel = Movel.obterMovel(idMovel);
+                //movel = Movel.obterMovel(idMovel);
             }
             if(idFuncionario != 0){
-                funcionario = Funcionario.obterFuncionario(idFuncionario);
+                //funcionario = Funcionario.obterFuncionario(idFuncionario);
             }
             if (idCliente != 0) {
-                cliente = Cliente.obterCliente(idCliente);
+               // cliente = Cliente.obterCliente(idCliente);
             }
 
             Pedido pedido = new Pedido(idPedido,valorTotal, movel, funcionario,cliente);
             if (operacao.equals("Incluir")) {
-                pedido.gravar();
+                pedido.save();
             } else if (operacao.equals("Editar")) {
-                pedido.alterar();
+                pedido.save();
                 System.out.println("Bring edit");
             } else if (operacao.equals("Excluir")) {
-                pedido.excluir();
+                pedido.remove();
             }
             RequestDispatcher view = request.getRequestDispatcher("PesquisaPedidoController");
             view.forward(request, response);
         } catch (IOException e) {
-            throw new ServletException(e);
-        } catch (SQLException e) {
-            throw new ServletException(e);
-        } catch (ClassNotFoundException e) {
             throw new ServletException(e);
         } catch (ServletException e) {
             throw e;

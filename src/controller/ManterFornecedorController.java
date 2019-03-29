@@ -50,8 +50,8 @@ public class ManterFornecedorController extends HttpServlet {
             request.setAttribute("operacao", operacao);
             if (!operacao.equals("Incluir")) {
                 Long idFornecedor = Long.parseLong(request.getParameter("idFornecedor"));
-                Fornecedor fornecedor = Fornecedor.obterFornecedor(idFornecedor);
-                request.setAttribute("fornecedor", fornecedor);
+               // Fornecedor fornecedor = Fornecedor.obterFornecedor(idFornecedor);
+               // request.setAttribute("fornecedor", fornecedor);
                 
             }
             RequestDispatcher view = request.getRequestDispatcher("cadastroFornecedor.jsp");
@@ -59,10 +59,6 @@ public class ManterFornecedorController extends HttpServlet {
         } catch (ServletException e) {
             throw e;
         } catch (IOException e) {
-            throw e;
-        } catch (SQLException e) {
-            throw e;
-        } catch (ClassNotFoundException e) {
             throw e;
         }
     }
@@ -83,21 +79,17 @@ public class ManterFornecedorController extends HttpServlet {
                // faltando colocar o campo Tipo de material fornecido, não sei como faz pra implementar isso no banco
         Long idFornecedor = Long.parseLong(request.getParameter("idFornecedor"));
         try{
-            Fornecedor fornecedor = new Fornecedor(idFornecedor, nome, cnpj, email, cep, logradouro, numero, complemento, bairro, uf, cidade, telefone, celular);
+            Fornecedor fornecedor = new Fornecedor(nome, cnpj, email, cep, logradouro, numero, complemento, bairro, uf, cidade, telefone, celular);
             if(operacao.equals("Incluir")){
-                fornecedor.gravar();
+                fornecedor.save();
             }else if(operacao.equals("Editar")){
-                fornecedor.alterar();
+                fornecedor.save();
             }else if(operacao.equals("Excluir")){
-                fornecedor.excluir();
+                fornecedor.remove();
             }
             RequestDispatcher view = request.getRequestDispatcher("PesquisaFornecedorController");
             view.forward(request, response);
         }catch(IOException e){
-            throw new ServletException(e);
-        }catch(SQLException e){
-            throw new ServletException(e);
-        }catch(ClassNotFoundException e){
             throw new ServletException(e);
         }catch(ServletException e){
             throw e;

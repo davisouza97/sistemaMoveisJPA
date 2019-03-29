@@ -41,10 +41,10 @@ public class ManterFerramentaController extends HttpServlet {
     public void prepararOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
         String operacao = request.getParameter("operacao");
         request.setAttribute("operacao", operacao);
-        request.setAttribute("fornecedores", Fornecedor.obterTodosFornecedor());
+        request.setAttribute("fornecedores", Fornecedor.findAll());
         if (!operacao.equals("Incluir")) {
-            Ferramenta ferramenta = Ferramenta.obterFerramenta(Long.parseLong(request.getParameter("idFerramenta")));
-            request.setAttribute("ferramenta", ferramenta);
+           // Ferramenta ferramenta = Ferramenta.obterFerramenta(Long.parseLong(request.getParameter("idFerramenta")));
+            //request.setAttribute("ferramenta", ferramenta);
 
         }
         request.getRequestDispatcher("cadastroFerramenta.jsp").forward(request, response);
@@ -63,24 +63,20 @@ public class ManterFerramentaController extends HttpServlet {
         try {
             Fornecedor fornecedor = null;
             if(idFornecedor != 0){
-                fornecedor = Fornecedor.obterFornecedor(idFornecedor);
+              //  fornecedor = Fornecedor.obterFornecedor(idFornecedor);
             }
-            Ferramenta ferramenta = new Ferramenta(idFerramenta, nome, tipo, valorUnitario, qtdEstoque, unidade, fornecedor);
+            Ferramenta ferramenta = new Ferramenta( nome, tipo, valorUnitario, qtdEstoque, unidade, fornecedor);
             if (operacao.equals("Incluir")) {
-                ferramenta.gravar();
+                ferramenta.save();
             } else if (operacao.equals("Editar")) {
-                ferramenta.alterar();
+                ferramenta.save();
                 System.out.println("Bring edit");
             } else if (operacao.equals("Excluir")) {
-                ferramenta.excluir();
+                ferramenta.remove();
             }
             RequestDispatcher view = request.getRequestDispatcher("PesquisaFerramentaController");
             view.forward(request, response);
         } catch (IOException e) {
-            throw new ServletException(e);
-        } catch (SQLException e) {
-            throw new ServletException(e);
-        } catch (ClassNotFoundException e) {
             throw new ServletException(e);
         } catch (ServletException e) {
             throw e;

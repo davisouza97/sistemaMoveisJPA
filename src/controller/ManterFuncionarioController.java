@@ -38,8 +38,8 @@ public class ManterFuncionarioController extends HttpServlet {
         String operacao = request.getParameter("operacao");
         request.setAttribute("operacao", operacao);
         if (!operacao.equals("Incluir")) {
-            Funcionario funcionario = Funcionario.obterFuncionario(Long.parseLong(request.getParameter("idFuncionario")));
-            request.setAttribute("funcionario", funcionario);
+           // Funcionario funcionario = Funcionario.obterFuncionario(Long.parseLong(request.getParameter("idFuncionario")));
+           // request.setAttribute("funcionario", funcionario);
            
           
         }
@@ -66,21 +66,17 @@ public class ManterFuncionarioController extends HttpServlet {
         String celular = request.getParameter("celular");
         Long idFuncionario = Long.parseLong(request.getParameter("idFuncionario"));
         try{
-            Funcionario funcionario = new Funcionario(nome, cpf, dataNascimento, email, cep, logradouro, numero, complemento, bairro, uf, cidade, cargo, salario, comissao, senha, telefone, celular, idFuncionario);
+            Funcionario funcionario = new Funcionario(nome, cpf, dataNascimento, email, cep, logradouro, numero, complemento, bairro, uf, cidade, cargo, salario, comissao, senha, telefone, celular);
             if(operacao.equals("Incluir")){
-                funcionario.gravar();
+                funcionario.save();
             }else if(operacao.equals("Editar")){
-                funcionario.alterar();
+                funcionario.save();
             }else if(operacao.equals("Excluir")){
-                funcionario.excluir();
+                funcionario.remove();
             }
             RequestDispatcher view = request.getRequestDispatcher("PesquisaFuncionarioController");
             view.forward(request, response);
         }catch(IOException e){
-            throw new ServletException(e);
-        }catch(SQLException e){
-            throw new ServletException(e);
-        }catch(ClassNotFoundException e){
             throw new ServletException(e);
         }catch(ServletException e){
             throw e;

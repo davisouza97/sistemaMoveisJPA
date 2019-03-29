@@ -16,7 +16,7 @@ public class ClienteDAO {
         
     }
 
-    public static void save(Cliente cliente)  {
+    public void save(Cliente cliente)  {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         try {

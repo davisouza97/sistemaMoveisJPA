@@ -1,14 +1,17 @@
 package model;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class Pessoa {
+public abstract class Pessoa implements Serializable{
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,7 +30,8 @@ public abstract class Pessoa {
     private String telefone;
     private String celular;
 
-    public Pessoa(){}
+    public Pessoa() {
+    }
 
     public Pessoa(String nome, String cpf, String dataNascimento, String email, String cep, String logradouro, String numero, String complemento, String bairro, String uf, String cidade, String telefone, String celular) {
         this.nome = nome;
@@ -156,5 +160,5 @@ public abstract class Pessoa {
     public void setCelular(String celular) {
         this.celular = celular;
     }
-    
+
 }
