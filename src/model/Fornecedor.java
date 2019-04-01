@@ -54,8 +54,8 @@ public class Fornecedor implements Serializable{
         FornecedorDAO.getInstance().remove(this);
     }
 
-    public Fornecedor find() {
-        return FornecedorDAO.getInstance().find(this.getId());
+    public static Fornecedor find(Long id) {
+        return FornecedorDAO.getInstance().find(id);
     }
 
     public static List<Fornecedor> findAll() {

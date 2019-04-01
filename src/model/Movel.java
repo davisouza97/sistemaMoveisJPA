@@ -59,8 +59,8 @@ public class Movel implements Serializable{
         MovelDAO.getInstance().remove(this);
     }
     
-    public Movel find(){
-        return MovelDAO.getInstance().findMovel(this.id);
+    public static Movel find(Long id){
+        return MovelDAO.getInstance().findMovel(id);
     }
     
     public static List<Movel> findAll(){

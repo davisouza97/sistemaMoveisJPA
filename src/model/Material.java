@@ -24,8 +24,8 @@ public class Material extends MaterialFerramenta {
         MaterialDAO.getInstance().remove(this);
     }
     
-    public Material find(){
-        return MaterialDAO.getInstance().findMaterial(this.getId());
+    public static Material find(Long id){
+        return MaterialDAO.getInstance().findMaterial(id);
     }
     
     public static List<Material> findAll(){

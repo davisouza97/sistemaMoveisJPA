@@ -24,8 +24,8 @@ public Long id;
     public void remove(){
         ClienteDAO.getInstance().remove(this);
     }
-    public Cliente find(){
-        return ClienteDAO.getInstance().find(this.getId());
+    public static Cliente find(Long id){
+        return ClienteDAO.getInstance().find(id);
                 }
     public static List<Cliente> findAll(){
         return ClienteDAO.getInstance().findAll();
