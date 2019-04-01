@@ -63,9 +63,9 @@ public class ManterMaterialController extends HttpServlet {
         try{
             Fornecedor fornecedor = null;
             if(idFornecedor != 0){
-                //fornecedor = Fornecedor.obterFornecedor(idFornecedor);
+                fornecedor = Fornecedor.find(idFornecedor);
             }
-            Material material = new Material(idMaterial, nome,tipo, valorUnitario, qtdEstoque, unidade, fornecedor);
+            Material material = new Material(nome, tipo, valorUnitario, qtdEstoque, unidade, fornecedor);
             if(operacao.equals("Incluir")){
                 material.save();
             }else if(operacao.equals("Editar")){

@@ -16,6 +16,7 @@ import model.Funcionario;
 import model.Movel;
 import model.Pedido;
 import utils.Strings;
+
 @WebServlet(name = "ManterPedidoController", urlPatterns = "/ManterPedidoController")
 public class ManterPedidoController extends HttpServlet {
 
@@ -41,29 +42,24 @@ public class ManterPedidoController extends HttpServlet {
         request.getRequestDispatcher("cadastroPedido.jsp").forward(request, response);
     }
 
-     protected void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+    protected void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         String operacao = request.getParameter("operacao");
         Long idPedido = Long.parseLong(request.getParameter("idPedido"));
         Double valorTotal = Double.parseDouble(request.getParameter("valorTotal"));
-        Long idMovel = Long.parseLong(request.getParameter("idMovel"));
         Long idFuncionario = Long.parseLong(request.getParameter("idFuncionario"));
         Long idCliente = Long.parseLong(request.getParameter("idCliente"));
 
         try {
             Cliente cliente = null;
-            Movel movel = null;
             Funcionario funcionario = null;
-            if(idMovel != 0){
-                //movel = Movel.obterMovel(idMovel);
-            }
-            if(idFuncionario != 0){
-                //funcionario = Funcionario.obterFuncionario(idFuncionario);
+            if (idFuncionario != 0) {
+                funcionario = Funcionario.find(idFuncionario);
             }
             if (idCliente != 0) {
-               // cliente = Cliente.obterCliente(idCliente);
+                cliente = Cliente.find(idCliente);
             }
 
-            Pedido pedido = new Pedido(idPedido,valorTotal, movel, funcionario,cliente);
+            Pedido pedido = new Pedido(valorTotal, cliente, funcionario);
             if (operacao.equals("Incluir")) {
                 pedido.save();
             } else if (operacao.equals("Editar")) {
@@ -106,5 +102,4 @@ public class ManterPedidoController extends HttpServlet {
         return "Short description";
     }
 
-   
 }

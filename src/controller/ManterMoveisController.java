@@ -57,15 +57,17 @@ public class ManterMoveisController extends HttpServlet {
         String acabamento = request.getParameter("acabamento");
         double peso = Double.parseDouble(request.getParameter("peso"));
         Long idMaterial = Long.parseLong(request.getParameter("idMaterial"));
-
-        
-
+        Long idPedido = Long.parseLong(request.getParameter("idPedido"));
         try {
             Material material = null;
-            if(idMaterial != 0){
-               // material = Material.obterMaterial(idMaterial);
+            if (idMaterial != 0) {
+                material = Material.find(idMaterial);
             }
-            Movel movel = new Movel(nome, preco, tipo, altura, largura, comprimento, acabamento, peso, material);
+            Pedido pedido = null;
+            if (idPedido != 0) {
+                pedido = Pedido.find(idPedido);
+            }
+            Movel movel = new Movel(nome, preco, tipo, altura, largura, comprimento, acabamento, peso, material, pedido);
             if (operacao.equals("Incluir")) {
                 movel.save();
             } else if (operacao.equals("Editar")) {

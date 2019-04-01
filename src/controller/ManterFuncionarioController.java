@@ -25,27 +25,27 @@ import model.Funcionario;
 @WebServlet(name = "ManterFuncionarioController", urlPatterns = "/ManterFuncionarioController")
 public class ManterFuncionarioController extends HttpServlet {
 
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
         String acao = request.getParameter("acao");
-        if (acao.equals("confirmarOperacao")){
+        if (acao.equals("confirmarOperacao")) {
             confirmarOperacao(request, response);
         } else if (acao.equals("prepararOperacao")) {
             prepararOperacao(request, response);
         }
     }
+
     protected void prepararOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
         String operacao = request.getParameter("operacao");
         request.setAttribute("operacao", operacao);
         if (!operacao.equals("Incluir")) {
-           // Funcionario funcionario = Funcionario.obterFuncionario(Long.parseLong(request.getParameter("idFuncionario")));
-           // request.setAttribute("funcionario", funcionario);
-           
-          
+            // Funcionario funcionario = Funcionario.obterFuncionario(Long.parseLong(request.getParameter("idFuncionario")));
+            // request.setAttribute("funcionario", funcionario);
+
         }
         request.getRequestDispatcher("cadastroFuncionario.jsp").forward(request, response);
     }
-    protected void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException{
+
+    protected void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         String operacao = request.getParameter("operacao");
         String nome = request.getParameter("nome");
         String cpf = request.getParameter("cpf");
@@ -65,25 +65,25 @@ public class ManterFuncionarioController extends HttpServlet {
         String telefone = request.getParameter("telefone");
         String celular = request.getParameter("celular");
         Long idFuncionario = Long.parseLong(request.getParameter("idFuncionario"));
-        try{
-            Funcionario funcionario = new Funcionario(nome, cpf, dataNascimento, email, cep, logradouro, numero, complemento, bairro, uf, cidade, cargo, salario, comissao, senha, telefone, celular);
-            if(operacao.equals("Incluir")){
+        try {
+            Funcionario funcionario = new Funcionario(cargo, salario, comissao, senha, nome,cpf,dataNascimento,  email,  cep, logradouro,  numero,  complemento,  bairro, uf,  cidade,  telefone,  celular);
+            if (operacao.equals("Incluir")) {
                 funcionario.save();
-            }else if(operacao.equals("Editar")){
+            } else if (operacao.equals("Editar")) {
                 funcionario.save();
-            }else if(operacao.equals("Excluir")){
+            } else if (operacao.equals("Excluir")) {
                 funcionario.remove();
             }
             RequestDispatcher view = request.getRequestDispatcher("PesquisaFuncionarioController");
             view.forward(request, response);
-        }catch(IOException e){
+        } catch (IOException e) {
             throw new ServletException(e);
-        }catch(ServletException e){
+        } catch (ServletException e) {
             throw e;
         }
-        
+
     }
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -96,7 +96,6 @@ public class ManterFuncionarioController extends HttpServlet {
         }
     }
 
-   
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -109,7 +108,6 @@ public class ManterFuncionarioController extends HttpServlet {
         }
     }
 
-    
     @Override
     public String getServletInfo() {
         return "Short description";
