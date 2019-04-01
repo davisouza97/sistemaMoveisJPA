@@ -46,8 +46,8 @@ public class Pedido implements Serializable {
         PedidoDAO.getInstance().remove(this);
     }
     
-    public Pedido find(){
-        return PedidoDAO.getInstance().findPedido(this.id);
+    public static Pedido find(Long id){
+        return PedidoDAO.getInstance().findPedido(id);
     }
     
     public static List<Pedido> findAll(){
