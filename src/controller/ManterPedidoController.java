@@ -35,8 +35,8 @@ public class ManterPedidoController extends HttpServlet {
         request.setAttribute("moveis", Movel.findAll());
         request.setAttribute("funcionarios", Funcionario.findAll());
         if (!operacao.equals("Incluir")) {
-            //Pedido pedido = Pedido.obterPedido(Long.parseLong(request.getParameter("idPedido")));
-            //request.setAttribute("pedido", pedido);
+            Pedido pedido = Pedido.find(Long.parseLong(request.getParameter("idPedido")));
+            request.setAttribute("pedido", pedido);
         }
         request.getRequestDispatcher("cadastroPedido.jsp").forward(request, response);
     }

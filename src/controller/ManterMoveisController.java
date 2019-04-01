@@ -37,8 +37,8 @@ public class ManterMoveisController extends HttpServlet {
         request.setAttribute("pedidos", Pedido.findAll());
         request.setAttribute("materiais", Material.findAll());
         if (!operacao.equals("Incluir")) {
-            //Movel movel = Movel.obterMovel(Long.parseLong(request.getParameter("idMovel")));
-            //request.setAttribute("movel", movel);
+            Movel movel = Movel.find(Long.parseLong(request.getParameter("idMovel")));
+            request.setAttribute("movel", movel);
 
         }
         request.getRequestDispatcher("cadastroMoveis.jsp").forward(request, response);
