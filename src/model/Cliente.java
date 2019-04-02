@@ -3,31 +3,34 @@ package model;
 import dao.ClienteDAO;
 import java.io.Serializable;
 
-
 import java.util.List;
 import javax.persistence.Entity;
 
 @Entity
-public class Cliente extends Pessoa implements Serializable{
-    
-public Long id;
+public class Cliente extends Pessoa implements Serializable {
+
+    public Long id;
+
     public Cliente(String nome, String cpf, String dataNascimento, String email, String cep, String logradouro, String numero, String complemento, String bairro, String uf, String cidade, String telefone, String celular) {
         super(nome, cpf, dataNascimento, email, cep, logradouro, numero, complemento, bairro, uf, cidade, telefone, celular);
     }
 
     public Cliente() {
     }
-    
-    public void save(){
+
+    public void save() {
         ClienteDAO.getInstance().save(this);
     }
-    public void remove(){
+
+    public void remove() {
         ClienteDAO.getInstance().remove(this);
     }
-    public static Cliente find(Long id){
+
+    public static Cliente find(Long id) {
         return ClienteDAO.getInstance().find(id);
-                }
-    public static List<Cliente> findAll(){
+    }
+
+    public static List<Cliente> findAll() {
         return ClienteDAO.getInstance().findAll();
     }
 }

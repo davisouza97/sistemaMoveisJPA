@@ -16,10 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Fornecedor;
 
-/**
- *
- * @author ISAAC
- */
+
 @WebServlet(name = "PesquisaFornecedorController", urlPatterns = "/PesquisaFornecedorController")
 public class PesquisaFornecedorController extends HttpServlet {
 

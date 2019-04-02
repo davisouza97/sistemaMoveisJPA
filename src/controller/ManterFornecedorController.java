@@ -50,8 +50,8 @@ public class ManterFornecedorController extends HttpServlet {
             request.setAttribute("operacao", operacao);
             if (!operacao.equals("Incluir")) {
                 Long idFornecedor = Long.parseLong(request.getParameter("idFornecedor"));
-               // Fornecedor fornecedor = Fornecedor.obterFornecedor(idFornecedor);
-               // request.setAttribute("fornecedor", fornecedor);
+               Fornecedor fornecedor = Fornecedor.find(idFornecedor);
+               request.setAttribute("fornecedor", fornecedor);
                 
             }
             RequestDispatcher view = request.getRequestDispatcher("cadastroFornecedor.jsp");

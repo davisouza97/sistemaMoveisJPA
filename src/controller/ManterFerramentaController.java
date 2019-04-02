@@ -43,8 +43,8 @@ public class ManterFerramentaController extends HttpServlet {
         request.setAttribute("operacao", operacao);
         request.setAttribute("fornecedores", Fornecedor.findAll());
         if (!operacao.equals("Incluir")) {
-           // Ferramenta ferramenta = Ferramenta.obterFerramenta(Long.parseLong(request.getParameter("idFerramenta")));
-            //request.setAttribute("ferramenta", ferramenta);
+           Ferramenta ferramenta = Ferramenta.find(Long.parseLong(request.getParameter("idFerramenta")));
+           request.setAttribute("ferramenta", ferramenta);
 
         }
         request.getRequestDispatcher("cadastroFerramenta.jsp").forward(request, response);

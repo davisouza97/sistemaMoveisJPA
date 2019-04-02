@@ -27,7 +27,7 @@ public class ManterClienteController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
         String acao = request.getParameter("acao");
-        if (acao.equals("confirmarOperacao")){
+        if (acao.equals("confirmarOperacao")) {
             confirmarOperacao(request, response);
         } else if (acao.equals("prepararOperacao")) {
             prepararOperacao(request, response);
@@ -38,14 +38,14 @@ public class ManterClienteController extends HttpServlet {
         String operacao = request.getParameter("operacao");
         request.setAttribute("operacao", operacao);
         if (!operacao.equals("Incluir")) {
-           // Cliente cliente = Cliente. (Long.parseLong(request.getParameter("idCliente")));
-            //request.setAttribute("cliente", cliente);
-           
+            Cliente cliente = Cliente.find(Long.parseLong(request.getParameter("idCliente")));
+            request.setAttribute("cliente", cliente);
+
         }
         request.getRequestDispatcher("cadastroCliente.jsp").forward(request, response);
     }
-   
-    protected void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException{
+
+    protected void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         String operacao = request.getParameter("operacao");
         String nome = request.getParameter("nome");
         String cpf = request.getParameter("cpf");
@@ -60,25 +60,26 @@ public class ManterClienteController extends HttpServlet {
         String cidade = request.getParameter("cidade");
         String telefone = request.getParameter("telefone");
         String celular = request.getParameter("celular");
-        
-        try{
+
+        try {
             Cliente cliente = new Cliente(nome, cpf, dataNascimento, email, cep, logradouro, numero, complemento, bairro, uf, cidade, telefone, celular);
-            if(operacao.equals("Incluir")){
+            if (operacao.equals("Incluir")) {
                 cliente.save();
-            }else if(operacao.equals("Editar")){
+            } else if (operacao.equals("Editar")) {
                 cliente.save();
-            }else if(operacao.equals("Excluir")){
+            } else if (operacao.equals("Excluir")) {
                 cliente.remove();
             }
             RequestDispatcher view = request.getRequestDispatcher("PesquisaClienteController");
             view.forward(request, response);
-        }catch(IOException e){
+        } catch (IOException e) {
             throw new ServletException(e);
-        }catch(ServletException e){
+        } catch (ServletException e) {
             throw e;
         }
-        
+
     }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

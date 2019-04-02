@@ -8,15 +8,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import javax.servlet.annotation.WebServlet;
 
-
-
-
+@WebServlet(name = "PesquisaMaterialController", urlPatterns = "/PesquisaMaterialController")
 public class PesquisaMaterialController extends HttpServlet {
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException,IOException {
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("materiais", Material.findAll());
         RequestDispatcher view = request.getRequestDispatcher("gridMaterial.jsp");
-        view.forward(request,response);
+        view.forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,6 +26,5 @@ public class PesquisaMaterialController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
-
 
 }
