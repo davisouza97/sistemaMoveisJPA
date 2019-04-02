@@ -34,13 +34,10 @@
                 <c:forEach items="${funcionarios}" var="funcionario">
                     <tr>
                         <td>
-                            <c:out value="${funcionario.idFuncionario}" />
-                        </td>
-                        <td>
                             <c:out value="${funcionario.nome}" />
                         </td>
-                        <td><a class="btn btn-primary" href="ManterFuncionarioController?acao=prepararOperacao&operacao=Editar&idFuncionario=<c:out value="${funcionario.idFuncionario}" />">Editar</a></td>
-                        <td><a class="btn btn-primary" href="ManterFuncionarioController?acao=prepararOperacao&operacao=Excluir&idFuncionario=<c:out value="${funcionario.idFuncionario}" />">Excluir</a></td>
+                        <td><a class="btn btn-primary" href="ManterFuncionarioController?acao=prepararOperacao&operacao=Editar&id=<c:out value="${funcionario.id}" />">Editar</a></td>
+                        <td><a class="btn btn-primary" href="ManterFuncionarioController?acao=prepararOperacao&operacao=Excluir&id=<c:out value="${funcionario.id}" />">Excluir</a></td>
                     </tr>
                 </c:forEach>
                 <td><a class="btn btn-danger" href="index.jsp">Voltar</a></td>

@@ -43,7 +43,7 @@ public class ManterMaterialController extends HttpServlet {
         request.setAttribute("operacao", operacao);
         request.setAttribute("fornecedores", Fornecedor.findAll());
         if (!operacao.equals("Incluir")) {
-           Material material = Material.find(Long.parseLong(request.getParameter("idMaterial")));
+           Material material = Material.find(Long.parseLong(request.getParameter("id")));
            request.setAttribute("material", material);
           
         }
@@ -52,13 +52,12 @@ public class ManterMaterialController extends HttpServlet {
     
      protected void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException{
         String operacao = request.getParameter("operacao");
-         Long idMaterial = Long.parseLong(request.getParameter("idMaterial"));
          String nome = request.getParameter("nome");
          String tipo = request.getParameter("tipo");
          Double valorUnitario = Double.parseDouble(request.getParameter("valorUnitario"));
          Double qtdEstoque = Double.parseDouble(request.getParameter("qtdEstoque"));
          String unidade = request.getParameter("unidade");
-         Long idFornecedor = Long.parseLong(request.getParameter("idFornecedor"));
+         Long idFornecedor = Long.parseLong(request.getParameter("id"));
        
         try{
             Fornecedor fornecedor = null;

@@ -33,13 +33,10 @@
                 <c:forEach items="${fornecedores}" var="fornecedor">
                     <tr>
                         <td>
-                            <c:out value="${fornecedor.idFornecedor}" />
-                        </td>
-                        <td>
                             <c:out value="${fornecedor.nome}" />
                         </td>
-                        <td><a class="btn btn-primary" href="ManterFornecedorController?acao=prepararOperacao&operacao=Editar&idFornecedor=<c:out value="${fornecedor.idFornecedor}"/> ">Editar</a></td>
-                        <td><a class="btn btn-primary" href="ManterFornecedorController?acao=prepararOperacao&operacao=Excluir&idFornecedor=<c:out value="${fornecedor.idFornecedor}"/> ">Excluir</a></td>
+                        <td><a class="btn btn-primary" href="ManterFornecedorController?acao=prepararOperacao&operacao=Editar&id=<c:out value="${fornecedor.id}"/> ">Editar</a></td>
+                        <td><a class="btn btn-primary" href="ManterFornecedorController?acao=prepararOperacao&operacao=Excluir&id=<c:out value="${fornecedor.id}"/> ">Excluir</a></td>
                     </tr>
                 </c:forEach>
                 <td><a class="btn btn-danger" href="index.jsp">Voltar</a></td>
