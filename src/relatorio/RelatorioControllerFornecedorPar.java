@@ -4,10 +4,10 @@
  */
 package relatorio;
 
-import dao.PersistenceUtil;
+import dao.BD;
 import java.io.IOException;
 import java.sql.Connection;
-
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.HashMap;
 import javax.servlet.ServletException;
@@ -22,45 +22,44 @@ import net.sf.jasperreports.engine.JasperPrint;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-
 @WebServlet(name = "RelatorioControllerFornecedorPar", urlPatterns = "/RelatorioControllerFornecedorPar")
 public class RelatorioControllerFornecedorPar extends HttpServlet {
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) {
-        EntityManager em = PersistenceUtil.getEntityManager();
-            EntityTransaction tx = em.getTransaction();
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy-HH:mm");
+ Connection conexao = null;
+ DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy-HH:mm");
         Date date = new Date();
         String data = dateFormat.format(date);
         try {
-
-            tx.begin();
+            conexao = BD.getConexao();
             HashMap parametros = new HashMap();
-            parametros.put("Par_Fornecedor", request.getParameter("paramFornecedor"));
-            String relatorio = getServletContext().getRealPath("/WEB-INF/classes/relatorio") + "/FornecedorParam.jasper";
-            
-           // JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, tx.???);
-//            
-//            byte[] relat = JasperExportManager.exportReportToPdf(jp);
-//            response.setHeader("Content-Disposition", "attachment;filename=relatorioFornecedoresParam" + data + ".pdf");
-//            response.setContentType("application/pdf");
-//            response.getOutputStream().write(relat);
-//        } catch (JRException ex) {
-//            ex.printStackTrace();
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
+            parametros.put("Par_Fornecedor",request.getParameter("paramFornecedor"));
+            String relatorio = getServletContext().getRealPath("/WEB-INF/classes/relatorio")+"/FornecedorParam.jasper";
+            JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);
+            byte[] relat = JasperExportManager.exportReportToPdf(jp);
+            response.setHeader("Content-Disposition", "attachment;filename=relatorioFornecedoresParam" + data + ".pdf");
+            response.setContentType("application/pdf");
+            response.getOutputStream().write(relat);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (JRException ex) {
+            ex.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
         } finally {
-            
-               PersistenceUtil.close(em);
+            try {
+                if (!conexao.isClosed()) {
+                    conexao.close();
+                }
+            } catch (SQLException ex) {
+            }
         }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
+    /** 
      * Handles the HTTP <code>GET</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -72,9 +71,8 @@ public class RelatorioControllerFornecedorPar extends HttpServlet {
         processRequest(request, response);
     }
 
-    /**
+    /** 
      * Handles the HTTP <code>POST</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -86,9 +84,8 @@ public class RelatorioControllerFornecedorPar extends HttpServlet {
         processRequest(request, response);
     }
 
-    /**
+    /** 
      * Returns a short description of the servlet.
-     *
      * @return a String containing servlet description
      */
     @Override

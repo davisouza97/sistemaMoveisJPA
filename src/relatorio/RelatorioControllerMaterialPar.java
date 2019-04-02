@@ -4,11 +4,10 @@
  */
 package relatorio;
 
-
-import dao.PersistenceUtil;
+import dao.BD;
 import java.io.IOException;
 import java.sql.Connection;
-
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.HashMap;
 import javax.servlet.ServletException;
@@ -23,36 +22,39 @@ import net.sf.jasperreports.engine.JasperPrint;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 
 @WebServlet(name = "RelatorioControllerMaterialPar", urlPatterns = "/RelatorioControllerMaterialPar")
 public class RelatorioControllerMaterialPar extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) {
- EntityManager em = PersistenceUtil.getEntityManager();
-            EntityTransaction tx = em.getTransaction();
+ Connection conexao = null;
  DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy-HH:mm");
         Date date = new Date();
         String data = dateFormat.format(date);
         try {
-             
-            tx.begin();
+            conexao = BD.getConexao();
             HashMap parametros = new HashMap();
             parametros.put("Par_Material", request.getParameter("paramMaterial"));
             String relatorio = getServletContext().getRealPath("/WEB-INF/classes/relatorio")+"/MaterialParam.jasper";
-            
-//            JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, tx.???);
-//            
-//            byte[] relat = JasperExportManager.exportReportToPdf(jp);
-//            response.setHeader("Content-Disposition", "attachment;filename=relatorioMaterialParam" + data + ".pdf");
-//            response.setContentType("application/pdf");
-//            response.getOutputStream().write(relat);
-//        } catch (JRException ex) {
-//            ex.printStackTrace();
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
+            JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);
+            byte[] relat = JasperExportManager.exportReportToPdf(jp);
+            response.setHeader("Content-Disposition", "attachment;filename=relatorioMaterialParam" + data + ".pdf");
+            response.setContentType("application/pdf");
+            response.getOutputStream().write(relat);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (JRException ex) {
+            ex.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
         } finally {
-            PersistenceUtil.close(em);
+            try {
+                if (!conexao.isClosed()) {
+                    conexao.close();
+                }
+            } catch (SQLException ex) {
+            }
         }
     }
 
