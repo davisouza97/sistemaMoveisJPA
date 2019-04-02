@@ -60,11 +60,11 @@ public class Movel implements Serializable{
     }
     
     public static Movel find(Long id){
-        return MovelDAO.getInstance().findMovel(id);
+        return MovelDAO.getInstance().find(id);
     }
     
     public static List<Movel> findAll(){
-        return MovelDAO.getInstance().findAllMovel();
+        return MovelDAO.getInstance().findAll();
     } 
     
     public Long getId() {

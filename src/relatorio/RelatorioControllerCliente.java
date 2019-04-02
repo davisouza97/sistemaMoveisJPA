@@ -40,7 +40,7 @@ public class RelatorioControllerCliente extends HttpServlet {
             //parametros.put("Par_cidade", request.getParameter("paramCliente"));
             String relatorio = getServletContext().getRealPath("/WEB-INF/classes/relatorio") + "/clientes.jasper";
 
-//            //JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, tx.??????);
+//            JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, tx.??????);
 //            
 //            byte[] relat = JasperExportManager.exportReportToPdf(jp);
 //            response.setHeader("Content-Disposition", "attachment;filename=relatorioClientes-" + data + ".pdf");

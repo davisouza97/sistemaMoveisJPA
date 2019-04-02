@@ -57,7 +57,7 @@ public class MaterialDAO {
         }
     }
 
-    public Material findMaterial(Long id) {
+    public Material find(Long id) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         Material material = null;
@@ -76,7 +76,7 @@ public class MaterialDAO {
         return material;
     }
 
-    public List<Material> findAllMaterial() {
+    public List<Material> findAll() {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         List<Material> materiais = null;

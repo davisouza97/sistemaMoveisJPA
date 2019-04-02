@@ -25,6 +25,7 @@ public class NewMain {
           Cliente m = new Cliente("Cliente", "String cpf", "String dataNascimento", "String email", "String cep", "String logradouro", "500", "complemento", "bairro", "mg", "cidade", "3299127999", "32991279999");
           ClienteDAO.getInstance().save(m);
 
+          System.out.println("acabou");
 
     }
     

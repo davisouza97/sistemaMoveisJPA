@@ -18,12 +18,7 @@
             <form action="ManterFornecedorController?acao=confirmarOperacao&operacao=${operacao}" method="POST">
                 <table class="tableform">
                     <tr><td colspan="4" style="text-align: center">${operacao} Fornecedor</td></tr>
-                    <tr>
-                        <td><label for="idFornecedor">Código do Fornecedor</label></td>
-                        <td colspan="3"><input class="form-control" type="number" required min="1" name="idFornecedor" id="idFornecedor" value="${fornecedor.idFornecedor}"  <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
-                        </tr>
-                        <tr>
-
+                   
                         <tr>
                             <td><label for="nome">Nome</label></td>
                             <td colspan="3"><input class="form-control" type="text" required maxlength="45" minlength="3" name="nome" id="nome" value="${fornecedor.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>

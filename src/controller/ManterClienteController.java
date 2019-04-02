@@ -38,7 +38,7 @@ public class ManterClienteController extends HttpServlet {
         String operacao = request.getParameter("operacao");
         request.setAttribute("operacao", operacao);
         if (!operacao.equals("Incluir")) {
-            Cliente cliente = Cliente.find(Long.parseLong(request.getParameter("idCliente")));
+            Cliente cliente = Cliente.find(Long.parseLong(request.getParameter("id")));
             request.setAttribute("cliente", cliente);
 
         }
