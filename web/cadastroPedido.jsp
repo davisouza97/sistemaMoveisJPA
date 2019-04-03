@@ -21,18 +21,7 @@
                 <table>
                     <tr><td colspan="4" style="text-align: center">${operacao} Pedido</td></tr>
                         
-                    <tr>
-
-                            <td><label for="idFuncionario">Funcionario</label></td>
-                            <td> 
-                                <select class="form-control" required name="idFuncionario" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
-                                <option required value="0" <c:if test="${pedido.funcionario.idFuncionario == null}"> selected</c:if>> </option>  
-                                <c:forEach items="${funcionarios}" var="funcionario">
-                                    <option required value="${funcionario.idFuncionario}" <c:if test="${pedido.funcionario.idFuncionario == funcionario.idFuncionario}"> selected</c:if>>${funcionario.idFuncionario} - ${funcionario.nome}</option>  
-                                </c:forEach>
-                                </select>
-                            </td>
-                        </tr>
+                    
                     
                     <tr>
                         <td><label for="idPedido">Código do Pedido</label></td>

@@ -47,11 +47,11 @@ public class Pedido implements Serializable {
     }
     
     public static Pedido find(Long id){
-        return PedidoDAO.getInstance().findPedido(id);
+        return PedidoDAO.getInstance().find(id);
     }
     
     public static List<Pedido> findAll(){
-        return PedidoDAO.getInstance().findAllPedido();
+        return PedidoDAO.getInstance().findAll();
     } 
     
     public Long getId() {

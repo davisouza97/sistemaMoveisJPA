@@ -37,7 +37,7 @@ public class ManterMoveisController extends HttpServlet {
         request.setAttribute("pedidos", Pedido.findAll());
         request.setAttribute("materiais", Material.findAll());
         if (!operacao.equals("Incluir")) {
-            Movel movel = Movel.find(Long.parseLong(request.getParameter("idMovel")));
+            Movel movel = Movel.find(Long.parseLong(request.getParameter("id")));
             request.setAttribute("movel", movel);
 
         }
@@ -47,7 +47,6 @@ public class ManterMoveisController extends HttpServlet {
 
     protected void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         String operacao = request.getParameter("operacao");
-        Long idMovel = Long.parseLong(request.getParameter("idMovel"));
         String nome = request.getParameter("nome");
         double preco = Double.parseDouble(request.getParameter("preco"));
         String tipo = request.getParameter("tipo");
@@ -56,8 +55,8 @@ public class ManterMoveisController extends HttpServlet {
         double comprimento = Double.parseDouble(request.getParameter("comprimento"));
         String acabamento = request.getParameter("acabamento");
         double peso = Double.parseDouble(request.getParameter("peso"));
-        Long idMaterial = Long.parseLong(request.getParameter("idMaterial"));
-        Long idPedido = Long.parseLong(request.getParameter("idPedido"));
+        Long idMaterial = Long.parseLong(request.getParameter("id"));
+        Long idPedido = Long.parseLong(request.getParameter("id"));
         try {
             Material material = null;
             if (idMaterial != 0) {

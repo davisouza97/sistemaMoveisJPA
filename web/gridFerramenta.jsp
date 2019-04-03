@@ -32,13 +32,10 @@
                 <c:forEach items="${ferramentas}" var="ferramenta">
                     <tr>
                         <td>
-                            <c:out value="${ferramenta.idFerramenta}" />
-                        </td>
-                        <td>
                             <c:out value="${ferramenta.nome}" />
                         </td>
-                        <td><a class="btn btn-primary" href="ManterFerramentaController?acao=prepararOperacao&operacao=Editar&idFerramenta=<c:out value="${ferramenta.idFerramenta}" />">Editar</a></td>
-                        <td><a class="btn btn-primary" href="ManterFerramentaController?acao=prepararOperacao&operacao=Excluir&idFerramenta=<c:out value="${ferramenta.idFerramenta}" />">Excluir</a></td>
+                        <td><a class="btn btn-primary" href="ManterFerramentaController?acao=prepararOperacao&operacao=Editar&id=<c:out value="${ferramenta.id}" />">Editar</a></td>
+                        <td><a class="btn btn-primary" href="ManterFerramentaController?acao=prepararOperacao&operacao=Excluir&id=<c:out value="${ferramenta.id}" />">Excluir</a></td>
                     </tr>
                 </c:forEach>
 

@@ -25,10 +25,10 @@ public class Material extends MaterialFerramenta {
     }
     
     public static Material find(Long id){
-        return MaterialDAO.getInstance().findMaterial(id);
+        return MaterialDAO.getInstance().find(id);
     }
     
     public static List<Material> findAll(){
-        return MaterialDAO.getInstance().findAllMaterial();
+        return MaterialDAO.getInstance().findAll();
     } 
 }

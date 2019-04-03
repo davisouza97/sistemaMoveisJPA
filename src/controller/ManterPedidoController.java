@@ -36,7 +36,7 @@ public class ManterPedidoController extends HttpServlet {
         request.setAttribute("moveis", Movel.findAll());
         request.setAttribute("funcionarios", Funcionario.findAll());
         if (!operacao.equals("Incluir")) {
-            Pedido pedido = Pedido.find(Long.parseLong(request.getParameter("idPedido")));
+            Pedido pedido = Pedido.find(Long.parseLong(request.getParameter("id")));
             request.setAttribute("pedido", pedido);
         }
         request.getRequestDispatcher("cadastroPedido.jsp").forward(request, response);
@@ -44,10 +44,9 @@ public class ManterPedidoController extends HttpServlet {
 
     protected void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         String operacao = request.getParameter("operacao");
-        Long idPedido = Long.parseLong(request.getParameter("idPedido"));
-        Double valorTotal = Double.parseDouble(request.getParameter("valorTotal"));
-        Long idFuncionario = Long.parseLong(request.getParameter("idFuncionario"));
-        Long idCliente = Long.parseLong(request.getParameter("idCliente"));
+        Double valorTotal = Double.parseDouble(request.getParameter("valorTotal"));//criar um getMovelByIdPedido e calcular o preco(ou criar um metodo pra fazer isso pq vai repetir)
+        Long idFuncionario = Long.parseLong(request.getParameter("id"));
+        Long idCliente = Long.parseLong(request.getParameter("id"));
 
         try {
             Cliente cliente = null;

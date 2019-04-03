@@ -31,14 +31,12 @@
                 </tr>
                 <c:forEach items="${clientes}" var="cliente">
                     <tr>
-                        <td>
-                            <c:out value="${cliente.idCliente}" />
-                        </td>
+                        
                         <td>
                             <c:out value="${cliente.nome}" />
                         </td>
-                        <td><a class="btn btn-primary" href="ManterClienteController?acao=prepararOperacao&operacao=Editar&idCliente=<c:out value="${cliente.idCliente}" />" >Editar</a></td>
-                        <td><a class="btn btn-primary" href="ManterClienteController?acao=prepararOperacao&operacao=Excluir&idCliente=<c:out value="${cliente.idCliente}" />" >Excluir</a></td>
+                        <td><a class="btn btn-primary" href="ManterClienteController?acao=prepararOperacao&operacao=Editar&id=<c:out value="${cliente.id}" />" >Editar</a></td>
+                        <td><a class="btn btn-primary" href="ManterClienteController?acao=prepararOperacao&operacao=Excluir&id=<c:out value="${cliente.id}" />" >Excluir</a></td>
                     </tr>
                 </c:forEach>
                 <td><a class="btn btn-danger" href="index.jsp">Voltar</a></td>

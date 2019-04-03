@@ -33,13 +33,10 @@
                 <c:forEach items="${materiais}" var="material">
                     <tr>
                         <td>
-                            <c:out value="${material.idMaterial}" />
-                        </td>
-                        <td>
                             <c:out value="${material.nome}" />
                         </td>
-                        <td><a class="btn btn-primary" href="ManterMaterialController?acao=prepararOperacao&operacao=Editar&idMaterial=<c:out value="${material.idMaterial}" />">Editar</a></td>
-                        <td><a class="btn btn-primary" href="ManterMaterialController?acao=prepararOperacao&operacao=Excluir&idMaterial=<c:out value="${material.idMaterial}" />">Excluir</a></td>
+                        <td><a class="btn btn-primary" href="ManterMaterialController?acao=prepararOperacao&operacao=Editar&id=<c:out value="${material.id}" />">Editar</a></td>
+                        <td><a class="btn btn-primary" href="ManterMaterialController?acao=prepararOperacao&operacao=Excluir&id=<c:out value="${material.id}" />">Excluir</a></td>
                     </tr>
                 </c:forEach>
                 <td><a class="btn btn-danger" href="index.jsp">Voltar</a></td>

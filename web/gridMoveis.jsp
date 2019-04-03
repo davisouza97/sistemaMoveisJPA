@@ -29,13 +29,10 @@
                 <c:forEach items="${moveis}" var="movel">
                     <tr>
                         <td>
-                            <c:out value="${movel.idMovel}" />
-                        </td>
-                        <td>
                             <c:out value="${movel.nome}" />
                         </td>
-                        <td><a class="btn btn-primary" href="ManterMoveisController?acao=prepararOperacao&operacao=Editar&idMovel=<c:out value="${movel.idMovel}" />">Editar</a></td>
-                        <td><a class="btn btn-primary" href="ManterMoveisController?acao=prepararOperacao&operacao=Excluir&idMovel=<c:out value="${movel.idMovel}" />">Excluir</a></td>
+                        <td><a class="btn btn-primary" href="ManterMoveisController?acao=prepararOperacao&operacao=Editar&id=<c:out value="${movel.id}" />">Editar</a></td>
+                        <td><a class="btn btn-primary" href="ManterMoveisController?acao=prepararOperacao&operacao=Excluir&id=<c:out value="${movel.id}" />">Excluir</a></td>
                     </tr>
                 </c:forEach>
                 <td><a class="btn btn-danger" href="index.jsp">Voltar</a></td>

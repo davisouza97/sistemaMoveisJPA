@@ -33,14 +33,11 @@
                 <c:forEach items="${pedidos}" var="pedido">
                     <tr>
                         <td>
-                            <c:out value="${pedido.idPedido}" />
-                        </td>
-                        <td>
                             <c:out value="${pedido.valorTotal}" />
                         </td>
-                       
-                        <td><a class="btn btn-primary" href="ManterPedidoController?acao=prepararOperacao&Operacao=Editar&idPedido=<c:out value="${pedido.idPedido}" />">Editar</a></td>
-                        <td><a class="btn btn-primary" href="ManterPedidoController?acao=prepararOperacao&Operacao=Excluir&idPedido=<c:out value="${pedido.idPedido}" />">Excluir</a></td>
+
+                        <td><a class="btn btn-primary" href="ManterPedidoController?acao=prepararOperacao&Operacao=Editar&id=<c:out value="${pedido.id}" />">Editar</a></td>
+                        <td><a class="btn btn-primary" href="ManterPedidoController?acao=prepararOperacao&Operacao=Excluir&id=<c:out value="${pedido.id}" />">Excluir</a></td>
                     </tr>
                 </c:forEach>
                 <td><a class="btn btn-danger" href="index.jsp">Voltar</a></td>
@@ -68,7 +65,7 @@
                         </div>
                         <div class="modal-body">
                             <h5>
-                               Selecione o cliente
+                                Selecione o cliente
                             </h5>
                             <form action="RelatorioControllerPedidoPar" method="POST" autofocus>
                                 <select class="form-control"  name="paramPedido">

@@ -43,7 +43,7 @@ public class ManterFerramentaController extends HttpServlet {
         request.setAttribute("operacao", operacao);
         request.setAttribute("fornecedores", Fornecedor.findAll());
         if (!operacao.equals("Incluir")) {
-           Ferramenta ferramenta = Ferramenta.find(Long.parseLong(request.getParameter("idFerramenta")));
+           Ferramenta ferramenta = Ferramenta.find(Long.parseLong(request.getParameter("id")));
            request.setAttribute("ferramenta", ferramenta);
 
         }
@@ -53,17 +53,16 @@ public class ManterFerramentaController extends HttpServlet {
 
     protected void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         String operacao = request.getParameter("operacao");
-        Long idFerramenta = Long.parseLong(request.getParameter("idFerramenta"));
         String nome = request.getParameter("nome");
         String tipo = request.getParameter("tipo");
         Double valorUnitario = Double.parseDouble(request.getParameter("valorUnitario"));
         Double qtdEstoque = Double.parseDouble(request.getParameter("qtdEstoque"));
         String unidade = request.getParameter("unidade");
-        Long idFornecedor = Long.parseLong(request.getParameter("idFornecedor"));
+        Long idFornecedor = Long.parseLong(request.getParameter("id"));
         try {
             Fornecedor fornecedor = null;
             if(idFornecedor != 0){
-              //  fornecedor = Fornecedor.obterFornecedor(idFornecedor);
+              fornecedor = Fornecedor.find(idFornecedor);
             }
             Ferramenta ferramenta = new Ferramenta( nome, tipo, valorUnitario, qtdEstoque, unidade, fornecedor);
             if (operacao.equals("Incluir")) {

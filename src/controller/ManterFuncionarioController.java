@@ -64,14 +64,17 @@ public class ManterFuncionarioController extends HttpServlet {
         String senha = request.getParameter("senha");
         String telefone = request.getParameter("telefone");
         String celular = request.getParameter("celular");
-        Long idFuncionario = Long.parseLong(request.getParameter("idFuncionario"));
+        
+        Long idFuncionario = Long.parseLong(request.getParameter("id"));
         try {
             Funcionario funcionario = new Funcionario(cargo, salario, comissao, senha, nome,cpf,dataNascimento,  email,  cep, logradouro,  numero,  complemento,  bairro, uf,  cidade,  telefone,  celular);
             if (operacao.equals("Incluir")) {
                 funcionario.save();
             } else if (operacao.equals("Editar")) {
+                funcionario.setId(idFuncionario);
                 funcionario.save();
             } else if (operacao.equals("Excluir")) {
+                funcionario.setId(idFuncionario);
                 funcionario.remove();
             }
             RequestDispatcher view = request.getRequestDispatcher("PesquisaFuncionarioController");

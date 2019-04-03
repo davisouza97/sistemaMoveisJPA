@@ -21,14 +21,7 @@
             <form action="ManterFerramentaController?acao=confirmarOperacao&operacao=${operacao}" method="POST">
                 <table class="tableform">
                     <tr><td colspan="4" style="text-align: center">${operacao} Ferramenta</td></tr>
-                    <tr>
-                        <td>
-                            <label for="idFerramenta">Código da Ferramenta</label>
-                        </td>
-                        <td colspan="3">
-                            <input class="form-control" type="number" required min="1" name="idFerramenta" id="idFerramenta" value="${ferramenta.idFerramenta}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
-                            </td>
-                        </tr>
+                    
 
                         <tr>
                             <td>

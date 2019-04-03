@@ -20,14 +20,7 @@
             <form action="ManterMaterialController?acao=confirmarOperacao&operacao=${operacao}" method="POST">
                 <table class="tableform">
                     <tr><td colspan="4" style="text-align: center">${operacao} Material</td></tr>
-                    <tr>
-                        <td>
-                            <label for="idMaterial">Código do Material</label>
-                        </td>
-                        <td colspan="3">
-                            <input class="form-control" type="number" min="1" name="idMaterial" id="idMaterial" value="${material.idMaterial}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
-                            </td>
-                        </tr>
+                    
                         <tr>
                             <td>
                                 <label for="nome">Nome</label>
