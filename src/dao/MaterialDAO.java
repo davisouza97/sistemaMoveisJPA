@@ -83,7 +83,7 @@ public class MaterialDAO {
         try {
             tx.begin();
             TypedQuery<Material> query
-                    = em.createQuery("select p from Movel p", Material.class);
+                    = em.createQuery("select m From Material m", Material.class);
             materiais = query.getResultList();
             tx.commit();
         } catch (Exception e) {

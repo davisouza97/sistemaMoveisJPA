@@ -38,6 +38,10 @@ public abstract class MaterialFerramenta {
     public MaterialFerramenta() {
     }
 
+    public Fornecedor getFornecedor() {
+        return fornecedor;
+    }
+
     
     
     public void setFornecedor(Fornecedor fornecedor) {
