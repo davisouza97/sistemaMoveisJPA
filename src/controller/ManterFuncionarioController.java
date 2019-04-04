@@ -37,8 +37,8 @@ public class ManterFuncionarioController extends HttpServlet {
     protected void prepararOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
         String operacao = request.getParameter("operacao");
         request.setAttribute("operacao", operacao);
-        if (!operacao.equals("Incluir")) {
-           Funcionario funcionario = Funcionario.find(Long.parseLong(request.getParameter("idFuncionario")));
+        if (!operacao.equalsIgnoreCase("Incluir")) {
+           Funcionario funcionario = Funcionario.find(Long.parseLong(request.getParameter("id")));
            request.setAttribute("funcionario", funcionario);
 
         }
@@ -64,17 +64,17 @@ public class ManterFuncionarioController extends HttpServlet {
         String senha = request.getParameter("senha");
         String telefone = request.getParameter("telefone");
         String celular = request.getParameter("celular");
-        
-        Long idFuncionario = Long.parseLong(request.getParameter("id"));
+        //Long id = 151L;
+        Long id = Long.parseLong(request.getParameter("id").trim()) ;
         try {
             Funcionario funcionario = new Funcionario(cargo, salario, comissao, senha, nome,cpf,dataNascimento,  email,  cep, logradouro,  numero,  complemento,  bairro, uf,  cidade,  telefone,  celular);
             if (operacao.equals("Incluir")) {
                 funcionario.save();
             } else if (operacao.equals("Editar")) {
-                funcionario.setId(idFuncionario);
+               funcionario.setId(id);
                 funcionario.save();
             } else if (operacao.equals("Excluir")) {
-                funcionario.setId(idFuncionario);
+                funcionario.setId(id);
                 funcionario.remove();
             }
             RequestDispatcher view = request.getRequestDispatcher("PesquisaFuncionarioController");

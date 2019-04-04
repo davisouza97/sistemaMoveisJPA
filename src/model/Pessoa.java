@@ -48,6 +48,9 @@ public abstract class Pessoa implements Serializable{
         this.telefone = telefone;
         this.celular = celular;
     }
+    public Pessoa(Long id){
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;

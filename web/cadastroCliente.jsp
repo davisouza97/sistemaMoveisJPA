@@ -23,7 +23,11 @@
                 <table>
                     <tr><td colspan="4" style="text-align: center">${operacao} Cliente</td></tr>
 
-                    
+                    <tr>
+                        <td colspan="3">
+                            <input type="HIDDEN" min="1" class="form-control" name="id" required id="id" value="${cliente.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
+                            </td>
+                        </tr>
                         <tr>
                             <td><label for="nome">Nome</label></td><td colspan="3"><input class="form-control" type="text" maxlength="45" minlength="3"  name="nome" required id="nome" value="${cliente.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td></tr>
                     <tr><td><label for="cpf">CPF</label></td><td colspan="3"><input class="form-control" type="number" maxlenght="14" minlength="14" required name="cpf" id="cpf" value="${cliente.cpf}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td></tr>
