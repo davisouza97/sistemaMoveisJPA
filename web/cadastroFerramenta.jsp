@@ -24,7 +24,7 @@
                     <tr>
                         
                         <td colspan="3">
-                            <input class="form-control" type="HIDDEN" required min="1" name="id" id="id" value="${ferramenta.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
+                            <input class="form-control" type="HIDDEN" required min="1" name="idFerramenta" id="id" value="${ferramenta.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
                             </td>
                         </tr>
 

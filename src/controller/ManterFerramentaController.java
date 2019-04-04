@@ -59,6 +59,7 @@ public class ManterFerramentaController extends HttpServlet {
         Double qtdEstoque = Double.parseDouble(request.getParameter("qtdEstoque"));
         String unidade = request.getParameter("unidade");
         Long idFornecedor = Long.parseLong(request.getParameter("id"));
+        Long idFerramenta = Long.parseLong(request.getParameter("idFerramenta"));
         try {
             Fornecedor fornecedor = null;
             if(idFornecedor != 0){
@@ -68,9 +69,11 @@ public class ManterFerramentaController extends HttpServlet {
             if (operacao.equals("Incluir")) {
                 ferramenta.save();
             } else if (operacao.equals("Editar")) {
+                ferramenta.setId(idFerramenta);
                 ferramenta.save();
                 System.out.println("Bring edit");
             } else if (operacao.equals("Excluir")) {
+                ferramenta.setId(idFerramenta);
                 ferramenta.remove();
             }
             RequestDispatcher view = request.getRequestDispatcher("PesquisaFerramentaController");
