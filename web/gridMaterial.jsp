@@ -26,7 +26,6 @@
                     <th colspan="4">Grid Material</th>
                 </tr>
                 <tr>
-                    <th>Cod</th>
                     <th>nome</th>
                     <th colspan="2">Ações</th>
                 </tr>
@@ -48,22 +47,22 @@
 
 
             <div>
-                <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modalMaterial">relatorios</a>
+                <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modalMaterial">Relatorios</a>
             </div>
             <div class="modal fade" id="modalMaterial" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5>
-                                Relatorio completo
+                                Relatorio Completo
                             </h5>
                             <div>
-                                <a href="RelatorioControllerMaterial" class="btn btn-success">Emitir relatorio</a>
+                                <a href="RelatorioControllerMaterial" class="btn btn-success">Emitir Relatorio</a>
                             </div> 
                         </div>
                         <div class="modal-body">
                             <h5>
-                                Escolha o material
+                                Escolha o Material
                             </h5>
                             <form action="RelatorioControllerMaterialPar" method="POST" autofocus>
                                 <select class="form-control" name="paramMaterial">
@@ -72,7 +71,7 @@
                                         <option value="${material.nome}">${material.nome}</option>  
                                     </c:forEach>
                                 </select>
-                                <input type="submit"/>
+                                <input type="submit" value="Enviar" class="btn btn-success"/>
 
                             </form>
                         </div>

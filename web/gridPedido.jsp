@@ -26,7 +26,6 @@
                     <th colspan="4">Grid Pedido</th>
                 </tr>
                 <tr>
-                    <th>Cod</th>
                     <th>Valor Total</th>
                     <th colspan="2">Ações</th>
                 </tr>
@@ -50,14 +49,14 @@
 
 
             <div>
-                <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modalPedido">relatorios</a>
+                <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modalPedido">Relatorios</a>
             </div>
             <div class="modal fade" id="modalPedido" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5>
-                                Relatorio completo
+                                Relatorio Completo
                             </h5>
                             <div>
                                 <a href="RelatorioControllerPedido" class="btn btn-success">Emitir relatorio</a>
@@ -65,7 +64,7 @@
                         </div>
                         <div class="modal-body">
                             <h5>
-                                Selecione o cliente
+                                Selecione o Cliente
                             </h5>
                             <form action="RelatorioControllerPedidoPar" method="POST" autofocus>
                                 <select class="form-control"  name="paramPedido">
@@ -74,7 +73,7 @@
                                         <option value="${pedido.idCliente}">${pedido.idCliente} - ${pedido.cliente.nome}</option>  
                                     </c:forEach>
                                 </select>
-                                <input type="submit"/>
+                                <input type="submit" value="Enviar" class="btn btn-success"/>
 
                             </form>
                         </div>

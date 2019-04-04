@@ -24,10 +24,9 @@
 
             <table class="table table-striped table-bordered table-condensed table-hover">
                 <tr>
-                    <th colspan="4">Grid funcionario</th>
+                    <th colspan="4">Grid Funcionario</th>
                 </tr>
                 <tr>
-                    <th>Cod</th>
                     <th>nome</th>
                     <th colspan="2">Ações</th>
                 </tr>
@@ -70,11 +69,11 @@
                                 <form action="RelatorioControllerFuncionarioPar" method="POST" autofocus>
                                     <select class="form-control" name="paramFuncionario">
                                      
-                                    <c:forEach items="${funcionarios}" var="funcionario">
+                                   <c:forEach items="${funcionarios}" var="funcionario">
                                         <option value="${funcionario.cargo}">${funcionario.cargo}</option>  
                                     </c:forEach>
                                 </select>
-                                <input type="submit"/>
+                                <input type="submit" value="Enviar" class="btn btn-success"/>
 
                             </form>
                         </div>

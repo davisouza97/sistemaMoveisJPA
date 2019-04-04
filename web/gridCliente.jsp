@@ -25,13 +25,11 @@
                     <th colspan="4">Grid Cliente</th>
                 </tr>
                 <tr>
-                    <th>Cod</th>
                     <th>nome</th>
                     <th colspan="2">Ações</th>
                 </tr>
                 <c:forEach items="${clientes}" var="cliente">
-                    <tr>
-                        
+                    <tr>   
                         <td>
                             <c:out value="${cliente.nome}" />
                         </td>
@@ -48,22 +46,22 @@
 
 
             <div>
-                <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modalCliente">relatorios</a>
+                <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modalCliente">Relatorios</a>
             </div>
             <div class="modal fade" id="modalCliente" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5>
-                                Relatorio completo
+                                Relatorio Completo
                             </h5>
                             <div>
-                                <a href="RelatorioControllerCliente" class="btn btn-success">Emitir relatorio</a>
+                                <a href="RelatorioControllerCliente" class="btn btn-success">Emitir Relatorio</a>
                             </div> 
                         </div>
                         <div class="modal-body">
                             <h5>
-                                Escolha a cidade
+                                Escolha a Cidade
                             </h5>
                             <form action="RelatorioControllerClientePar" method="POST" autofocus>
                                 <select class="form-control" name="paramCliente">
@@ -72,7 +70,7 @@
                                         <option value="${cliente.cidade}" >${cliente.cidade}</option>  
                                     </c:forEach>
                                 </select>
-                                <input type="submit"/>
+                                <input type="submit" value="Enviar" class="btn btn-success"/>
 
                             </form>
                         </div>

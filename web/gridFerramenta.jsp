@@ -25,7 +25,6 @@
                     <th colspan="4">Grid Ferramenta</th>
                 </tr>
                 <tr>
-                    <th>Cod</th>
                     <th>nome</th>
                     <th colspan="2">Ações</th>
                 </tr>

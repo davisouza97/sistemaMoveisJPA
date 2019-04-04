@@ -23,10 +23,9 @@
 
             <table class="table table-striped table-bordered table-condensed table-hover">
                 <tr>
-                    <th colspan="4">Grid fornecedor</th>
+                    <th colspan="4">Grid Fornecedor</th>
                 </tr>
                 <tr>
-                    <th>Cod</th>
                     <th>nome</th>
                     <th colspan="2">Ações</th>
                 </tr>
@@ -48,22 +47,22 @@
 
 
             <div>
-                <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modalFornecedor">relatorios</a>
+                <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modalFornecedor">Relatorios</a>
             </div>
             <div class="modal fade" id="modalFornecedor" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5>
-                                Relatorio completo
+                                Relatorio Completo
                             </h5>
                             <div>
-                                <a href="RelatorioControllerFornecedor" class="btn btn-success">Emitir relatorio</a>
+                                <a href="RelatorioControllerFornecedor" class="btn btn-success">Emitir Relatorio</a>
                             </div> 
                         </div>
                         <div class="modal-body">
                             <h5>
-                               Escolha a cidade
+                               Escolha a Cidade
                             </h5>
                             <form action="RelatorioControllerFornecedorPar" method="POST" autofocus>
                                 <select class="form-control" name="paramFornecedor">
@@ -72,7 +71,7 @@
                                         <option  value="${fornecedor.cidade}">${fornecedor.cidade}</option>  
                                     </c:forEach>
                                 </select>
-                                <input type="submit"/>
+                                <input type="submit" value="Enviar" class="btn btn-success"/>
 
                             </form>
                         </div>
