@@ -16,8 +16,6 @@ public class Ferramenta extends MaterialFerramenta {
     public Ferramenta() {
     }
     
-    
-    
     public void save() {
         FerramentaDAO.getInstance().save(this);
     }

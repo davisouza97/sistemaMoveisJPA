@@ -49,9 +49,9 @@ public class ManterFornecedorController extends HttpServlet {
             String operacao = request.getParameter("operacao");
             request.setAttribute("operacao", operacao);
             if (!operacao.equals("Incluir")) {
-               Long idFornecedor = Long.parseLong(request.getParameter("id"));
-               Fornecedor fornecedor = Fornecedor.find(idFornecedor);
-               request.setAttribute("fornecedor", fornecedor);   
+                Long idFornecedor = Long.parseLong(request.getParameter("id"));
+                Fornecedor fornecedor = Fornecedor.find(idFornecedor);
+                request.setAttribute("fornecedor", fornecedor);
             }
             RequestDispatcher view = request.getRequestDispatcher("cadastroFornecedor.jsp");
             view.forward(request, response);
@@ -61,7 +61,8 @@ public class ManterFornecedorController extends HttpServlet {
             throw e;
         }
     }
-    protected void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException{
+
+    protected void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         String operacao = request.getParameter("operacao");
         String nome = request.getParameter("nome");
         String cnpj = request.getParameter("cnpj");
@@ -75,27 +76,30 @@ public class ManterFornecedorController extends HttpServlet {
         String cidade = request.getParameter("cidade");
         String telefone = request.getParameter("telefone");
         String celular = request.getParameter("celular");
-               // faltando colocar o campo Tipo de material fornecido, não sei como faz pra implementar isso no banco
-        Long id = Long.parseLong(request.getParameter("id"));
-        try{
+        Long id = null;
+        if (!operacao.equals("Incluir")) {
+            id = Long.parseLong(request.getParameter("id"));
+        }
+
+        try {
             Fornecedor fornecedor = new Fornecedor(nome, cnpj, email, cep, logradouro, numero, complemento, bairro, uf, cidade, telefone, celular);
-            if(operacao.equals("Incluir")){
+            if (operacao.equals("Incluir")) {
                 fornecedor.save();
-            }else if(operacao.equals("Editar")){
+            } else if (operacao.equals("Editar")) {
                 fornecedor.setId(id);
                 fornecedor.save();
-            }else if(operacao.equals("Excluir")){
+            } else if (operacao.equals("Excluir")) {
                 fornecedor.setId(id);
                 fornecedor.remove();
             }
             RequestDispatcher view = request.getRequestDispatcher("PesquisaFornecedorController");
             view.forward(request, response);
-        }catch(IOException e){
+        } catch (IOException e) {
             throw new ServletException(e);
-        }catch(ServletException e){
+        } catch (ServletException e) {
             throw e;
         }
-        
+
     }
 
     @Override

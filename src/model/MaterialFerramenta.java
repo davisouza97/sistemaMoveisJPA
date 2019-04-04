@@ -24,7 +24,7 @@ public abstract class MaterialFerramenta {
     private double qtdEstoque;
     private String unidade;
     private Fornecedor fornecedor;
-    private Long idFornecedor;
+   
 
     public MaterialFerramenta(String nome, String tipo, double valorUnitario, double qtdEstoque, String unidade, Fornecedor fornecedor) {
         this.nome = nome;
@@ -33,7 +33,6 @@ public abstract class MaterialFerramenta {
         this.qtdEstoque = qtdEstoque;
         this.unidade = unidade;
         this.fornecedor = fornecedor;
-        this.idFornecedor = 0l;
     }
 
     public MaterialFerramenta() {
@@ -43,14 +42,6 @@ public abstract class MaterialFerramenta {
     
     public void setFornecedor(Fornecedor fornecedor) {
         this.fornecedor = fornecedor;
-    }
-
-    public Long getIdFornecedor() {
-        return idFornecedor;
-    }
-
-    public void setIdFornecedor(Long idFornecedor) {
-        this.idFornecedor = idFornecedor;
     }
 
     public String getNome() {
