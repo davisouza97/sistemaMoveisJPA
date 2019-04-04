@@ -60,7 +60,11 @@ public class ManterClienteController extends HttpServlet {
         String cidade = request.getParameter("cidade");
         String telefone = request.getParameter("telefone");
         String celular = request.getParameter("celular");
-        Long id = Long.parseLong(request.getParameter("id"));
+        Long id = null;
+        if (!operacao.equals("Incluir")) {
+         id = Long.parseLong(request.getParameter("id"));    
+        }
+        
         try {
             Cliente cliente = new Cliente(nome, cpf, dataNascimento, email, cep, logradouro, numero, complemento, bairro, uf, cidade, telefone, celular);
            
