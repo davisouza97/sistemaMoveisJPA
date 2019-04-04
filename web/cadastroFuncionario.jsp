@@ -19,7 +19,7 @@
                 <table class="tableform">
                     <tr><td colspan="4" style="text-align: center">${operacao} Funcionario</td></tr>
                     <tr>
-                        
+
                         <td colspan="3"><input class="form-control" type="HIDDEN" required min="1" name="id" id="id" value="${funcionario.id}"  <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
                         </tr>
                         <tr>
@@ -176,8 +176,19 @@
                     </tr>
 
                     <tr>
-                        <td><a href="PesquisaFuncionarioController"><input class="btn btn-danger" type="button" value="voltar"></a></td>
-                        <td colspan="3" class="tdsalvar" ><input class="btn btn-success" type="submit" name="confirmar" value="Confirmar"></td>
+                        <td>
+                            <a href="PesquisaFuncionarioController">
+                                <input class="btn btn-danger" type="button" value="voltar">
+                            </a>
+                        </td>
+                        <td colspan="2" class="tdsalvar" >
+                            <input class="btn btn-success" type="submit" name="confirmar" value="Confirmar">
+                        </td>
+                        <td>
+                            <a href="index.jsp">
+                                <input class="btn btn-primary" type="button" value="Home">
+                            </a>
+                        </td>
                     </tr>
                 </table>
 

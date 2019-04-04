@@ -21,7 +21,7 @@
                 <table class="tableform">
                     <tr><td colspan="4" style="text-align: center">${operacao} Material</td></tr>
                     <tr>
-                        
+
                         <td colspan="3">
                             <input class="form-control" type="HIDDEN" min="1" name="id" id="id" value="${material.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
                             </td>
@@ -84,8 +84,13 @@
                                 <input class="btn btn-danger" type="button" value="voltar">
                             </a>
                         </td>
-                        <td colspan="3" class="tdsalvar">
+                        <td colspan="2" class="tdsalvar">
                             <input class="btn btn-success" type="submit" name="salvar" value="confirmar">
+                        </td>
+                        <td>
+                            <a href="index.jsp">
+                                <input class="btn btn-primary" type="button" value="Home">
+                            </a>
                         </td>
                     </tr>
                 </table>

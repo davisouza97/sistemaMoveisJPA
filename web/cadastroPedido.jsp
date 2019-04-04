@@ -20,22 +20,22 @@
             <form action="ManterPedidoController?acao=confirmarOperacao&operacao=${operacao}" method="POST">
                 <table>
                     <tr><td colspan="4" style="text-align: center">${operacao} Pedido</td></tr>
-                        
+
                     <tr>
 
-                            <td><label for="idFuncionario">Funcionario</label></td>
-                            <td> 
-                                <select class="form-control" required name="idFuncionario" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
+                        <td><label for="idFuncionario">Funcionario</label></td>
+                        <td> 
+                            <select class="form-control" required name="idFuncionario" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
                                 <option required value="0" <c:if test="${pedido.funcionario.id == null}"> selected</c:if>> </option>  
                                 <c:forEach items="${funcionarios}" var="funcionario">
                                     <option required value="${funcionario.id}" <c:if test="${pedido.funcionario.id == funcionario.id}"> selected</c:if>>${funcionario.id} - ${funcionario.nome}</option>  
                                 </c:forEach>
-                                </select>
-                            </td>
-                        </tr>
-                    
+                            </select>
+                        </td>
+                    </tr>
+
                     <tr>
-                        
+
                         <td colspan="3"><input class="form-control" type="HIDDEN" required min="1" name="id" id="id" value="${pedido.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
                         </tr>
                         <tr>
@@ -47,9 +47,9 @@
                                 <c:forEach items="${moveis}" var="movel">
                                     <option required value="${movel.id}" <c:if test="${pedido.movel.id == movel.id}"> selected</c:if>>${movel.id} - ${movel.nome}</option>  
                                 </c:forEach>
-                                </select>
-                            </td>
-                        </tr>
+                            </select>
+                        </td>
+                    </tr>
 
                     <tr>
                         <td><label for="valorTotal">Valor Total</label></td>
@@ -72,8 +72,19 @@
                     </tr>
 
                     <tr>
-                        <td><a href="PesquisaPedidoController"><input class="btn btn-danger" type="button" value="voltar"></a></td>
-                        <td colspan="3" class="tdsalvar" ><input class="btn btn-success" type="submit" name="" value="Confirmar"></td>
+                        <td>
+                            <a href="PesquisaPedidoController">
+                                <input class="btn btn-danger" type="button" value="voltar">
+                            </a>
+                        </td>
+                        <td colspan="2" class="tdsalvar" >
+                            <input class="btn btn-success" type="submit" name="" value="Confirmar">
+                        </td>
+                        <td>
+                            <a href="index.jsp">
+                                <input class="btn btn-primary" type="button" value="Home">
+                            </a>
+                        </td>
                     </tr>
                 </table>     
             </form> 

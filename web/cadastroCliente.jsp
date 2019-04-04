@@ -75,8 +75,19 @@
                     <tr><td><label for="complemento">Complemento</label></td><td><input class="form-control" type="text" maxlenght="45" name="complemento" id="complemento" value="${cliente.complemento}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td></tr>
 
                     <tr>
-                        <td><a href="PesquisaClienteController"><input class="btn btn-danger" type="button" value="voltar"></a></td>
-                        <td colspan="3"><input class="btn btn-success" type="submit" name="salvar" value="Confirmar"></td>
+                        <td>
+                            <a href="PesquisaClienteController">
+                                <input class="btn btn-danger" type="button" value="voltar">
+                            </a>
+                        </td>
+                        <td colspan="2">
+                            <input class="btn btn-success" type="submit" name="salvar" value="Confirmar">
+                        </td>
+                        <td>
+                            <a href="index.jsp">
+                                <input class="btn btn-primary" type="button" value="Home">
+                            </a>
+                        </td>
                     </tr>
 
                 </table>
