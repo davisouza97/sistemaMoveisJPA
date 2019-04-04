@@ -57,9 +57,12 @@ public class ManterMaterialController extends HttpServlet {
          Double valorUnitario = Double.parseDouble(request.getParameter("valorUnitario"));
          Double qtdEstoque = Double.parseDouble(request.getParameter("qtdEstoque"));
          String unidade = request.getParameter("unidade");
-         Long idFornecedor = Long.parseLong(request.getParameter("id"));
-         Long idMaterial = Long.parseLong(request.getParameter("idMaterial"));
-       
+         Long idFornecedor = Long.parseLong(request.getParameter("idFornecedor").trim());
+          Long idMaterial = null;
+         if(!operacao.equals("Incluir")){
+         idMaterial = Long.parseLong(request.getParameter("id").trim());
+         }
+         
         try{
             Fornecedor fornecedor = null;
             if(idFornecedor != 0){
