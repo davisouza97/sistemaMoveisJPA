@@ -26,7 +26,6 @@ public class Movel implements Serializable {
     private Double altura;
     private Double largura;
     private Double comprimento;
-
     private Double peso;
     @ManyToOne
     private Material material;
@@ -34,14 +33,13 @@ public class Movel implements Serializable {
     private Pedido pedido;
 
     public Movel(String nome, Double preco, String tipo, Double altura, Double largura, Double comprimento, Double peso, Material material, Pedido pedido) {
-
+        
         this.nome = nome;
         this.preco = preco;
         this.tipo = tipo;
         this.altura = altura;
         this.largura = largura;
         this.comprimento = comprimento;
-        
         this.peso = peso;
         this.material = material;
         this.pedido = pedido;
@@ -122,7 +120,6 @@ public class Movel implements Serializable {
         this.comprimento = comprimento;
     }
 
-   
     public Double getPeso() {
         return peso;
     }
