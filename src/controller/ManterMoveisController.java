@@ -54,15 +54,19 @@ public class ManterMoveisController extends HttpServlet {
         double largura = Double.parseDouble(request.getParameter("largura"));
         double comprimento = Double.parseDouble(request.getParameter("comprimento"));
         double peso = Double.parseDouble(request.getParameter("peso"));
-        Long idMaterial = null;
-        Long idPedido = null;
+
+        Long idMaterial = Long.parseLong(request.getParameter("idMaterial"));
+       
+        Long idPedido = Long.parseLong(request.getParameter("idPedido"));
+        
+        Long idMovel = null;
         if (!operacao.equals("Incluir")) {
-        idMaterial = Long.parseLong(request.getParameter("id"));
-        idPedido = Long.parseLong(request.getParameter("id"));    
+            idMovel = Long.parseLong(request.getParameter("id"));
         }
+
         try {
             Material material = null;
-            if (idMaterial != 0 || idMaterial != null) {
+            if (idMaterial != 0) {
                 material = Material.find(idMaterial);
             }
             Pedido pedido = null;
@@ -73,9 +77,11 @@ public class ManterMoveisController extends HttpServlet {
             if (operacao.equals("Incluir")) {
                 movel.save();
             } else if (operacao.equals("Editar")) {
+                movel.setId(idMovel);
                 movel.save();
                 System.out.println("Bring edit");
             } else if (operacao.equals("Excluir")) {
+                movel.setId(idMovel);
                 movel.remove();
             }
             RequestDispatcher view = request.getRequestDispatcher("PesquisaMovelController");

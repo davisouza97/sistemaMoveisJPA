@@ -14,7 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Movel implements Serializable{
+public class Movel implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -47,8 +48,6 @@ public class Movel implements Serializable{
     public Movel() {
     }
 
-    
-    
     public void save() {
         MovelDAO.getInstance().save(this);
     }
@@ -56,15 +55,15 @@ public class Movel implements Serializable{
     public void remove() {
         MovelDAO.getInstance().remove(this);
     }
-    
-    public static Movel find(Long id){
+
+    public static Movel find(Long id) {
         return MovelDAO.getInstance().find(id);
     }
-    
-    public static List<Movel> findAll(){
+
+    public static List<Movel> findAll() {
         return MovelDAO.getInstance().findAll();
-    } 
-    
+    }
+
     public Long getId() {
         return id;
     }
