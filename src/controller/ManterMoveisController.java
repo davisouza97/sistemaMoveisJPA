@@ -53,30 +53,35 @@ public class ManterMoveisController extends HttpServlet {
         double altura = Double.parseDouble(request.getParameter("altura"));
         double largura = Double.parseDouble(request.getParameter("largura"));
         double comprimento = Double.parseDouble(request.getParameter("comprimento"));
-        //String acabamento = request.getParameter("acabamento");
         double peso = Double.parseDouble(request.getParameter("peso"));
-        Long idMaterial = null;
-        Long idPedido = null;
+
+        Long idMaterial = Long.parseLong(request.getParameter("idMaterial"));
+       
+        Long idPedido = Long.parseLong(request.getParameter("idPedido"));
+        
+        Long idMovel = null;
         if (!operacao.equals("Incluir")) {
-        idMaterial = Long.parseLong(request.getParameter("id"));
-        idPedido = Long.parseLong(request.getParameter("id"));    
+            idMovel = Long.parseLong(request.getParameter("id"));
         }
+
         try {
             Material material = null;
-            if (idMaterial != 0 || idMaterial != null) {
+            if (idMaterial != 0) {
                 material = Material.find(idMaterial);
             }
             Pedido pedido = null;
             if (idPedido != 0) {
                 pedido = Pedido.find(idPedido);
             }
-            Movel movel = new Movel(nome, preco, tipo, altura, largura, comprimento, null, peso, material, pedido);
+            Movel movel = new Movel(nome, preco, tipo, altura, largura, comprimento, peso, material, pedido);
             if (operacao.equals("Incluir")) {
                 movel.save();
             } else if (operacao.equals("Editar")) {
+                movel.setId(idMovel);
                 movel.save();
                 System.out.println("Bring edit");
             } else if (operacao.equals("Excluir")) {
+                movel.setId(idMovel);
                 movel.remove();
             }
             RequestDispatcher view = request.getRequestDispatcher("PesquisaMovelController");

@@ -14,7 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Movel implements Serializable{
+public class Movel implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,22 +26,22 @@ public class Movel implements Serializable{
     private Double altura;
     private Double largura;
     private Double comprimento;
-    private String acabamento;
+
     private Double peso;
     @ManyToOne
     private Material material;
     @ManyToOne
     private Pedido pedido;
 
-    public Movel(String nome, Double preco, String tipo, Double altura, Double largura, Double comprimento, String acabamento, Double peso, Material material, Pedido pedido) {
-        
+    public Movel(String nome, Double preco, String tipo, Double altura, Double largura, Double comprimento, Double peso, Material material, Pedido pedido) {
+
         this.nome = nome;
         this.preco = preco;
         this.tipo = tipo;
         this.altura = altura;
         this.largura = largura;
         this.comprimento = comprimento;
-        this.acabamento = acabamento;
+        
         this.peso = peso;
         this.material = material;
         this.pedido = pedido;
@@ -49,8 +50,6 @@ public class Movel implements Serializable{
     public Movel() {
     }
 
-    
-    
     public void save() {
         MovelDAO.getInstance().save(this);
     }
@@ -58,15 +57,15 @@ public class Movel implements Serializable{
     public void remove() {
         MovelDAO.getInstance().remove(this);
     }
-    
-    public static Movel find(Long id){
+
+    public static Movel find(Long id) {
         return MovelDAO.getInstance().find(id);
     }
-    
-    public static List<Movel> findAll(){
+
+    public static List<Movel> findAll() {
         return MovelDAO.getInstance().findAll();
-    } 
-    
+    }
+
     public Long getId() {
         return id;
     }
@@ -123,14 +122,7 @@ public class Movel implements Serializable{
         this.comprimento = comprimento;
     }
 
-    public String getAcabamento() {
-        return acabamento;
-    }
-
-    public void setAcabamento(String acabamento) {
-        this.acabamento = acabamento;
-    }
-
+   
     public Double getPeso() {
         return peso;
     }

@@ -38,9 +38,9 @@
                             <td><label for="idMaterial">Material</label></td>
                             <td colspan="3">
                                 <select class="form-control" required name="idMaterial" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                                <option required value="0" <c:if test="${movel.Material== null}"> selected</c:if>> </option>  
+                                <option required value="0" <c:if test="${movel.Material == null}"> selected</c:if>> </option>  
                                 <c:forEach items="${materiais}" var="material">
-                                    <option required value="${material.id}" <c:if test="${movel.material.id== material.id}"> selected</c:if>> ${material.nome}</option>  
+                                    <option required value="${material.id}" <c:if test="${movel.material.id == material.id}"> selected</c:if>> ${material.nome}</option>  
                                 </c:forEach>
                             </select>
                         </td>
@@ -58,7 +58,17 @@
                         <tr>
                             <td><label for="peso">Peso</label></td><td colspan="3"><input class="form-control" type="number" min="1" name="peso" id="peso" value="${movel.peso}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                     </tr>
-
+                     <tr>
+                            <td><label for="idPedido">Pedido</label></td>
+                            <td colspan="3">
+                                <select class="form-control" required name="idPedido" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                <option required value="0" <c:if test="${movel.Pedido == null}"> selected</c:if>> </option>  
+                                <c:forEach items="${pedidos}" var="pedido">
+                                    <option required value="${Pedido.id}" <c:if test="${movel.Pedido.id== Pedido.id}"> selected</c:if>> ${Pedido.id}</option>  
+                                </c:forEach>
+                            </select>
+                        </td>
+                    </tr>
 
                     <tr>
                         <td><a href="PesquisaMovelController"><input class="btn btn-danger" type="button" value="voltar"></a></td>
