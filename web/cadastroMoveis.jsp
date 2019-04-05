@@ -62,9 +62,9 @@
                             <td><label for="idPedido">Pedido</label></td>
                             <td colspan="3">
                                 <select class="form-control" required name="idPedido" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                                <option required value="0" <c:if test="${movel.Pedido == null}"> selected</c:if>> </option>  
+                                <option required value="0" <c:if test="${movel.pedido == null}"> selected</c:if>> </option>  
                                 <c:forEach items="${pedidos}" var="pedido">
-                                    <option required value="${Pedido.id}" <c:if test="${movel.Pedido.id== Pedido.id}"> selected</c:if>> ${Pedido.id}</option>  
+                                    <option required value="${pedido.id}" <c:if test="${movel.pedido.id == pedido.id}"> selected</c:if>> ${pedido.id}</option>  
                                 </c:forEach>
                             </select>
                         </td>
