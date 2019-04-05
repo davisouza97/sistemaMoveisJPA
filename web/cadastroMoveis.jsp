@@ -1,5 +1,5 @@
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <!DOCTYPE html>
@@ -61,7 +61,7 @@
                      <tr>
                             <td><label for="idPedido">Pedido</label></td>
                             <td colspan="3">
-                                <select class="form-control" required name="idPedido" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                <select class="form-control" required name="idPedidoMovel" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                 <option required value="0" <c:if test="${movel.pedido == null}"> selected</c:if>> </option>  
                                 <c:forEach items="${pedidos}" var="pedido">
                                     <option required value="${pedido.id}" <c:if test="${movel.pedido.id == pedido.id}"> selected</c:if>> ${pedido.id}</option>  

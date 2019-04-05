@@ -57,7 +57,7 @@ public class ManterMoveisController extends HttpServlet {
 
         Long idMaterial = Long.parseLong(request.getParameter("idMaterial"));
        
-        Long idPedido = Long.parseLong(request.getParameter("idPedido"));
+        Long idPedido = Long.parseLong(request.getParameter("idPedidoMovel"));
         
         Long idMovel = null;
         if (!operacao.equals("Incluir")) {
