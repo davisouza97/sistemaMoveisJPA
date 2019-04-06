@@ -17,20 +17,19 @@
         <div class="container">
             <form action="ManterFuncionarioController?acao=confirmarOperacao&operacao=${operacao}" method="POST">
                 <table class="tableform">
-                    <tr><td colspan="4" style="text-align: center">${operacao} Funcionario</td></tr>
                     <tr>
-
-                        <td colspan="3"><input class="form-control" type="HIDDEN" required min="1" name="id" id="id" value="${funcionario.id}"  <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
+                        <td colspan="4" style="text-align: center">${operacao} Funcionario</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <input class="form-control" type="HIDDEN" required min="1" name="id" id="id" value="${funcionario.id}"  <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
+                            </td>
                         </tr>
-                        <tr>
-
-                        <tr>
-
                         <tr>
                             <td>
                                 <label for="nome">Nome</label>
                             </td>
-                            <td colspan="3">
+                            <td colspan="4">
                                 <input class="form-control" type="text" required maxlength="45" minlength="3" name="nome" id="nome" value="${funcionario.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                             </td>
                         </tr>
@@ -38,7 +37,7 @@
                             <td>
                                 <label for="senha">Senha</label>
                             </td>
-                            <td colspan="3">
+                            <td colspan="4">
                                 <input class="form-control" type="text" maxlength="12" minlength="3" name="senha" id="senha" value="${funcionario.senha}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                             </td>
                         </tr>
@@ -46,7 +45,7 @@
                             <td>
                                 <label for="cpf">CPF</label>
                             </td>
-                            <td colspan="3">
+                            <td colspan="4">
                                 <input class="form-control" type="text" required maxlength="11" minlength="11" min="1" name="cpf" id="cpf" value="${funcionario.cpf}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                             </td>
                         </tr>
@@ -54,17 +53,15 @@
                             <td>
                                 <label for="dataNascimento">Data de Nascimento</label>
                             </td>
-                            <td colspan="3">
+                            <td colspan="4">
                                 <input class="form-control" type="date" required name="dataNascimento" id="dataNascimento" value="${funcionario.dataNascimento}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                             </td>
                         </tr>
-
-
                         <tr>
                             <td>
                                 <label for="email">e-mail</label>
                             </td>
-                            <td colspan="3">
+                            <td colspan="4">
                                 <input class="form-control" type="email" required name="email" id="email" value="${funcionario.email}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                             </td>
                         </tr>
@@ -81,7 +78,7 @@
                             <td>
                                 <label for="logradouro">Logradouro</label>
                             </td>
-                            <td colspan="3">
+                            <td colspan="4">
                                 <input class="form-control" type="text" required maxlength="45" minlength="3" name="logradouro" id="logradouro" value="${funcionario.logradouro}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                             </td>
                         </tr>
@@ -145,14 +142,14 @@
                             <td>
                                 <label for="complemento">Complemento</label>
                             </td>
-                            <td colspan="3">
+                            <td colspan="4">
                                 <input class="form-control" type="text" maxlength="45" minlength="3" name="complemento" id="complemento" value="${funcionario.complemento}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                             </td>
                         </tr>
 
                         <tr>
                             <td>Cargo </td>
-                            <td colspan="3">
+                            <td colspan="4">
                                 <select name="cargo" required id="cargo" class="form-control">
                                     <option value="Estagiário" <c:if test="${funcionario.cargo.equals('Estagiário')}"> selected</c:if>>Estagiario</option>
                                 <option value="Gerente" <c:if test="${funcionario.cargo.equals('Gerente')}"> selected</c:if>>Gerente</option>
