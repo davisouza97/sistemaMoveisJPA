@@ -20,7 +20,7 @@
                 <table class="tableform">
                     <tr><td colspan="4" style="text-align: center">${operacao} Movel</td></tr>
                     <tr>
-                        <td><input type="HIDDEN" required min="1" name="idPedido" id="idPedido" value="${movel.Pedido}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
+                        <td><input type="HIDDEN" required min="1" name="idPedido" id="idPedido" value="${movel.pedido}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
                     </tr>
                         <tr>
 
@@ -38,7 +38,7 @@
                             <td><label for="idMaterial">Material</label></td>
                             <td colspan="3">
                                 <select class="form-control" required name="idMaterial" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                                <option required value="0" <c:if test="${movel.Material == null}"> selected</c:if>> </option>  
+                                <option required value="0" <c:if test="${movel.material == null}"> selected</c:if>> </option>  
                                 <c:forEach items="${materiais}" var="material">
                                     <option required value="${material.id}" <c:if test="${movel.material.id == material.id}"> selected</c:if>> ${material.nome}</option>  
                                 </c:forEach>
