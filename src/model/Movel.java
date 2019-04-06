@@ -64,6 +64,10 @@ public class Movel implements Serializable {
         return MovelDAO.getInstance().findAll();
     }
 
+    public static List<Movel> findAllByPedido(Pedido pedido) {
+        return MovelDAO.getInstance().findAllByPedido(pedido);
+    }
+    
     public Long getId() {
         return id;
     }

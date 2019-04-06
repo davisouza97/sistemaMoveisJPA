@@ -45,9 +45,13 @@ public class ManterPedidoController extends HttpServlet {
     protected void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         String operacao = request.getParameter("operacao");
         Double valorTotal = Double.parseDouble(request.getParameter("valorTotal"));//criar um getMovelByIdPedido e calcular o preco(ou criar um metodo pra fazer isso pq vai repetir)
-        Long idFuncionario = Long.parseLong(request.getParameter("id"));
-        Long idCliente = Long.parseLong(request.getParameter("id"));
-
+        Long idFuncionario = Long.parseLong(request.getParameter("idFuncionario"));
+        Long idCliente = Long.parseLong(request.getParameter("idCliente"));
+        Long id = null;
+        if (!operacao.equals("Incluir")) {
+            id = Long.parseLong(request.getParameter("id"));
+        }
+        
         try {
             Cliente cliente = null;
             Funcionario funcionario = null;
@@ -62,9 +66,11 @@ public class ManterPedidoController extends HttpServlet {
             if (operacao.equals("Incluir")) {
                 pedido.save();
             } else if (operacao.equals("Editar")) {
+                pedido.setId(id);
                 pedido.save();
                 System.out.println("Bring edit");
             } else if (operacao.equals("Excluir")) {
+                pedido.setId(id);
                 pedido.remove();
             }
             RequestDispatcher view = request.getRequestDispatcher("PesquisaPedidoController");

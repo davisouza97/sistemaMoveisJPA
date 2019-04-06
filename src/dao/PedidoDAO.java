@@ -14,6 +14,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
+import model.Movel;
 
 public class PedidoDAO {
 
@@ -81,6 +82,17 @@ public class PedidoDAO {
         } finally {
             PersistenceUtil.close(em);
         }
+        List<Movel> moveis = Movel.findAllByPedido(pedido);
+        double preco = 0;
+        for (Movel movel : moveis) {
+            if (movel.getPedido() != null) {
+                if (movel.getPedido().getId() == id) {
+                    preco += movel.getPreco();
+                }
+
+            }
+        }
+        pedido.setValorTotal(preco);
         return pedido;
     }
 
