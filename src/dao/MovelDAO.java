@@ -9,7 +9,6 @@ import model.Pedido;
 
 public class MovelDAO {
 
-    
     private static MovelDAO instance = new MovelDAO();
 
     public static MovelDAO getInstance() {
@@ -97,15 +96,14 @@ public class MovelDAO {
         }
         return moveis;
     }
-    
-     public List<Movel> findAllByPedido(Pedido pedido) {
+
+    public List<Movel> findAllByPedido(Pedido pedido) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         List<Movel> moveis = null;
         try {
             tx.begin();
             TypedQuery<Movel> query = em.createQuery("select p from Movel p", Movel.class);
-            //query.setParameter("var", pedido.getId());
             moveis = query.getResultList();
             tx.commit();
         } catch (Exception e) {
@@ -118,4 +116,5 @@ public class MovelDAO {
         }
         return moveis;
     }
+
 }

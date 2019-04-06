@@ -2,17 +2,13 @@ package model;
 
 import dao.PedidoDAO;
 import java.io.Serializable;
-
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import utils.Data;
 
 @Entity
 public class Pedido implements Serializable {
@@ -21,6 +17,7 @@ public class Pedido implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String codigoPedido;
     private Double valorTotal;
     @ManyToOne
     private Cliente cliente;
@@ -29,6 +26,7 @@ public class Pedido implements Serializable {
 
     public Pedido(Double valorTotal, Cliente cliente, Funcionario funcionario) {
         this.valorTotal = valorTotal;
+        this.codigoPedido =""+funcionario.getId()+"-"+Data.DevolveData();
         this.cliente = cliente;
         this.funcionario = funcionario;
     }
@@ -86,5 +84,14 @@ public class Pedido implements Serializable {
         this.funcionario = funcionario;
     }
 
+    public String getCodigoPedido() {
+        return codigoPedido;
+    }
+
+    public void setCodigoPedido(String codigoPedido) {
+        this.codigoPedido = codigoPedido;
+    }
+    
+    
     
 }

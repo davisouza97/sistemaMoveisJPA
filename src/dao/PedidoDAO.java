@@ -2,17 +2,10 @@ package dao;
 
 import model.Pedido;
 
-import java.sql.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Types;
-import java.sql.Statement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import model.Movel;
 
@@ -54,6 +47,9 @@ public class PedidoDAO {
         EntityTransaction tx = em.getTransaction();
         try {
             tx.begin();
+//            Query query = em.createQuery("update Movel set PEDIDO_ID = null WHERE PEDIDO_ID = :codigo");
+//            query.setParameter("codigo", pedido.getId());
+//            int result = query.executeUpdate();
             em.remove(em.getReference(Pedido.class, pedido.getId()));
             tx.commit();
         } catch (Exception e) {
@@ -83,16 +79,16 @@ public class PedidoDAO {
             PersistenceUtil.close(em);
         }
         List<Movel> moveis = Movel.findAllByPedido(pedido);
-        double preco = 0;
-        for (Movel movel : moveis) {
-            if (movel.getPedido() != null) {
-                if (movel.getPedido().getId() == id) {
-                    preco += movel.getPreco();
+            double preco = 0;
+            for (Movel movel : moveis) {
+                if (movel.getPedido() != null) {
+                    if (movel.getPedido().getId() == pedido.getId()) {
+                        preco += movel.getPreco();
+                    }
                 }
-
             }
-        }
-        pedido.setValorTotal(preco);
+            pedido.setValorTotal(preco);
+       pedido.setValorTotal(preco);
         return pedido;
     }
 
@@ -113,6 +109,19 @@ public class PedidoDAO {
             throw new RuntimeException(e);
         } finally {
             PersistenceUtil.close(em);
+        }
+
+        for (Pedido pedido : pedidos) {
+            List<Movel> moveis = Movel.findAllByPedido(pedido);
+            double preco = 0;
+            for (Movel movel : moveis) {
+                if (movel.getPedido() != null) {
+                    if (movel.getPedido().getId() == pedido.getId()) {
+                        preco += movel.getPreco();
+                    }
+                }
+            }
+            pedido.setValorTotal(preco);
         }
         return pedidos;
     }

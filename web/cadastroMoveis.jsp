@@ -21,11 +21,6 @@
                     <tr>
                         <td><input type="HIDDEN" required min="1" name="idPedido" id="idPedido" value="${movel.pedido}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
                     </tr>
-                    <tr>
-                        <td colspan="4">
-                            <input type="HIDDEN" required min="1" name="idPedido" id="idPedido" value="${movel.Pedido}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
-                            </td>
-                        </tr>
                         <tr>
                             <td colspan="4">
                                 <input class="form-control" type="HIDDEN" required min="1" name="id" id="id" value="${movel.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
@@ -110,7 +105,7 @@
                                 <option required value="0" <c:if test="${movel.pedido == null}"> selected</c:if>> </option>  
 
                                 <c:forEach items="${pedidos}" var="pedido">
-                                    <option required value="${pedido.id}" <c:if test="${movel.pedido.id == pedido.id}"> selected</c:if>> ${pedido.id}</option>  
+                                    <option required value="${pedido.id}" <c:if test="${movel.pedido.id == pedido.id}"> selected</c:if>> ${pedido.codigoPedido}</option>  
                                 </c:forEach>
                             </select>
                         </td>
