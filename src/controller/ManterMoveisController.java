@@ -56,13 +56,10 @@ public class ManterMoveisController extends HttpServlet {
         double peso = Double.parseDouble(request.getParameter("peso"));
 
         Long idMaterial = Long.parseLong(request.getParameter("idMaterial"));
-        Long idPedido = null;
-        if(request.getParameter("idPedido")== "0" ){
-           idPedido = null;
-        }else{
-         idPedido = Long.parseLong(request.getParameter("idPedido"));
-        }
-        
+
+       
+        Long idPedido = Long.parseLong(request.getParameter("idPedidoMovel"));
+      
 
         Long idMovel = null;
         if (!operacao.equals("Incluir")) {

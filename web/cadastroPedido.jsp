@@ -19,11 +19,13 @@
         <div class="container">
             <form action="ManterPedidoController?acao=confirmarOperacao&operacao=${operacao}" method="POST">
                 <table>
-                    <tr><td colspan="4" style="text-align: center">${operacao} Pedido</td></tr>
-
                     <tr>
-
-                        <td><label for="idFuncionario">Funcionario</label></td>
+                        <td colspan="4" style="text-align: center">${operacao} Pedido</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="idFuncionario">Funcionario</label>
+                        </td>
                         <td> 
                             <select class="form-control" required name="idFuncionario" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
                                 <option required value="0" <c:if test="${pedido.funcionario.id == null}"> selected</c:if>> </option>  
@@ -33,14 +35,15 @@
                             </select>
                         </td>
                     </tr>
-
                     <tr>
-
-                        <td colspan="3"><input class="form-control" type="HIDDEN" required min="1" name="id" id="id" value="${pedido.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
+                        <td colspan="4">
+                            <input class="form-control" type="HIDDEN" required min="1" name="id" id="id" value="${pedido.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
+                            </td>
                         </tr>
                         <tr>
-
-                            <td><label for="idMovel">Movel</label></td>
+                            <td>
+                                <label for="idMovel">Movel</label>
+                            </td>
                             <td> 
                                 <select class="form-control" required name="idMovel" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                 <option required value="0" <c:if test="${pedido.movel.id == null}"> selected</c:if>> </option>  
@@ -50,15 +53,16 @@
                             </select>
                         </td>
                     </tr>
-
                     <tr>
-                        <td><label for="valorTotal">Valor Total</label></td>
-                        <td colspan="3"><input class="form-control" type="number" required min="0" name="valorTotal" id="valorTotal" value="${pedido.valorTotal}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
+                        <td>
+                            <label for="valorTotal">Valor Total</label>
+                        </td>
+                        <td colspan="4"><input class="form-control" type="number" required min="0" name="valorTotal" id="valorTotal" value="${pedido.valorTotal}"<c:if test="${operacao == 'Excluir'}"> readonly</c:if>></td>
                         </tr>
-
                         <tr>
-
-                            <td><label for="idCliente">Cliente</label></td>
+                            <td>
+                                <label for="idCliente">Cliente</label>
+                            </td>
                             <td> 
                                 <select class="form-control" required name="idCliente" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                 <option required value="0" <c:if test="${pedido.cliente.id == null}"> selected</c:if>> </option>  
@@ -66,11 +70,8 @@
                                     <option required value="${cliente.id}" <c:if test="${pedido.cliente.id == cliente.id}"> selected</c:if>>${cliente.id} - ${cliente.nome}</option>  
                                 </c:forEach>
                             </select>
-
                         </td>
-
                     </tr>
-
                     <tr>
                         <td>
                             <a href="PesquisaPedidoController">
