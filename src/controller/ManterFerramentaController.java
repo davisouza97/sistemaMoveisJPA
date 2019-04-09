@@ -58,8 +58,13 @@ public class ManterFerramentaController extends HttpServlet {
         Double valorUnitario = Double.parseDouble(request.getParameter("valorUnitario"));
         Double qtdEstoque = Double.parseDouble(request.getParameter("qtdEstoque"));
         String unidade = request.getParameter("unidade");
-        Long idFornecedor = Long.parseLong(request.getParameter("id"));
-        Long idFerramenta = Long.parseLong(request.getParameter("idFerramenta"));
+        Long idFornecedor = Long.parseLong(request.getParameter("idFornecedor"));
+        Long idFerramenta = null;
+        if(!operacao.equals("Incluir")){
+        idFerramenta = Long.parseLong(request.getParameter("idFerramenta").trim());
+        }
+        
+        
         try {
             Fornecedor fornecedor = null;
             if(idFornecedor != 0){

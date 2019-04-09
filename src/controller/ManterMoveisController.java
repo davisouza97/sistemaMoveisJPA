@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Ferramenta;
 import model.Funcionario;
 import model.Material;
 import model.Movel;
@@ -36,6 +37,7 @@ public class ManterMoveisController extends HttpServlet {
         request.setAttribute("operacao", operacao);
         request.setAttribute("pedidos", Pedido.findAll());
         request.setAttribute("materiais", Material.findAll());
+        request.setAttribute("ferramentas", Ferramenta.findAll());
         if (!operacao.equals("Incluir")) {
             Movel movel = Movel.find(Long.parseLong(request.getParameter("id")));
             request.setAttribute("movel", movel);
@@ -53,8 +55,10 @@ public class ManterMoveisController extends HttpServlet {
         double comprimento = Double.parseDouble(request.getParameter("comprimento"));
         double peso = Double.parseDouble(request.getParameter("peso"));
 
+        Long idFerramenta = Long.parseLong(request.getParameter("idFerramenta"));
+
         Long idMaterial = Long.parseLong(request.getParameter("idMaterial"));
- 
+       
         Long idPedido = Long.parseLong(request.getParameter("idPedidoMovel"));
 
         
@@ -64,6 +68,11 @@ public class ManterMoveisController extends HttpServlet {
             idMovel = Long.parseLong(request.getParameter("id"));
         }
         try {
+            Ferramenta ferramenta = null;
+            if(idFerramenta != 0){
+                ferramenta = Ferramenta.find(idFerramenta);
+            }
+            
             Material material = null;
             if (idMaterial != 0) {
                 material = Material.find(idMaterial);
@@ -72,7 +81,7 @@ public class ManterMoveisController extends HttpServlet {
             if (idPedido != 0) {
                 pedido = Pedido.find(idPedido);
             }
-            Movel movel = new Movel(nome, preco, tipo, altura, largura, comprimento, peso, material, pedido);
+            Movel movel = new Movel(nome, preco, tipo, altura, largura, comprimento, peso, ferramenta, material, pedido);
             if (operacao.equals("Incluir")) {
                 movel.save();
             } else if (operacao.equals("Editar")) {

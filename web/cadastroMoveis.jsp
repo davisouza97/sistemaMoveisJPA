@@ -11,7 +11,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" >
-        <title>Cadastro de mï¿½veis</title>
+        <title>Cadastro de Móveis</title>
     </head>
 
     <body>
@@ -36,7 +36,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <label for="preco">Preï¿½o</label>
+                                <label for="preco">Preço</label>
                             </td>
                             <td colspan="4">
                                 <input class="form-control" type="number" required min="0" name="preco" id="preco" value="${movel.preco}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
@@ -50,6 +50,21 @@
                                 <input class="form-control" type="text" required maxlength="45" minlength="2" name="tipo" id="tipo" value="${movel.tipo}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <label for="idFerramenta">Ferramenta</label>
+                            </td>
+                            <td colspan="4">
+                                <select class="form-control" required name="idFerramenta" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                <option required value="0" <c:if test="${movel.material == null}"> selected</c:if>> </option>  
+                                <c:forEach items="${ferramentas}" var="ferramenta">
+                                    <option required value="${ferramenta.id}" <c:if test="${movel.ferramenta.id == ferramenta.id}"> selected</c:if>> ${ferramenta.nome}</option>  
+                                </c:forEach>
+                            </select>
+                        </td>
+                    </tr>
+                        
+                        
                         <tr>
                             <td>
                                 <label for="idMaterial">Material</label>
