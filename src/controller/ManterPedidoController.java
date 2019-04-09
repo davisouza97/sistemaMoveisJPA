@@ -4,7 +4,9 @@ import dao.ClienteDAO;
 import dao.MovelDAO;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -100,6 +102,15 @@ public class ManterPedidoController extends HttpServlet {
                 }
                 pedido.save();
             } else if (operacao.equals("Excluir")) {
+                List<Movel> moveis = MovelDAO.getInstance().findAll();
+                for (Movel movel : moveis) {
+                    if (movel.getPedido()!=null) {
+                        if (Objects.equals(movel.getPedido().getId(), id)) {
+                            movel.setPedido(null);
+                            movel.save();
+                        }
+                    }
+                }
                 pedido.setId(id);
                 pedido.remove();
             }
