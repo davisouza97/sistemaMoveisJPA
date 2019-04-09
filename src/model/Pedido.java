@@ -26,7 +26,7 @@ public class Pedido implements Serializable {
 
     public Pedido(Double valorTotal, Cliente cliente, Funcionario funcionario) {
         this.valorTotal = valorTotal;
-        this.codigoPedido =""+funcionario.getId()+"-"+Data.DevolveData();
+        this.codigoPedido = cliente.getNome()+"/"+funcionario.getNome();
         this.cliente = cliente;
         this.funcionario = funcionario;
     }

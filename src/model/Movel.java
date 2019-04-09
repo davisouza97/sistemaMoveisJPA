@@ -150,4 +150,9 @@ public class Movel implements Serializable {
         this.pedido = pedido;
     }
 
+    @Override
+    public String toString() {
+        return "Movel{"+ this.nome + '}';
+    }
+    
 }

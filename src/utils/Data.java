@@ -16,7 +16,7 @@ public abstract class Data {
 
     public static String DevolveData() {
         Date hoje = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy/HH:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("ddMMyy");
         return sdf.format(hoje);
     }
 }

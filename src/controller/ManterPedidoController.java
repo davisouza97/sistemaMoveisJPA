@@ -1,8 +1,10 @@
 package controller;
 
 import dao.ClienteDAO;
+import dao.MovelDAO;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -51,7 +53,8 @@ public class ManterPedidoController extends HttpServlet {
         if (!operacao.equals("Incluir")) {
             id = Long.parseLong(request.getParameter("id"));
         }
-        
+        String[] listaMoveisRemove = request.getParameterValues("listaMoveisRemove");
+        String[] listaMoveisAdd = request.getParameterValues("listaMoveisAdd");
         try {
             Cliente cliente = null;
             Funcionario funcionario = null;
@@ -64,11 +67,38 @@ public class ManterPedidoController extends HttpServlet {
 
             Pedido pedido = new Pedido(valorTotal, cliente, funcionario);
             if (operacao.equals("Incluir")) {
+                if (listaMoveisAdd != null) {
+                    for (String movel : listaMoveisAdd) {
+                        Movel m = MovelDAO.getInstance().find(Long.parseLong(movel));
+                        m.setPedido(pedido);
+                        m.save();
+                    }
+                }
+                if (listaMoveisRemove != null) {
+                    for (String movel : listaMoveisRemove) {
+                        Movel m = MovelDAO.getInstance().find(Long.parseLong(movel));
+                        m.setPedido(null);
+                        m.save();
+                    }
+                }
                 pedido.save();
             } else if (operacao.equals("Editar")) {
                 pedido.setId(id);
+               if (listaMoveisAdd != null) {
+                    for (String movel : listaMoveisAdd) {
+                        Movel m = MovelDAO.getInstance().find(Long.parseLong(movel));
+                        m.setPedido(pedido);
+                        m.save();
+                    }
+                }
+                if (listaMoveisRemove != null) {
+                    for (String movel : listaMoveisRemove) {
+                        Movel m = MovelDAO.getInstance().find(Long.parseLong(movel));
+                        m.setPedido(null);
+                        m.save();
+                    }
+                }
                 pedido.save();
-                System.out.println("Bring edit");
             } else if (operacao.equals("Excluir")) {
                 pedido.setId(id);
                 pedido.remove();

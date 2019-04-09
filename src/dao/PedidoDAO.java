@@ -47,9 +47,15 @@ public class PedidoDAO {
         EntityTransaction tx = em.getTransaction();
         try {
             tx.begin();
-//            Query query = em.createQuery("update Movel set PEDIDO_ID = null WHERE PEDIDO_ID = :codigo");
-//            query.setParameter("codigo", pedido.getId());
-//            int result = query.executeUpdate();
+            List<Movel> moveis = Movel.findAllByPedido(pedido);
+            for (Movel movel : moveis) {
+                if (movel.getPedido() != null) {
+                    if (movel.getPedido().getId() == pedido.getId()) {
+                        movel.setPedido(null);
+                        MovelDAO.getInstance().save(movel);
+                    }
+                }
+            }
             em.remove(em.getReference(Pedido.class, pedido.getId()));
             tx.commit();
         } catch (Exception e) {
@@ -79,16 +85,16 @@ public class PedidoDAO {
             PersistenceUtil.close(em);
         }
         List<Movel> moveis = Movel.findAllByPedido(pedido);
-            double preco = 0;
-            for (Movel movel : moveis) {
-                if (movel.getPedido() != null) {
-                    if (movel.getPedido().getId() == pedido.getId()) {
-                        preco += movel.getPreco();
-                    }
+        double preco = 0;
+        for (Movel movel : moveis) {
+            if (movel.getPedido() != null) {
+                if (movel.getPedido().getId() == pedido.getId()) {
+                    preco += movel.getPreco();
                 }
             }
-            pedido.setValorTotal(preco);
-       pedido.setValorTotal(preco);
+        }
+        pedido.setValorTotal(preco);
+        PedidoDAO.getInstance().save(pedido);
         return pedido;
     }
 
@@ -122,6 +128,7 @@ public class PedidoDAO {
                 }
             }
             pedido.setValorTotal(preco);
+            PedidoDAO.getInstance().save(pedido);
         }
         return pedidos;
     }

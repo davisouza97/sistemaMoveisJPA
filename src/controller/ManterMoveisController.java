@@ -39,10 +39,8 @@ public class ManterMoveisController extends HttpServlet {
         if (!operacao.equals("Incluir")) {
             Movel movel = Movel.find(Long.parseLong(request.getParameter("id")));
             request.setAttribute("movel", movel);
-
         }
         request.getRequestDispatcher("cadastroMoveis.jsp").forward(request, response);
-
     }
 
     protected void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException {
@@ -56,16 +54,15 @@ public class ManterMoveisController extends HttpServlet {
         double peso = Double.parseDouble(request.getParameter("peso"));
 
         Long idMaterial = Long.parseLong(request.getParameter("idMaterial"));
-
-       
+ 
         Long idPedido = Long.parseLong(request.getParameter("idPedidoMovel"));
-      
 
+        
+        
         Long idMovel = null;
         if (!operacao.equals("Incluir")) {
             idMovel = Long.parseLong(request.getParameter("id"));
         }
-
         try {
             Material material = null;
             if (idMaterial != 0) {
@@ -123,5 +120,5 @@ public class ManterMoveisController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+    
 }
