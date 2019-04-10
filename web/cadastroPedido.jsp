@@ -41,7 +41,7 @@
                         <td>
                             <label for="idFuncionario">Funcionario</label>
                         </td>
-                        <td>
+                        <td colspan="4">
                             <c:if test="${operacao == 'Incluir'}">
                                 <select class="form-control" required name="idFuncionario">
                                     <option required value="0" <c:if test="${pedido.funcionario.id == null}"> selected </c:if>> </option>
@@ -78,7 +78,7 @@
                             <td>
                                 <label for="idCliente">Cliente</label>
                             </td>
-                            <td>
+                            <td colspan="4">
                             <c:if test="${operacao == 'Incluir'}">
                                 <select class="form-control" required name="idCliente">
                                     <option required value="0" <c:if test="${pedido.cliente.id == null}"> selected</c:if>>
@@ -96,7 +96,9 @@
                     </tr>
 
                     <tr>
-                        <td></td>
+                        <td>
+                            &nbsp
+                        </td>
                         <td>
                             <c:if test="${operacao != 'Incluir'}">
                                 <select size="5" multiple name="listaMoveisRemove">
@@ -118,6 +120,7 @@
                                 </c:forEach>
                             </select>
                         </td>
+
                     </tr>
 
 
@@ -138,8 +141,10 @@
                         </td>
                     </tr>
                 </table>
+
             </form>
         </div>
+
     </body>
 
     <!-- Optional JavaScript -->
