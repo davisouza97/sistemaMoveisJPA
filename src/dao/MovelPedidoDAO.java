@@ -1,29 +1,33 @@
+
 package dao;
 
-import model.Cliente;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
+import model.Cliente;
+import model.MovelPedido;
 
-public class ClienteDAO {
-    private static ClienteDAO instance = new ClienteDAO();
-    public static ClienteDAO getInstance(){
+
+
+public class MovelPedidoDAO {
+    private static MovelPedidoDAO instance = new MovelPedidoDAO();
+    public static MovelPedidoDAO getInstance(){
         return instance;
     }
-    private ClienteDAO(){
+    private MovelPedidoDAO(){
         
     }
 
-    public void save(Cliente cliente)  {
+    public void save(MovelPedido mp)  {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         try {
             tx.begin();
-            if(cliente.getId() != null){
-                em.merge(cliente);
+            if(mp.getId() != null){
+                em.merge(mp);
             }else{
-            em.persist(cliente);
+            em.persist(mp);
         }
          tx.commit();       
         } catch (Exception e) {
@@ -36,12 +40,12 @@ public class ClienteDAO {
         }
        
     }
-    public void remove(Cliente cliente) {
+    public void remove(MovelPedido mp) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         try {
             tx.begin();
-            em.remove(em.getReference(Cliente.class, cliente.getId()));
+            em.remove(em.getReference(MovelPedido.class, mp.getId()));
             tx.commit();       
         } catch (Exception e) {
             if(tx != null && tx.isActive()){
@@ -53,13 +57,13 @@ public class ClienteDAO {
         }
     }
 
-    public Cliente find(Long id) {
+    public MovelPedido find(Long id) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
-        Cliente cliente = null;
+        MovelPedido cliente = null;
         try {
             tx.begin();
-            cliente = em.find(Cliente.class, id);
+            cliente = em.find(MovelPedido.class, id);
             tx.commit();       
         } catch (Exception e) {
             if(tx != null && tx.isActive()){
@@ -72,13 +76,13 @@ public class ClienteDAO {
         return cliente;
         
     }
-    public List<Cliente> findAll(){
+    public List<MovelPedido> findAll(){
        EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
-        List<Cliente> clientes = null;
+        List<MovelPedido> clientes = null;
         try {
            tx.begin();
-           TypedQuery<Cliente> query = em.createQuery("select c From Cliente c", Cliente.class);
+           TypedQuery<MovelPedido> query = em.createQuery("select c From Cliente c", MovelPedido.class);
            clientes = query.getResultList();
          tx.commit();       
         } catch (Exception e) {

@@ -136,24 +136,24 @@
                             <td>
                             <c:if test="${operacao != 'Incluir'}">
                                 <select size="5" multiple name="listaMoveisRemove" title="Selecione para remover">
-                                    <c:forEach items="${moveis}" var="movel">
-                                        <c:if test="${movel.pedido.id == pedido.id}">
-                                            <option value="${movel.id}"> ${movel.nome}</option>
-                                        </c:if>
+                                    <c:forEach items="${moveisDoPedido}" var="movelPedido">
+                                        
+                                            <option value="${movelPedido.movel.id}"> ${movelPedido.movel.nome}</option>
+                                        
                                     </c:forEach>
                                 </select>
                             </c:if>
                         </td>
                         <td></td>
+                        <c:if test="${operacao != 'Incluir'}">
                         <td>
                             <select size="5" multiple name="listaMoveisAdd" title="Selecione para adicionar">
                                 <c:forEach items="${moveis}" var="movel">
-                                    <c:if test="${movel.pedido == null}">
-                                        <option value="${movel.id}"> ${movel.nome}</option>>
-                                    </c:if>
+                                    <option value="${movel.id}"> ${movel.nome}</option>>
                                 </c:forEach>
                             </select>
                         </td>
+                        </c:if>
                     </tr>
                     <tr>
                         <td>

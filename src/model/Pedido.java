@@ -2,17 +2,17 @@ package model;
 
 import dao.PedidoDAO;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import utils.Data;
+
 
 @Entity
 public class Pedido implements Serializable {
@@ -21,25 +21,38 @@ public class Pedido implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @SequenceGenerator(name = "seq",initialValue = 1)
+    @SequenceGenerator(name = "seq", initialValue = 1)
     private String codigoPedido;
     private Double valorTotal;
     @ManyToOne
     private Cliente cliente;
     @ManyToOne
     private Funcionario funcionario;
+
+    @OneToMany(mappedBy = "pedido", cascade=CascadeType.REMOVE)
+    private ArrayList<MovelPedido> movelPedidos;
+
     private String dataPedido;
     private String dataEntrega;
 
-    public Pedido(Double valorTotal, Cliente cliente, Funcionario funcionario, String dataPedido, String dataEntrega) {
+    public Pedido(Double valorTotal, Cliente cliente, Funcionario funcionario, Movel movel, String dataPedido, String dataEntrega, ArrayList<MovelPedido> movelPedidos) {
         this.valorTotal = valorTotal;
         this.cliente = cliente;
         this.funcionario = funcionario;
         this.dataPedido = dataPedido;
         this.dataEntrega = dataEntrega;
+        this.movelPedidos = movelPedidos;
     }
 
     public Pedido() {
+    }
+
+    public Pedido(Double valorTotal, Cliente cliente, Funcionario funcionario, String dtCriado, String dtEntrega) {
+        this.valorTotal = valorTotal;
+        this.cliente = cliente;
+        this.funcionario = funcionario;
+        this.dataPedido = dataPedido;
+        this.dataEntrega = dataEntrega;
     }
 
     public void save() {
@@ -49,15 +62,15 @@ public class Pedido implements Serializable {
     public void remove() {
         PedidoDAO.getInstance().remove(this);
     }
-    
-    public static Pedido find(Long id){
+
+    public static Pedido find(Long id) {
         return PedidoDAO.getInstance().find(id);
     }
-    
-    public static List<Pedido> findAll(){
+
+    public static List<Pedido> findAll() {
         return PedidoDAO.getInstance().findAll();
-    } 
-    
+    }
+
     public Long getId() {
         return id;
     }
@@ -67,6 +80,7 @@ public class Pedido implements Serializable {
     }
 
     public Double getValorTotal() {
+        updateValorTotal();
         return valorTotal;
     }
 
@@ -112,5 +126,21 @@ public class Pedido implements Serializable {
 
     public void setDataEntrega(String dataEntrega) {
         this.dataEntrega = dataEntrega;
+    }
+
+    public ArrayList<MovelPedido> getMovelPedidos() {
+        return movelPedidos;
+    }
+
+    public void setMovelPedidos(ArrayList<MovelPedido> movelPedidos) {
+        this.movelPedidos = movelPedidos;
+    }
+    
+    private void updateValorTotal(){
+        double x = 0;
+        for (MovelPedido movelPedido : movelPedidos) {
+            x += movelPedido.getMovel().getPreco();
+        }
+        this.valorTotal = x;
     }
 }
