@@ -99,7 +99,7 @@
                             <label for="dataCriacao">Data do Pedido</label>
                         </td>
                         <td colspan="4">
-                            <input class="form-control" type="date" maxlenght="10" minlength="10"  required name="dataCriacao" id="dataNascimento" value="${pedido.dataPedido}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                            <input class="form-control" type="date" maxlenght="10" minlength="10"  required name="dataCriacao" id="dataNascimento" value="${pedido.dataPedido}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
                             </td>
                         </tr>
                         <tr>
@@ -107,7 +107,7 @@
                                 <label for="dataPrevista">Data Prevista de Entrega</label>
                             </td>
                             <td colspan="4">
-                                <input class="form-control" type="date" maxlenght="10" minlength="10"  required name="dataPrevista" id="dataNascimento" value="${pedido.dataEntrega}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                <input class="form-control" type="date" maxlenght="10" minlength="10"  required name="dataPrevista" id="dataNascimento" value="${pedido.dataEntrega}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
                             </td>
                         </tr>
                         <tr>
