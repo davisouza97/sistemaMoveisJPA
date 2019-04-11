@@ -2,12 +2,16 @@ package model;
 
 import dao.PedidoDAO;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import utils.Data;
 
 @Entity
@@ -17,25 +21,27 @@ public class Pedido implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @SequenceGenerator(name = "seq",initialValue = 1)
     private String codigoPedido;
     private Double valorTotal;
     @ManyToOne
     private Cliente cliente;
     @ManyToOne
     private Funcionario funcionario;
+    private String dataPedido;
+    private String dataEntrega;
 
-    public Pedido(Double valorTotal, Cliente cliente, Funcionario funcionario) {
+    public Pedido(Double valorTotal, Cliente cliente, Funcionario funcionario, String dataPedido, String dataEntrega) {
         this.valorTotal = valorTotal;
-        this.codigoPedido = cliente.getNome()+"/"+funcionario.getNome();
         this.cliente = cliente;
         this.funcionario = funcionario;
+        this.dataPedido = dataPedido;
+        this.dataEntrega = dataEntrega;
     }
 
     public Pedido() {
     }
 
-    
-    
     public void save() {
         PedidoDAO.getInstance().save(this);
     }
@@ -91,7 +97,20 @@ public class Pedido implements Serializable {
     public void setCodigoPedido(String codigoPedido) {
         this.codigoPedido = codigoPedido;
     }
-    
-    
-    
+
+    public String getDataPedido() {
+        return dataPedido;
+    }
+
+    public void setDataPedido(String dataPedido) {
+        this.dataPedido = dataPedido;
+    }
+
+    public String getDataEntrega() {
+        return dataEntrega;
+    }
+
+    public void setDataEntrega(String dataEntrega) {
+        this.dataEntrega = dataEntrega;
+    }
 }
