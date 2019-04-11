@@ -1,15 +1,10 @@
 package controller;
 
-import dao.ClienteDAO;
 import dao.MovelDAO;
+import dao.MovelPedidoDAO;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -21,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.Cliente;
 import model.Funcionario;
 import model.Movel;
+import model.MovelPedido;
 import model.Pedido;
 import utils.Strings;
 
@@ -45,6 +41,8 @@ public class ManterPedidoController extends HttpServlet {
         if (!operacao.equals("Incluir")) {
             Pedido pedido = Pedido.find(Long.parseLong(request.getParameter("id")));
             request.setAttribute("pedido", pedido);
+
+            request.setAttribute("moveisDoPedido", pedido.getMovelPedidos());
         }
         request.getRequestDispatcher("cadastroPedido.jsp").forward(request, response);
     }
@@ -54,6 +52,7 @@ public class ManterPedidoController extends HttpServlet {
         Double valorTotal = Double.parseDouble(request.getParameter("valorTotal"));//criar um getMovelByIdPedido e calcular o preco(ou criar um metodo pra fazer isso pq vai repetir)
         Long idFuncionario = Long.parseLong(request.getParameter("idFuncionario"));
         Long idCliente = Long.parseLong(request.getParameter("idCliente"));
+       // Long idMovel = Long.parseLong(request.getParameter("idMovel"));
         String dtCriado = request.getParameter("dataCriacao");
         String dtEntrega = request.getParameter("dataPrevista");
         Long id = null;
@@ -71,50 +70,44 @@ public class ManterPedidoController extends HttpServlet {
             if (idCliente != 0) {
                 cliente = Cliente.find(idCliente);
             }
+            
 
-            Pedido pedido = new Pedido(valorTotal, cliente, funcionario, dtCriado,dtEntrega);
+            Pedido pedido = new Pedido(valorTotal, cliente, funcionario, dtCriado, dtEntrega);
             if (operacao.equals("Incluir")) {
                 if (listaMoveisAdd != null) {
-                    for (String movel : listaMoveisAdd) {
-                        Movel m = MovelDAO.getInstance().find(Long.parseLong(movel));
-                        m.setPedido(pedido);
-                        m.save();
+                    for (String moveladd : listaMoveisAdd) {
+                        Movel m = MovelDAO.getInstance().find(Long.parseLong(moveladd));
+                        MovelPedidoDAO.getInstance().save(new MovelPedido(m, pedido));
                     }
                 }
                 if (listaMoveisRemove != null) {
-                    for (String movel : listaMoveisRemove) {
-                        Movel m = MovelDAO.getInstance().find(Long.parseLong(movel));
-                        m.setPedido(null);
-                        m.save();
+                    for (String movelrem : listaMoveisRemove) {
+                        MovelPedido m = MovelPedidoDAO.getInstance().find(Long.parseLong(movelrem));
+                        MovelPedidoDAO.getInstance().remove(m);
                     }
                 }
                 pedido.save();
             } else if (operacao.equals("Editar")) {
                 pedido.setId(id);
-               if (listaMoveisAdd != null) {
-                    for (String movel : listaMoveisAdd) {
-                        Movel m = MovelDAO.getInstance().find(Long.parseLong(movel));
-                        m.setPedido(pedido);
-                        m.save();
+                if (listaMoveisAdd != null) {
+                    if (listaMoveisAdd != null) {
+                        for (String moveladd : listaMoveisAdd) {
+                            Movel m = MovelDAO.getInstance().find(Long.parseLong(moveladd));
+                            MovelPedidoDAO.getInstance().save(new MovelPedido(m, pedido));
+                        }
                     }
-                }
-                if (listaMoveisRemove != null) {
-                    for (String movel : listaMoveisRemove) {
-                        Movel m = MovelDAO.getInstance().find(Long.parseLong(movel));
-                        m.setPedido(null);
-                        m.save();
+                    if (listaMoveisRemove != null) {
+                        for (String movelrem : listaMoveisRemove) {
+                            MovelPedido m = MovelPedidoDAO.getInstance().find(Long.parseLong(movelrem));
+                            MovelPedidoDAO.getInstance().remove(m);
+                        }
                     }
+
                 }
                 pedido.save();
             } else if (operacao.equals("Excluir")) {
-                List<Movel> moveis = MovelDAO.getInstance().findAll();
-                for (Movel movel : moveis) {
-                    if (movel.getPedido()!=null) {
-                        if (Objects.equals(movel.getPedido().getId(), id)) {
-                            movel.setPedido(null);
-                            movel.save();
-                        }
-                    }
+                for (MovelPedido movelPedido : pedido.getMovelPedidos()) {
+                    MovelPedidoDAO.getInstance().remove(movelPedido);
                 }
                 pedido.setId(id);
                 pedido.remove();

@@ -4,6 +4,7 @@ import dao.MovelDAO;
 import java.io.Serializable;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,7 +12,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Movel implements Serializable {
@@ -33,10 +36,11 @@ public class Movel implements Serializable {
     private Ferramenta ferramenta;
     @ManyToOne
     private Material material;
-    @ManyToOne
-    private Pedido pedido;
+    
+    @OneToMany(mappedBy = "movel")
+    private ArrayList<MovelPedido> movelPedidos;
 
-    public Movel(String nome, Double preco, String tipo, Double altura, Double largura, Double comprimento, Double peso, Ferramenta ferramenta, Material material, Pedido pedido) {
+    public Movel(String nome, Double preco, String tipo, Double altura, Double largura, Double comprimento, Double peso, Ferramenta ferramenta, Material material, ArrayList<MovelPedido> movelPedidos) {
         
         this.nome = nome;
         this.preco = preco;
@@ -47,10 +51,22 @@ public class Movel implements Serializable {
         this.peso = peso;
         this.ferramenta = ferramenta;
         this.material = material;
-        this.pedido = pedido;
+        this.movelPedidos = movelPedidos;
     }
 
     public Movel() {
+    }
+
+    public Movel(String nome, double preco, String tipo, double altura, double largura, double comprimento, double peso, Ferramenta ferramenta, Material material) {
+         this.nome = nome;
+        this.preco = preco;
+        this.tipo = tipo;
+        this.altura = altura;
+        this.largura = largura;
+        this.comprimento = comprimento;
+        this.peso = peso;
+        this.ferramenta = ferramenta;
+        this.material = material;
     }
 
     public void save() {
@@ -145,13 +161,14 @@ public class Movel implements Serializable {
         this.material = material;
     }
 
-    public Pedido getPedido() {
-        return pedido;
+    public ArrayList<MovelPedido> getMovelPedidos() {
+        return movelPedidos;
     }
 
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
+    public void setMovelPedidos(ArrayList<MovelPedido> movelPedidos) {
+        this.movelPedidos = movelPedidos;
     }
+
 
     @Override
     public String toString() {

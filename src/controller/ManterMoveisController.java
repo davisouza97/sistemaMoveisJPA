@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Ferramenta;
-import model.Funcionario;
 import model.Material;
 import model.Movel;
 import model.Pedido;
@@ -59,9 +57,6 @@ public class ManterMoveisController extends HttpServlet {
 
         Long idMaterial = Long.parseLong(request.getParameter("idMaterial"));
        
-        Long idPedido = Long.parseLong(request.getParameter("idPedidoMovel"));
-
-        
         
         Long idMovel = null;
         if (!operacao.equals("Incluir")) {
@@ -77,11 +72,8 @@ public class ManterMoveisController extends HttpServlet {
             if (idMaterial != 0) {
                 material = Material.find(idMaterial);
             }
-            Pedido pedido = null;
-            if (idPedido != 0) {
-                pedido = Pedido.find(idPedido);
-            }
-            Movel movel = new Movel(nome, preco, tipo, altura, largura, comprimento, peso, ferramenta, material, pedido);
+           
+            Movel movel = new Movel(nome, preco, tipo, altura, largura, comprimento, peso, ferramenta, material);
             if (operacao.equals("Incluir")) {
                 movel.save();
             } else if (operacao.equals("Editar")) {

@@ -8,6 +8,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import model.Movel;
+import model.MovelPedido;
 
 public class PedidoDAO {
 
@@ -47,15 +48,9 @@ public class PedidoDAO {
         EntityTransaction tx = em.getTransaction();
         try {
             tx.begin();
-            List<Movel> moveis = Movel.findAllByPedido(pedido);
-            for (Movel movel : moveis) {
-                if (movel.getPedido() != null) {
-                    if (movel.getPedido().getId() == pedido.getId()) {
-                        movel.setPedido(null);
-                        MovelDAO.getInstance().save(movel);
-                    }
-                }
-            }
+//            for (MovelPedido mp : pedido.getMovelPedidos()) {
+//                MovelPedidoDAO.getInstance().remove(mp);
+//            }
             em.remove(em.getReference(Pedido.class, pedido.getId()));
             tx.commit();
         } catch (Exception e) {
@@ -84,17 +79,6 @@ public class PedidoDAO {
         } finally {
             PersistenceUtil.close(em);
         }
-        List<Movel> moveis = Movel.findAllByPedido(pedido);
-        double preco = 0;
-        for (Movel movel : moveis) {
-            if (movel.getPedido() != null) {
-                if (movel.getPedido().getId() == pedido.getId()) {
-                    preco += movel.getPreco();
-                }
-            }
-        }
-        pedido.setValorTotal(preco);
-        PedidoDAO.getInstance().save(pedido);
         return pedido;
     }
 
@@ -115,20 +99,6 @@ public class PedidoDAO {
             throw new RuntimeException(e);
         } finally {
             PersistenceUtil.close(em);
-        }
-
-        for (Pedido pedido : pedidos) {
-            List<Movel> moveis = Movel.findAllByPedido(pedido);
-            double preco = 0;
-            for (Movel movel : moveis) {
-                if (movel.getPedido() != null) {
-                    if (movel.getPedido().getId() == pedido.getId()) {
-                        preco += movel.getPreco();
-                    }
-                }
-            }
-            pedido.setValorTotal(preco);
-            PedidoDAO.getInstance().save(pedido);
         }
         return pedidos;
     }
