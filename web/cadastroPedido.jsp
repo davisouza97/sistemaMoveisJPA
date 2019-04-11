@@ -10,6 +10,13 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
+        <style>
+            select{
+                background: col
+
+            }
+        </style>
+
         <title>Cadastro de Pedidos</title>
     </head>
 
@@ -94,14 +101,22 @@
                                 <input class="form-control" type="Hidden" min="0" name="idCliente" id="idCliente" value="${pedido.cliente.id}" readonly>
                             </c:if>
                     </tr>
-
                     <tr>
                         <td>
-                            &nbsp
+                            Remover Moveis
                         </td>
                         <td>
+                            
+                        </td>
+                        <td>
+                            Adicionar Moveis
+                        </td>
+                    
+                    </tr>
+                    <tr>
+                        <td>
                             <c:if test="${operacao != 'Incluir'}">
-                                <select size="5" multiple name="listaMoveisRemove">
+                                <select size="5" multiple name="listaMoveisRemove" title="Selecione para remover">
                                     <c:forEach items="${moveis}" var="movel">
                                         <c:if test="${movel.pedido.id == pedido.id}">
                                             <option value="${movel.id}"> ${movel.nome}</option>
@@ -112,7 +127,7 @@
                         </td>
                         <td></td>
                         <td>
-                            <select size="5" multiple name="listaMoveisAdd">
+                            <select size="5" multiple name="listaMoveisAdd" title="Selecione para adicionar">
                                 <c:forEach items="${moveis}" var="movel">
                                     <c:if test="${movel.pedido == null}">
                                         <option value="${movel.id}"> ${movel.nome}</option>>
