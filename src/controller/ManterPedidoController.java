@@ -4,6 +4,9 @@ import dao.ClienteDAO;
 import dao.MovelDAO;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -24,7 +27,7 @@ import utils.Strings;
 @WebServlet(name = "ManterPedidoController", urlPatterns = "/ManterPedidoController")
 public class ManterPedidoController extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException, ParseException {
         String acao = request.getParameter("acao");
         if (acao.equals("confirmarOperacao")) {
             confirmarOperacao(request, response);
@@ -46,11 +49,13 @@ public class ManterPedidoController extends HttpServlet {
         request.getRequestDispatcher("cadastroPedido.jsp").forward(request, response);
     }
 
-    protected void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+    protected void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException, ParseException {
         String operacao = request.getParameter("operacao");
         Double valorTotal = Double.parseDouble(request.getParameter("valorTotal"));//criar um getMovelByIdPedido e calcular o preco(ou criar um metodo pra fazer isso pq vai repetir)
         Long idFuncionario = Long.parseLong(request.getParameter("idFuncionario"));
         Long idCliente = Long.parseLong(request.getParameter("idCliente"));
+        String dtCriado = request.getParameter("dataCriacao");
+        String dtEntrega = request.getParameter("dataPrevista");
         Long id = null;
         if (!operacao.equals("Incluir")) {
             id = Long.parseLong(request.getParameter("id"));
@@ -67,7 +72,7 @@ public class ManterPedidoController extends HttpServlet {
                 cliente = Cliente.find(idCliente);
             }
 
-            Pedido pedido = new Pedido(valorTotal, cliente, funcionario);
+            Pedido pedido = new Pedido(valorTotal, cliente, funcionario, dtCriado,dtEntrega);
             if (operacao.equals("Incluir")) {
                 if (listaMoveisAdd != null) {
                     for (String movel : listaMoveisAdd) {
@@ -129,6 +134,8 @@ public class ManterPedidoController extends HttpServlet {
             processRequest(request, response);
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(ManterPedidoController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(ManterPedidoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -139,6 +146,8 @@ public class ManterPedidoController extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(ManterPedidoController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ManterPedidoController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
             Logger.getLogger(ManterPedidoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
