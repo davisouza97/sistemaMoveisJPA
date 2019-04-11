@@ -10,17 +10,33 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
-        <style>
-            select{
-                background: col
 
+        <script type="text/javascript">
+            function dataHoje() {
+                var data = new Date();
+                var dia = data.getDate();
+                var mes = data.getMonth() + 1;
+                var ano = data.getFullYear();
+
+                if (mes.toString().length == 1) {
+                    mes = "0" + mes;
+                }
+                if (dia.toString().length == 1) {
+                    dia = "0" + dia;
+                }
+                var x = ano + "-" + mes + "-" + dia;
+                console.log(x);
+                document.getElementById('dataCriacao').value = x;
             }
-        </style>
-
+        </script>
         <title>Cadastro de Pedidos</title>
     </head>
 
-    <body>
+    <body <c:if test="${operacao == 'Incluir'}">  onload="dataHoje()"</c:if>>
+
+            <input class="form-control" type="HIDDEN" required min="1" name="idPedido" id="idPedido" value="${pedido.id}">
+
+
         <div class="container">
             <form action="ManterPedidoController?acao=confirmarOperacao&operacao=${operacao}" method="POST">
                 <table>
@@ -59,11 +75,6 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="4">
-                            <input class="form-control" type="HIDDEN" required min="1" name="idPedido" id="idPedido" value="${pedido.id}">
-                        </td>
-                    </tr>
-                    <tr>
                         <td>
                             <label for="valorTotal">Valor Total</label>
                         </td>
@@ -99,7 +110,7 @@
                             <label for="dataCriacao">Data do Pedido</label>
                         </td>
                         <td colspan="4">
-                            <input class="form-control" type="date" maxlenght="10" minlength="10"  required name="dataCriacao" id="dataNascimento" value="${pedido.dataPedido}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
+                            <input class="form-control" type="date" required name="dataCriacao"  readonly id="dataCriacao" <c:if test="${operacao != 'Incluir'}">  value="${pedido.dataPedido}"</c:if>>
                             </td>
                         </tr>
                         <tr>
@@ -107,7 +118,7 @@
                                 <label for="dataPrevista">Data Prevista de Entrega</label>
                             </td>
                             <td colspan="4">
-                                <input class="form-control" type="date" maxlenght="10" minlength="10"  required name="dataPrevista" id="dataNascimento" value="${pedido.dataEntrega}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
+                                <input class="form-control" type="date" maxlenght="10" minlength="10" min="" required name="dataPrevista" id="dataPrevista" value="${pedido.dataEntrega}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
                             </td>
                         </tr>
                         <tr>
