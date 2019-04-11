@@ -21,11 +21,7 @@
     </head>
 
     <body>
-
         <div class="container">
-
-
-
             <form action="ManterPedidoController?acao=confirmarOperacao&operacao=${operacao}" method="POST">
                 <table>
                     <tr>
@@ -41,8 +37,6 @@
                                 <input class="form-control" type="text" min="0" name="CodigoPedido" id="CodigoPedido" value="${pedido.codigoPedido}" readonly>
                             </td>
                         </c:if>
-
-
                     </tr>
                     <tr>
                         <td>
@@ -62,7 +56,6 @@
                                 <input class="form-control" type="text" min="0" value="${pedido.funcionario.id} - ${pedido.funcionario.nome}" readonly>
                                 <input class="form-control" type="Hidden" min="0" name="idFuncionario" id="idFuncionario" value="${pedido.funcionario.id}" readonly>
                             </c:if>
-
                         </td>
                     </tr>
                     <tr>
@@ -103,18 +96,33 @@
                     </tr>
                     <tr>
                         <td>
-                            Remover Moveis
+                            <label for="dataCriacao">Data do Pedido</label>
                         </td>
-                        <td>
-                            
-                        </td>
-                        <td>
-                            Adicionar Moveis
-                        </td>
-                    
-                    </tr>
-                    <tr>
-                        <td>
+                        <td colspan="4">
+                            <input class="form-control" type="date" maxlenght="10" minlength="10"  required name="dataCriacao" id="dataNascimento" value="${pedido.dataPedido}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="dataPrevista">Data Prevista de Entrega</label>
+                            </td>
+                            <td colspan="4">
+                                <input class="form-control" type="date" maxlenght="10" minlength="10"  required name="dataPrevista" id="dataNascimento" value="${pedido.dataEntrega}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Remover Moveis
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+                                Adicionar Moveis
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                             <c:if test="${operacao != 'Incluir'}">
                                 <select size="5" multiple name="listaMoveisRemove" title="Selecione para remover">
                                     <c:forEach items="${moveis}" var="movel">
@@ -135,11 +143,7 @@
                                 </c:forEach>
                             </select>
                         </td>
-
                     </tr>
-
-
-
                     <tr>
                         <td>
                             <a href="PesquisaPedidoController">
@@ -156,10 +160,8 @@
                         </td>
                     </tr>
                 </table>
-
             </form>
         </div>
-
     </body>
 
     <!-- Optional JavaScript -->
