@@ -136,7 +136,7 @@
                             <input class="btn btn-success" type="submit" name="salvar" value="Confirmar">
                         </td>
                         <td>
-                            <a href="index.jsp">
+                            <a href="home.jsp">
                                 <input class="btn btn-primary" type="button" value="Home">
                             </a>
                         </td>

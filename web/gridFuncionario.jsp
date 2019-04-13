@@ -39,7 +39,7 @@
                         <td><a class="btn btn-primary" href="ManterFuncionarioController?acao=prepararOperacao&operacao=Excluir&id=<c:out value="${funcionario.id}" />">Excluir</a></td>
                     </tr>
                 </c:forEach>
-                <td><a class="btn btn-danger" href="index.jsp">Voltar</a></td>
+                <td><a class="btn btn-danger" href="home.jsp">Voltar</a></td>
                 <td colspan="3"><a class="btn btn-primary" href="ManterFuncionarioController?acao=prepararOperacao&operacao=Incluir">Incluir</a></td>
             </table>
 

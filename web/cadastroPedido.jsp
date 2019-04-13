@@ -45,16 +45,6 @@
                     <td colspan="4" style="text-align: center">${operacao} Pedido</td>
                     </tr>
                     <tr>
-                        <c:if test="${operacao != 'Incluir'}">
-                            <td>
-                                <label for="CodigoPedido">Codigo do Pedido</label>
-                            </td>
-                            <td>
-                                <input class="form-control" type="text" min="0" name="CodigoPedido" id="CodigoPedido" value="${pedido.codigoPedido}" readonly>
-                            </td>
-                        </c:if>
-                    </tr>
-                    <tr>
                         <td>
                             <label for="idFuncionario">Funcionario</label>
                         </td>
@@ -137,22 +127,22 @@
                             <c:if test="${operacao != 'Incluir'}">
                                 <select size="5" multiple name="listaMoveisRemove" title="Selecione para remover">
                                     <c:forEach items="${moveisDoPedido}" var="movelPedido">
-                                        
-                                            <option value="${movelPedido.id}"> ${movelPedido.movel.nome}</option>
-                                        
+
+                                        <option value="${movelPedido.id}"> ${movelPedido.movel.nome}</option>
+
                                     </c:forEach>
                                 </select>
                             </c:if>
                         </td>
                         <td></td>
                         <c:if test="${operacao != 'Incluir'}">
-                        <td>
-                            <select size="5" multiple name="listaMoveisAdd" title="Selecione para adicionar">
-                                <c:forEach items="${moveis}" var="movel">
-                                    <option value="${movel.id}"> ${movel.nome}</option>>
-                                </c:forEach>
-                            </select>
-                        </td>
+                            <td>
+                                <select size="5" multiple name="listaMoveisAdd" title="Selecione para adicionar">
+                                    <c:forEach items="${moveis}" var="movel">
+                                        <option value="${movel.id}"> ${movel.nome}</option>>
+                                    </c:forEach>
+                                </select>
+                            </td>
                         </c:if>
                     </tr>
                     <tr>
@@ -165,7 +155,7 @@
                             <input class="btn btn-success" type="submit" name="" value="Confirmar">
                         </td>
                         <td>
-                            <a href="index.jsp">
+                            <a href="home.jsp">
                                 <input class="btn btn-primary" type="button" value="Home">
                             </a>
                         </td>

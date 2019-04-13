@@ -32,11 +32,11 @@
             <c:forEach items="${pedidos}" var="pedido">
                 <tr>
                     <td>
-                        <c:out value="${pedido.codigoPedido}" />
+                        <c:out value="${pedido.id}" />
                     </td>
 
                     <td>
-                        <c:out value="${pedido.valorTotal}" />
+                        <c:out value=" R$${pedido.valorTotal}" />
                     </td>
 
                     <td><a class="btn btn-primary"
@@ -45,7 +45,7 @@
                             href="ManterPedidoController?acao=prepararOperacao&Operacao=Excluir&id=<c:out value="${pedido.id}" />">Excluir</a></td>
                 </tr>
             </c:forEach>
-            <td><a class="btn btn-danger" href="index.jsp">Voltar</a></td>
+            <td><a class="btn btn-danger" href="home.jsp">Voltar</a></td>
             <td colspan="3"><a class="btn btn-primary"
                     href="ManterPedidoController?acao=prepararOperacao&operacao=Incluir">Incluir</a></td>
         </table>

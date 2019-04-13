@@ -23,23 +23,26 @@ public class LogarController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
-        
+
         RequestDispatcher view = null;
-        String mensagem = "";
-        
+        String mensagem = "ok";
+
         Funcionario funcionario = FuncionarioDAO.findFuncionarioByCpf(login);
         if (funcionario == null) {
-            mensagem = "cpf de outro senha";
+            mensagem = "erro";
+            request.setAttribute("mensagem", mensagem);
             view = request.getRequestDispatcher("index.jsp");
-            
         } else if (!senha.equals(funcionario.getSenha())) {
-            mensagem = "senha de outro cpf";
+            mensagem = "erro";
+            request.setAttribute("mensagem", mensagem);
             view = request.getRequestDispatcher("index.jsp");
+
         } else {
             HttpSession session = request.getSession();
             session.setAttribute("id", funcionario.getId());
             session.setAttribute("cargo", funcionario.getCargo());
             session.setAttribute("nome", funcionario.getNome());
+            request.setAttribute("mensagem", mensagem);
             view = request.getRequestDispatcher("HomeController");
         }
         view.forward(request, response);

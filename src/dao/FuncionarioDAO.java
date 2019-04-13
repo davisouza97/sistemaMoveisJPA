@@ -103,13 +103,14 @@ public class FuncionarioDAO {
             tx.begin();
             TypedQuery<Funcionario> query = em.createQuery("select f From Funcionario f where f.cpf LIKE :cpf", Funcionario.class);
             query.setParameter("cpf", cpf);
+            
             funcionario = query.getSingleResult();
             tx.commit();
         } catch (Exception e) {
             if (tx != null && tx.isActive()) {
                 tx.rollback();
             }
-            throw new RuntimeException(e);
+            funcionario = null;
         } finally {
             PersistenceUtil.close(em);
         }

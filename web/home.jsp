@@ -19,7 +19,8 @@
             }
         </style>
     </head>
-
+    <c:if test="${sessionScope.nome != null}">
+    
     <body>
         <nav class="navbar navbar-dark bg-dark">
             <a class="navbar-brand" href="#">Sistema Interno</a>
@@ -108,5 +109,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     </body>
+    </c:if>
 
 </html>

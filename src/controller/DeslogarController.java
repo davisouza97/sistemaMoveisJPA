@@ -20,9 +20,9 @@ import javax.servlet.http.HttpServletResponse;
 public class DeslogarController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getSession().invalidate();
+        request.setAttribute("teste", "abc123");
         RequestDispatcher view = request.getRequestDispatcher("index.jsp");
-        view.forward(request, response);
-       
+        view.forward(request, response);  
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
