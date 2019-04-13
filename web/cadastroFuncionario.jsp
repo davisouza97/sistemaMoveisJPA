@@ -38,7 +38,7 @@
                                 <label for="senha">Senha</label>
                             </td>
                             <td colspan="4">
-                                <input class="form-control" type="text" maxlength="12" minlength="3" name="senha" id="senha" value="${funcionario.senha}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                <input class="form-control" type="password" maxlength="12" minlength="3" name="senha" id="senha" value="${funcionario.senha}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                             </td>
                         </tr>
                         <tr>

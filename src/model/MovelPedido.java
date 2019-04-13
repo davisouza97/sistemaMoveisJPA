@@ -39,8 +39,6 @@ public class MovelPedido implements Serializable {
     public MovelPedido() {
     }
 
-    
-    
     public MovelPedido(Movel m, Pedido p) {
     this.movel = m;
     this.pedido = p;
@@ -69,6 +67,4 @@ public class MovelPedido implements Serializable {
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
     }
-    
-    
 }

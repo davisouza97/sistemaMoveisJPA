@@ -21,8 +21,6 @@ public class Pedido implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @SequenceGenerator(name = "seq", initialValue = 1)
-    private String codigoPedido;
     private Double valorTotal;
     @ManyToOne
     private Cliente cliente;
@@ -36,6 +34,7 @@ public class Pedido implements Serializable {
     private String dataEntrega;
 
     public Pedido(Double valorTotal, Cliente cliente, Funcionario funcionario, Movel movel, String dataPedido, String dataEntrega, ArrayList<MovelPedido> movelPedidos) {
+        
         this.valorTotal = valorTotal;
         this.cliente = cliente;
         this.funcionario = funcionario;
@@ -47,12 +46,11 @@ public class Pedido implements Serializable {
     public Pedido() {
     }
 
-    public Pedido(Double valorTotal, Cliente cliente, Funcionario funcionario, String dtCriado, String dtEntrega) {
-        this.valorTotal = valorTotal;
+    public Pedido( Cliente cliente, Funcionario funcionario, String dtCriado, String dtEntrega) {
         this.cliente = cliente;
         this.funcionario = funcionario;
-        this.dataPedido = dataPedido;
-        this.dataEntrega = dataEntrega;
+        this.dataPedido = dtCriado;
+        this.dataEntrega = dtEntrega;
     }
 
     public void save() {
@@ -104,14 +102,6 @@ public class Pedido implements Serializable {
         this.funcionario = funcionario;
     }
 
-    public String getCodigoPedido() {
-        return codigoPedido;
-    }
-
-    public void setCodigoPedido(String codigoPedido) {
-        this.codigoPedido = codigoPedido;
-    }
-
     public String getDataPedido() {
         return dataPedido;
     }
@@ -142,5 +132,14 @@ public class Pedido implements Serializable {
             x += movelPedido.getMovel().getPreco();
         }
         this.valorTotal = x;
+    }
+    
+    public void removeMovelPedido(MovelPedido m){
+        for (MovelPedido movelPedido : this.movelPedidos) {
+            if (movelPedido.getId() == m.getId()) {
+                movelPedidos.remove(movelPedido);
+                break;
+            }
+        }
     }
 }

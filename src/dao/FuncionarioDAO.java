@@ -2,8 +2,6 @@ package dao;
 
 import model.Funcionario;
 
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -20,7 +18,6 @@ public class FuncionarioDAO {
     private FuncionarioDAO() {
     }
 
-    
     public static void save(Funcionario funcionario) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -96,6 +93,27 @@ public class FuncionarioDAO {
             PersistenceUtil.close(em);
         }
         return funcionarios;
+    }
+
+    public static Funcionario findFuncionarioByCpf(String cpf) {
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        Funcionario funcionario = null;
+        try {
+            tx.begin();
+            TypedQuery<Funcionario> query = em.createQuery("select f From Funcionario f where f.cpf LIKE :cpf", Funcionario.class);
+            query.setParameter("cpf", cpf);
+            funcionario = query.getSingleResult();
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
+        } finally {
+            PersistenceUtil.close(em);
+        }
+        return funcionario;
     }
 
 }

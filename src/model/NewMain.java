@@ -6,6 +6,7 @@
 package model;
 
 import dao.ClienteDAO;
+import dao.FuncionarioDAO;
 import dao.MovelDAO;
 import dao.PedidoDAO;
 import java.text.SimpleDateFormat;
@@ -30,8 +31,10 @@ public class NewMain {
 //          ClienteDAO.getInstance().save(m);
 //
 //          System.out.println("acabou");
-        
+     
 
+//            Funcionario f = FuncionarioDAO.findFuncionarioByCpf("32132132121");
+//            System.out.println(f.getNome());
     }
 
 }
