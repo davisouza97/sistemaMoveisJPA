@@ -137,9 +137,7 @@
                             <c:if test="${operacao != 'Incluir'}">
                                 <select size="5" multiple name="listaMoveisRemove" title="Selecione para remover">
                                     <c:forEach items="${moveisDoPedido}" var="movelPedido">
-                                        
                                             <option value="${movelPedido.movel.id}"> ${movelPedido.movel.nome}</option>
-                                        
                                     </c:forEach>
                                 </select>
                             </c:if>
