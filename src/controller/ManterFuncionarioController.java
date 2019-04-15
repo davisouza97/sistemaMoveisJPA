@@ -37,9 +37,9 @@ public class ManterFuncionarioController extends HttpServlet {
     protected void prepararOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
         String operacao = request.getParameter("operacao");
         request.setAttribute("operacao", operacao);
-        if (!operacao.equalsIgnoreCase("Incluir")) {
-           Funcionario funcionario = Funcionario.find(Long.parseLong(request.getParameter("id")));
-           request.setAttribute("funcionario", funcionario);
+        if (operacao.equalsIgnoreCase("Editar") || operacao.equalsIgnoreCase("Excluir")) {
+            Funcionario funcionario = Funcionario.find(Long.parseLong(request.getParameter("id")));
+            request.setAttribute("funcionario", funcionario);
 
         }
         request.getRequestDispatcher("cadastroFuncionario.jsp").forward(request, response);
@@ -59,29 +59,34 @@ public class ManterFuncionarioController extends HttpServlet {
         String uf = request.getParameter("uf");
         String cidade = request.getParameter("cidade");
         String cargo = request.getParameter("cargo");
-        double salario = Double.parseDouble(request.getParameter("salario").trim()); //quando tenta persistir no banco da erro nesta linha double provavel incompatibilidade
-        String comissao = request.getParameter("comissao"); //quando tenta persistir no banco da erro nesta linha double provavel incompatibilidade
+        double salario = Double.parseDouble(request.getParameter("salario").trim());
+        String comissao = request.getParameter("comissao");
         String senha = request.getParameter("senha");
         String telefone = request.getParameter("telefone");
         String celular = request.getParameter("celular");
         Long id = null;
-        if(!operacao.equals("Incluir")){
-         id = Long.parseLong(request.getParameter("id").trim()) ;
+        if (operacao.equals("Editar") || operacao.equals("Excluir")) {
+            id = Long.parseLong(request.getParameter("id").trim());
         }
-        
-        
+
         try {
-            Funcionario funcionario = new Funcionario(cargo, salario, comissao, senha, nome,cpf,dataNascimento,  email,  cep, logradouro,  numero,  complemento,  bairro, uf,  cidade,  telefone,  celular);
-            if (operacao.equals("Incluir")) {
+            Funcionario funcionario = new Funcionario(cargo, salario, comissao, senha, nome, cpf, dataNascimento, email, cep, logradouro, numero, complemento, bairro, uf, cidade, telefone, celular);
+            if (operacao.equals("Incluir") || operacao.equals("Cadastrar")) {
                 funcionario.save();
             } else if (operacao.equals("Editar")) {
-               funcionario.setId(id);
+                funcionario.setId(id);
                 funcionario.save();
             } else if (operacao.equals("Excluir")) {
                 funcionario.setId(id);
                 funcionario.remove();
             }
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaFuncionarioController");
+            RequestDispatcher view = null;
+            if (!operacao.equals("Cadastrar")) {
+                view = request.getRequestDispatcher("PesquisaFuncionarioController");
+            } else {
+                view = request.getRequestDispatcher("DeslogarController");
+            }
+
             view.forward(request, response);
         } catch (IOException e) {
             throw new ServletException(e);

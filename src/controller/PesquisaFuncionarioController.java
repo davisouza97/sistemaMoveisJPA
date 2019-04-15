@@ -23,8 +23,6 @@ public class PesquisaFuncionarioController extends HttpServlet {
         RequestDispatcher view = request.getRequestDispatcher("gridFuncionario.jsp");
         view.forward(request, response);
     }
-
-
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

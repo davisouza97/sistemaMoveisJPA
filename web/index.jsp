@@ -42,13 +42,13 @@
             <input type="text" class="form-control" placeholder="CPF" name="login">
         </div>
         <div class="form-group">
-            <input type="password" class="form-control" placeholder="Senha">
+            <input type="password" class="form-control" placeholder="Senha" name="senha">
         </div>
         <div class="form-group">
             <input type="submit" class="btn btn-primary btn-block" value="Logar">
         </div>     
     </form>
-    <p class="text-center"><a href="#">Criar Conta</a></p>
+    <p class="text-center"><a href="ManterFuncionarioController?acao=prepararOperacao&operacao=Cadastrar">Criar Conta</a></p>
 </div>
 </body>
 </html>                                		                            

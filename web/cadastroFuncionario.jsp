@@ -22,7 +22,7 @@
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <input class="form-control" type="HIDDEN" required min="1" name="id" id="id" value="${funcionario.id}"  <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
+                            <input class="form-control" type="HIDDEN" required min="1" name="id" id="id" value="${funcionario.id}"  <c:if test="${operacao == 'Editar'||operacao == 'Excluir'}"> readonly</c:if>>
                             </td>
                         </tr>
                         <tr>
@@ -169,23 +169,32 @@
                             <td>
                                 <input type="radio" required name="comissao" value="S" <c:if test="${funcionario.comissao.equals('S')}"> checked</c:if>>S&nbsp;
                             <input type="radio" required name="comissao" value="N" <c:if test="${funcionario.comissao.equals('N')}"> checked</c:if>>N
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>
-                            <a href="PesquisaFuncionarioController">
-                                <input class="btn btn-danger" type="button" value="voltar">
-                            </a>
+                        <tr>
+                            <td>
+                            <c:if test="${operacao != 'Cadastrar'}">
+                                <a href="PesquisaFuncionarioController">
+                                    <input class="btn btn-danger" type="button" value="voltar">
+                                </a>
+                            </c:if>
+                            <c:if test="${operacao == 'Cadastrar'}">
+                                <a href="DeslogarController">
+                                    <input class="btn btn-danger" type="button" value="voltar">
+                                </a>
+                            </c:if>
                         </td>
                         <td colspan="2" class="tdsalvar" >
                             <input class="btn btn-success" type="submit" name="confirmar" value="Confirmar">
                         </td>
-                        <td>
-                            <a href="home.jsp">
-                                <input class="btn btn-primary" type="button" value="Home">
-                            </a>
-                        </td>
+                        <c:if test="${operacao != 'Cadastrar'}">
+                            <td>
+                                <a href="home.jsp">
+                                    <input class="btn btn-primary" type="button" value="Home">
+                                </a>
+                            </td>
+                        </c:if>
                     </tr>
                 </table>
 

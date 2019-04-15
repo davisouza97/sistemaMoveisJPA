@@ -25,7 +25,7 @@
         <nav class="navbar navbar-dark bg-dark">
             <a class="navbar-brand" href="#">Sistema Interno</a>
             <div style="color: white">${sessionScope.nome}</div>
-            <div><form action="DeslogarController" method="POST"><input type="submit" value="Logout"></form></div>
+            <div><form action="DeslogarController" method="POST"><input class="btn btn-danger" type="submit" value="Logout"></form></div>
 
         </nav>
         <br>
