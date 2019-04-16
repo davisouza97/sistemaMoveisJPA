@@ -18,9 +18,7 @@
         <div class="container">
             <form action="ManterMoveisController?acao=confirmarOperacao&operacao=${operacao}" method="POST">
                 <table class="tableform">
-                    <tr>
-                        <td><input type="HIDDEN" required min="1" name="idPedido" id="idPedido" value="${movel.pedido}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>></td>
-                    </tr>
+                   
                         <tr>
                             <td colspan="4">
                                 <input class="form-control" type="HIDDEN" required min="1" name="id" id="id" value="${movel.id}" <c:if test="${operacao != 'Incluir'}"> readonly</c:if>>
