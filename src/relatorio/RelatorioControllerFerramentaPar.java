@@ -1,5 +1,6 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package relatorio;
@@ -23,22 +24,22 @@ import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-@WebServlet(name = "RelatorioControllerFuncionario", urlPatterns = "/RelatorioControllerFuncionario")
-public class RelatorioControllerFuncionario extends HttpServlet {
+@WebServlet(name = "RelatorioControllerFerramentaPar", urlPatterns = "/RelatorioControllerFerramentaPar")
+public class RelatorioControllerFerramentaPar extends HttpServlet {
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) {
- Connection conexao = null;
- DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy-HH:mm");
+        Connection conexao = null;
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy-HH:mm");
         Date date = new Date();
         String data = dateFormat.format(date);
         try {
             conexao = BD.getConexao();
             HashMap parametros = new HashMap();
             //parametros.put("PAR_codCurso", Integer.parseInt(request.getParameter("txtCodCurso")));
-
-            String relatorio = getServletContext().getRealPath("/WEB-INF/classes/relatorio")+"/Funcionarios.jasper";
+            String relatorio = getServletContext().getRealPath("/WEB-INF/classes/relatorio") + "/FerramentaParam.jasper";
             JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);
             byte[] relat = JasperExportManager.exportReportToPdf(jp);
-            response.setHeader("Content-Disposition", "attachment;filename=relatorioFuncionario" + data + ".pdf");
+            response.setHeader("Content-Disposition", "attachment;filename=relatorioFerramentaParam" + data + ".pdf");
             response.setContentType("application/pdf");
             response.getOutputStream().write(relat);
         } catch (SQLException ex) {
@@ -60,8 +61,9 @@ public class RelatorioControllerFuncionario extends HttpServlet {
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -73,8 +75,9 @@ public class RelatorioControllerFuncionario extends HttpServlet {
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -86,12 +89,14 @@ public class RelatorioControllerFuncionario extends HttpServlet {
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }

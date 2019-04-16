@@ -42,34 +42,30 @@
                 <td><a class="btn btn-danger" href="home.jsp">Voltar</a></td>
                 <td colspan="3"><a class="btn btn-primary" href="ManterFuncionarioController?acao=prepararOperacao&operacao=Incluir">Incluir</a></td>
             </table>
-
         </div>
-        <!--
-         <div class="container">
+        <div class="container">
+            <div>
+                <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modalFuncionario">Relatorios</a>
+            </div>
+            <div class="modal fade" id="modalFuncionario" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5>
+                                Relatorio completo
+                            </h5>
+                            <div>
+                                <a href="RelatorioControllerFuncionario" class="btn btn-success">Emitir Relatorio</a>
+                            </div> 
+                        </div>
+                        <div class="modal-body">
+                            <h5>
+                                Escolha o Cargo
+                            </h5>
+                            <form action="RelatorioControllerFuncionarioPar" method="POST" autofocus>
+                                <select class="form-control" name="paramFuncionario">
 
-
-                <div>
-                    <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modalFuncionario">relatorios</a>
-                </div>
-                <div class="modal fade" id="modalFuncionario" tabindex="-1" role="dialog">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5>
-                                    Relatorio completo
-                                </h5>
-                                <div>
-                                    <a href="RelatorioControllerFuncionario" class="btn btn-success">Emitir relatorio</a>
-                                </div> 
-                            </div>
-                            <div class="modal-body">
-                                <h5>
-                                    Escolha o cargo
-                                </h5>
-                                <form action="RelatorioControllerFuncionarioPar" method="POST" autofocus>
-                                    <select class="form-control" name="paramFuncionario">
-                                     
-                                   <c:forEach items="${funcionarios}" var="funcionario">
+                                    <c:forEach items="${funcionarios}" var="funcionario">
                                         <option value="${funcionario.cargo}">${funcionario.cargo}</option>  
                                     </c:forEach>
                                 </select>
@@ -78,16 +74,12 @@
                             </form>
                         </div>
                         <div class="modal-footer">
-
-
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </div>
-        -->
+
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

@@ -35,7 +35,8 @@ public class RelatorioControllerMoveis extends HttpServlet {
             conexao = BD.getConexao();
             HashMap parametros = new HashMap();
             //parametros.put("PAR_codCurso", Integer.parseInt(request.getParameter("txtCodCurso")));
-            String relatorio = getServletContext().getRealPath("/WEB-INF/classes/relatorio") + "/movel.jasper";
+
+            String relatorio = getServletContext().getRealPath("/WEB-INF/classes/relatorio") + "/Moveis.jasper";
             JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);
             byte[] relat = JasperExportManager.exportReportToPdf(jp);
             response.setHeader("Content-Disposition", "attachment;filename=relatorioMovel" + data + ".pdf");

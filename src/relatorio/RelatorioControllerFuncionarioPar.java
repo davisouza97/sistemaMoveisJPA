@@ -34,7 +34,8 @@ public class RelatorioControllerFuncionarioPar extends HttpServlet {
             conexao = BD.getConexao();
             HashMap parametros = new HashMap();
             parametros.put("Par_Funcionario", request.getParameter("paramFuncionario"));
-            String relatorio = getServletContext().getRealPath("/WEB-INF/classes/relatorio")+"/FuncionarioParam.jasper";
+
+            String relatorio = getServletContext().getRealPath("/WEB-INF/classes/relatorio")+"/FuncionariosParam.jasper";
             JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);
             byte[] relat = JasperExportManager.exportReportToPdf(jp);
             response.setHeader("Content-Disposition", "attachment;filename=relatorioFuncionarioParam" + data + ".pdf");
