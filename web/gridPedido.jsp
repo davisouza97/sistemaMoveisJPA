@@ -51,46 +51,7 @@
         </table>
 
     </div>
-     <div>
-                <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modalMovel">Relatorios</a>
-            </div>
-            <div class="modal fade" id="modalMovel" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5>
-                                Relatorio Completo
-                            </h5>
-                            <div>
-                                <a href="RelatorioControllerPedido" class="btn btn-success">Emitir Relatorio</a>
-                            </div> 
-                        </div>
-                        <div class="modal-body">
-                            <h5>
-                                Escolha o Móvel
-                            </h5>
-                            <form action="RelatorioControllerPedidoPar" method="POST" autofocus>
-                                <select class="form-control" name="paramPedido">
-                                      
-                                    <c:forEach items="${pedidos}" var="pedido">
-                                        <option value="${pedido.id}">${pedido.id}</option>  
-                                    </c:forEach>
-                                </select>
-                                <input type="submit" value="Enviar" class="btn btn-success"/>
-
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-
-
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-                              
-        </div>
+    
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
