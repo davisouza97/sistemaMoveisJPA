@@ -12,6 +12,10 @@
         <servlet-name>DeslogarController</servlet-name>
         <servlet-class>controller.DeslogarController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RelatorioControllerFerramentaPar</servlet-name>
+        <servlet-class>relatorio.RelatorioControllerFerramentaPar</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LogarController</servlet-name>
         <url-pattern>/LogarController</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>DeslogarController</servlet-name>
         <url-pattern>/DeslogarController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RelatorioControllerFerramentaPar</servlet-name>
+        <url-pattern>/RelatorioControllerFerramentaPar</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

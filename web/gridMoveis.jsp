@@ -58,13 +58,12 @@
                         </div>
                         <div class="modal-body">
                             <h5>
-                                Escolha o Móvel
+                                Escolha o Tipo
                             </h5>
                             <form action="RelatorioControllerMoveisPar" method="POST" autofocus>
-                                <select class="form-control" name="paramMovel">
-                                      
+                                <select class="form-control" name="paramMovel">  
                                     <c:forEach items="${moveis}" var="movel">
-                                        <option value="${movel.nome}">${movel.nome}</option>  
+                                        <option value="${movel.tipo}">${movel.tipo}</option>  
                                     </c:forEach>
                                 </select>
                                 <input type="submit" value="Enviar" class="btn btn-success"/>
@@ -72,15 +71,10 @@
                             </form>
                         </div>
                         <div class="modal-footer">
-
-
                         </div>
-
                     </div>
-
                 </div>
-            </div>
-                              
+            </div>      
         </div>
                                     <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->

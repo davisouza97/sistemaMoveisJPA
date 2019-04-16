@@ -19,7 +19,6 @@
 
     <body>
         <div class="container">
-
             <table class="table table-striped table-bordered table-condensed table-hover">
                 <tr>
                     <th colspan="4">Grid Ferramenta</th>
@@ -41,9 +40,42 @@
                 <td><a class="btn btn-danger" href="home.jsp">Voltar</a></td>
                 <td><a class="btn btn-primary" href="ManterFerramentaController?acao=prepararOperacao&operacao=Incluir">Incluir</a></td>
             </table>
+        </div>
+        <div class="container">
 
 
-
+            <div>
+                <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modalFerramenta">Relatorios</a>
+            </div>
+            <div class="modal fade" id="modalFerramenta" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5>
+                                Relatorio Completo
+                            </h5>
+                            <div>
+                                <a href="RelatorioControllerFerramenta" class="btn btn-success">Emitir Relatorio</a>
+                            </div> 
+                        </div>
+                        <div class="modal-body">
+                            <h5>
+                                Escolha o Tipo
+                            </h5>
+                            <form action="RelatorioControllerFerramentaPar" method="POST" autofocus>
+                                <select class="form-control" name="paramFerramenta">
+                                    <c:forEach items="${ferramentas}" var="ferramenta">
+                                        <option value="${ferramenta.tipo}">${ferramenta.tipo}</option>  
+                                    </c:forEach>
+                                </select>
+                                <input type="submit" value="Enviar" class="btn btn-success"/>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->

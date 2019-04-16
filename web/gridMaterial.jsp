@@ -62,13 +62,13 @@
                         </div>
                         <div class="modal-body">
                             <h5>
-                                Escolha o Material
+                                Escolha o Tipo
                             </h5>
                             <form action="RelatorioControllerMaterialPar" method="POST" autofocus>
                                 <select class="form-control" name="paramMaterial">
                                     
                                     <c:forEach items="${materiais}" var="material">
-                                        <option value="${material.nome}">${material.nome}</option>  
+                                        <option value="${material.tipo}">${material.tipo}</option>  
                                     </c:forEach>
                                 </select>
                                 <input type="submit" value="Enviar" class="btn btn-success"/>
