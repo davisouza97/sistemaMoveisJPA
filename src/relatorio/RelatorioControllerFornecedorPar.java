@@ -33,6 +33,7 @@ public class RelatorioControllerFornecedorPar extends HttpServlet {
             conexao = BD.getConexao();
             HashMap parametros = new HashMap();
             parametros.put("Par_Fornecedor",request.getParameter("paramFornecedor"));
+
             String relatorio = getServletContext().getRealPath("/WEB-INF/classes/relatorio")+"/FornecedoresParam.jasper";
             JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);
             byte[] relat = JasperExportManager.exportReportToPdf(jp);

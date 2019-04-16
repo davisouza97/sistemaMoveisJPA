@@ -111,20 +111,7 @@
                                 <input class="form-control" type="number" min="1" name="peso" id="peso" value="${movel.peso}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <label for="idPedido">Pedido</label>
-                            </td>
-                            <td colspan="4">
-                                <select class="form-control" required name="idPedidoMovel" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
-                                <option required value="0" <c:if test="${movel.pedido == null}"> selected</c:if>> </option>  
-
-                                <c:forEach items="${pedidos}" var="pedido">
-                                    <option required value="${pedido.id}" <c:if test="${movel.pedido.id == pedido.id}"> selected</c:if>> ${pedido.codigoPedido}</option>  
-                                </c:forEach>
-                            </select>
-                        </td>
-                    </tr>
+                       
 
                     <tr>
                         <td>
