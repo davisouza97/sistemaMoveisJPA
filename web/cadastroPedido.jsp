@@ -9,8 +9,6 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-
-
         <script type="text/javascript">
             function dataHoje() {
                 var data = new Date();
@@ -27,6 +25,26 @@
                 var x = ano + "-" + mes + "-" + dia;
                 console.log(x);
                 document.getElementById('dataCriacao').value = x;
+            }
+
+            function addMovel(valor, nome = 'movel') {
+                // get reference to select element
+                var sel = document.getElementById('MA');
+                // create new option element
+                var opt = document.createElement('option');
+                // create text node to add to option element (opt)
+                opt.appendChild(document.createTextNode(nome));
+                // set value property of opt
+                opt.value = valor;
+                opt.onclick= removeMovel;
+                // add opt to end of select box (sel)
+                sel.add(opt);
+            }
+
+            function removeMovel() {
+                var x = document.getElementById("MA");
+                console.log(x.value);
+                x.remove(x.selectedIndex);
             }
         </script>
         <title>Cadastro de Pedidos</title>
@@ -82,8 +100,7 @@
                             <td colspan="4">
                             <c:if test="${operacao == 'Incluir'}">
                                 <select class="form-control" required name="idCliente">
-                                    <option required value="0" <c:if test="${pedido.cliente.id == null}"> selected</c:if>>
-                                        </option>
+                                    <option required value="0" <c:if test="${pedido.cliente.id == null}"> selected</c:if></option>
                                     <c:forEach items="${clientes}" var="cliente">
                                         <option required value="${cliente.id}" <c:if test="${pedido.cliente.id == cliente.id}">
                                                 selected</c:if>>${cliente.id} - ${cliente.nome}</option>
@@ -113,23 +130,23 @@
                         </tr>
                         <tr>
                             <td>
-                                Remover Moveis
+                                Móveis já adicionados
                             </td>
                             <td>
-
                             </td>
                             <td>
-                                Adicionar Moveis
+                                Todos os Móveis
                             </td>
                         </tr>
                         <tr>
                             <td>
+                            <%
+                               // session.setAttribute("ListName", listaMoveisRemove);
+                            %>
                             <c:if test="${operacao != 'Incluir'}">
-                                <select size="5" multiple name="listaMoveisRemove" title="Selecione para remover">
+                                <select id="MA" size="5" multiple name="listaMoveisRemove" title="Selecione para remover">
                                     <c:forEach items="${moveisDoPedido}" var="movelPedido">
-
-                                        <option value="${movelPedido.id}"> ${movelPedido.movel.nome}</option>
-
+                                        <option onclick="removeMovel()" value="${movelPedido.id}"> ${movelPedido.movel.nome}</option>
                                     </c:forEach>
                                 </select>
                             </c:if>
@@ -137,9 +154,9 @@
                         <td></td>
                         <c:if test="${operacao != 'Incluir'}">
                             <td>
-                                <select size="5" multiple name="listaMoveisAdd" title="Selecione para adicionar">
+                                <select id="MR" size="5" multiple name="listaMoveisAdd" title="Selecione para adicionar">
                                     <c:forEach items="${moveis}" var="movel">
-                                        <option value="${movel.id}"> ${movel.nome}</option>>
+                                        <option onclick="addMovel(${movel.id}, '${movel.nome}')" value="${movel.id}" > ${movel.nome}</option>
                                     </c:forEach>
                                 </select>
                             </td>

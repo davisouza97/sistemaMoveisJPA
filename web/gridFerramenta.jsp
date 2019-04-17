@@ -38,7 +38,7 @@
                 </c:forEach>
 
                 <td><a class="btn btn-danger" href="home.jsp">Voltar</a></td>
-                <td><a class="btn btn-primary" href="ManterFerramentaController?acao=prepararOperacao&operacao=Incluir">Incluir</a></td>
+                <td colspan="2"><a class="btn btn-primary" href="ManterFerramentaController?acao=prepararOperacao&operacao=Incluir">Incluir</a></td>
             </table>
         </div>
         <div class="container">
