@@ -83,7 +83,7 @@ public class ManterPedidoController extends HttpServlet {
             } else if (operacao.equals("Editar")) {
 
                 Pedido pedido = PedidoDAO.getInstance().find(id);
-                
+                pedido.removeMovelPedido();
                 pedido.setMovelPedidos(new ArrayList<MovelPedido>());     //esvaziando o que tem no banco pra preencher com o que tem no jsp
                 if (listaMoveis != null) {
                     for (String movel : listaMoveis) {

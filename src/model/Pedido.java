@@ -140,12 +140,9 @@ public class Pedido implements Serializable {
         this.valorTotal = x;
     }
 
-    public void removeMovelPedido(MovelPedido m) {
-        for (MovelPedido movelPedido : this.movelPedidos) {
-            if (movelPedido.getId() == m.getId()) {
-                movelPedidos.remove(movelPedido);
-                break;
-            }
+    public void removeMovelPedido() {
+        for (MovelPedido movelPedido : movelPedidos) {
+            movelPedido.delete();
         }
     }
 
