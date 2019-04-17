@@ -5,6 +5,7 @@
  */
 package model;
 
+import dao.MovelPedidoDAO;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,10 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-/**
- *
- * @author Walter
- */
 @Entity
 public class MovelPedido implements Serializable {
     @Id
@@ -44,6 +41,10 @@ public class MovelPedido implements Serializable {
     this.pedido = p;
     }
 
+    public void delete(){
+        MovelPedidoDAO.getInstance().remove(this);
+    }
+    
     public Long getId() {
         return id;
     }
@@ -67,4 +68,11 @@ public class MovelPedido implements Serializable {
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
     }
+
+    @Override
+    public String toString() {
+        return  id +"-"+ movel + "-" + pedido;
+    }
+    
+    
 }

@@ -36,7 +36,7 @@
                 opt.appendChild(document.createTextNode(nome));
                 // set value property of opt
                 opt.value = valor;
-                opt.onclick= removeMovel;
+                opt.onclick = removeMovel;
                 // add opt to end of select box (sel)
                 sel.add(opt);
             }
@@ -46,6 +46,15 @@
                 console.log(x.value);
                 x.remove(x.selectedIndex);
             }
+
+            function selectAll() {
+                selectBox = document.getElementById('MA');
+                for (var i = 0; i < selectBox.options.length; i++) {
+                    selectBox.options[i].selected = true;
+                }
+            }
+
+
         </script>
         <title>Cadastro de Pedidos</title>
     </head>
@@ -140,13 +149,11 @@
                         </tr>
                         <tr>
                             <td>
-                            <%
-                               // session.setAttribute("ListName", listaMoveisRemove);
-                            %>
+
                             <c:if test="${operacao != 'Incluir'}">
-                                <select id="MA" size="5" multiple name="listaMoveisRemove" title="Selecione para remover">
+                                <select id="MA" size="5" multiple name="listaMoveis" title="Selecione para remover">
                                     <c:forEach items="${moveisDoPedido}" var="movelPedido">
-                                        <option onclick="removeMovel()" value="${movelPedido.id}"> ${movelPedido.movel.nome}</option>
+                                        <option onclick="removeMovel()" value="${movelPedido.movel.id}"> ${movelPedido.movel.nome}</option>
                                     </c:forEach>
                                 </select>
                             </c:if>
@@ -169,7 +176,7 @@
                             </a>
                         </td>
                         <td colspan="2" class="tdsalvar">
-                            <input class="btn btn-success" type="submit" name="" value="Confirmar">
+                            <input class="btn btn-success" type="submit" name="" onclick="selectAll()" value="Confirmar">
                         </td>
                         <td>
                             <a href="home.jsp">

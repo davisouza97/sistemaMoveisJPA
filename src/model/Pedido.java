@@ -1,5 +1,6 @@
 package model;
 
+import dao.MovelPedidoDAO;
 import dao.PedidoDAO;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
-
 
 @Entity
 public class Pedido implements Serializable {
@@ -27,14 +27,14 @@ public class Pedido implements Serializable {
     @ManyToOne
     private Funcionario funcionario;
 
-    @OneToMany(mappedBy = "pedido", cascade=CascadeType.REMOVE)
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.REMOVE)
     private ArrayList<MovelPedido> movelPedidos;
 
     private String dataPedido;
     private String dataEntrega;
 
     public Pedido(Double valorTotal, Cliente cliente, Funcionario funcionario, Movel movel, String dataPedido, String dataEntrega, ArrayList<MovelPedido> movelPedidos) {
-        
+
         this.valorTotal = valorTotal;
         this.cliente = cliente;
         this.funcionario = funcionario;
@@ -44,13 +44,15 @@ public class Pedido implements Serializable {
     }
 
     public Pedido() {
+        valorTotal = 0d;
     }
 
-    public Pedido( Cliente cliente, Funcionario funcionario, String dtCriado, String dtEntrega) {
+    public Pedido(Cliente cliente, Funcionario funcionario, String dtCriado, String dtEntrega) {
         this.cliente = cliente;
         this.funcionario = funcionario;
         this.dataPedido = dtCriado;
         this.dataEntrega = dtEntrega;
+        valorTotal = 0d;
     }
 
     public void save() {
@@ -125,16 +127,20 @@ public class Pedido implements Serializable {
     public void setMovelPedidos(ArrayList<MovelPedido> movelPedidos) {
         this.movelPedidos = movelPedidos;
     }
-    
-    private void updateValorTotal(){
+
+    private void updateValorTotal() {
         double x = 0;
         for (MovelPedido movelPedido : movelPedidos) {
-            x += movelPedido.getMovel().getPreco();
+            if (movelPedido.getMovel() == null) {//evitar inconsistencia do banco
+               // movelPedido.delete();
+            } else {
+                x += movelPedido.getMovel().getPreco();
+            }
         }
         this.valorTotal = x;
     }
-    
-    public void removeMovelPedido(MovelPedido m){
+
+    public void removeMovelPedido(MovelPedido m) {
         for (MovelPedido movelPedido : this.movelPedidos) {
             if (movelPedido.getId() == m.getId()) {
                 movelPedidos.remove(movelPedido);
@@ -142,4 +148,5 @@ public class Pedido implements Serializable {
             }
         }
     }
+
 }
