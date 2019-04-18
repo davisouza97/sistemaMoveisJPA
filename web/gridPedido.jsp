@@ -47,7 +47,7 @@
                                    href="ManterPedidoController?acao=prepararOperacao&operacao=Incluir">Incluir</a></td>
             </table>
         </div>
-        <div>
+        <div class="container">
             <div>
                 <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modalMovel">Relatorios</a>
             </div>
