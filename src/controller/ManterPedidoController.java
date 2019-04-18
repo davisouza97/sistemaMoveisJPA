@@ -72,13 +72,17 @@ public class ManterPedidoController extends HttpServlet {
 
             if (operacao.equals("Incluir")) {
                 Pedido pedido = new Pedido(cliente, funcionario, dtCriado, dtEntrega);
+                pedido.save();
                 
                 if (listaMoveis != null) {
-                    for (String movelrem : listaMoveis) {
-                        MovelPedido m = MovelPedidoDAO.getInstance().find(Long.parseLong(movelrem));
-                        MovelPedidoDAO.getInstance().remove(m);
+                    pedido.setMovelPedidos(new ArrayList<MovelPedido>());
+                    for (String movel : listaMoveis) {
+                        Movel m = MovelDAO.getInstance().find(Long.parseLong(movel));
+                        MovelPedido mp = new MovelPedido(m, pedido);
+                        MovelPedidoDAO.getInstance().save(mp);
+                        pedido.getMovelPedidos().add(mp);
                     }
-                }
+                }   
                 pedido.save();
             } else if (operacao.equals("Editar")) {
 
