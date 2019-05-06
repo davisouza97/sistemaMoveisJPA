@@ -80,8 +80,6 @@
                                 <select class="form-control" required name="idFuncionario">
                                     <option required value="0" <c:if test="${pedido.funcionario.id == null}"> selected </c:if>> </option>
                                     <c:forEach items="${funcionarios}" var="funcionario">
-                                        <option required value="${funcionario.id}" <c:if
-                                                    test="${pedido.funcionario.id == funcionario.id}"> selected</c:if>>${funcionario.id} - ${funcionario.nome}</option>
                                         <option required value="${funcionario.id}" <c:if test="${pedido.funcionario.id == funcionario.id}"> selected</c:if>>${funcionario.id} - ${funcionario.nome}</option>
                                     </c:forEach>
                                 </select>
