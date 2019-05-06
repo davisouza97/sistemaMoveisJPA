@@ -82,6 +82,7 @@
                                     <c:forEach items="${funcionarios}" var="funcionario">
                                         <option required value="${funcionario.id}" <c:if
                                                     test="${pedido.funcionario.id == funcionario.id}"> selected</c:if>>${funcionario.id} - ${funcionario.nome}</option>
+                                        <option required value="${funcionario.id}" <c:if test="${pedido.funcionario.id == funcionario.id}"> selected</c:if>>${funcionario.id} - ${funcionario.nome}</option>
                                     </c:forEach>
                                 </select>
                             </c:if>
