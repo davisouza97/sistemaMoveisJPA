@@ -9,7 +9,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-        
+
         <title>Cadastro de Pedidos</title>
     </head>
 
@@ -102,23 +102,47 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>
+                        <select id="MA" size="5" hidden multiple name="listaMoveis" title="Selecione para remover">
+                        <c:forEach items="${moveisDoPedido}" var="movelPedido">
+                            <option onclick="removeMovel()" value="${movelPedido.movel.id}"> ${movelPedido.movel.nome}</option>
+                        </c:forEach>
+                        </select>
+                        <select id="listaQtd" size="5" hidden multiple name="listaMoveis" title="Selecione para remover">
+                        <c:forEach items="${moveisDoPedido}" var="movelPedido">
+                            <option onclick="removeMovel()" value="${movelPedido.quantidade}"> ${movelPedido.movel.nome}</option>
+                        </c:forEach>
+                    </select>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table id="interno">
+                                <tr>
+                                    <th>item</th>
+                                    <th>vlr unit</th>
+                                    <th>qunt</th>
+                                    <th>vlr total</th>
+                                </tr>
+                                <c:forEach items="${moveisDoPedido}" var="movelPedido">
+                                    <tr>
+                                        <td>${movelPedido.movel.nome}</td>
+                                        <td>${movelPedido.movel.preco}</td>
+                                        <td><input type="number" value="${movelPedido.quantidade}"></td>
+                                        <td>#####</td>
+                                        <td> <input type="button" onclick="removemovel()" value="remover"> </td>
+                                    <tr>
+                                </c:forEach>
 
-                            <c:if test="${true}">
-                                <select id="MA" size="5" multiple name="listaMoveis" title="Selecione para remover">
-                                    <c:forEach items="${moveisDoPedido}" var="movelPedido">
-                                        <option onclick="removeMovel()" value="${movelPedido.movel.id}"> ${movelPedido.movel.nome}</option>
-                                    </c:forEach>
-                                </select>
-                            </c:if>
+                            </table>
+
                         </td>
                         <td></td>
                         <c:if test="${true}">
                             <td>
                                 <select id="MR" size="5" multiple name="listaMoveisAdd" title="Selecione para adicionar">
                                     <c:forEach items="${moveis}" var="movel">
-                                        <option onclick="addMovel(${movel.id}, '${movel.nome}')" value="${movel.id}" > ${movel.nome}</option>
-                                    </c:forEach>
+                                        <!--<option onclick="addMovel(${movel.id}, '${movel.nome}')" value="${movel.id}" > ${movel.nome}</option>-->
+                                        <option onclick="inserirMovel(${movel.id}, '${movel.nome}', ${movel.preco}, 7,this)" value="${movel.id}" > ${movel.nome}
+                                        </c:forEach>
                                 </select>
                             </td>
                         </c:if>
@@ -141,6 +165,7 @@
                 </table>
             </form>
         </div>
+
     </body>
 
     <script src="javascripto.js"></script>

@@ -12,7 +12,7 @@ public class PersistenceUtil {
 
     public static EntityManager getEntityManager() {
         if (emf == null) {
-            emf = Persistence.createEntityManagerFactory("sistemaMoveisJPAPU");
+            emf = Persistence.createEntityManagerFactory("sistemaMoveisJPA");
         }
         return emf.createEntityManager();
     }

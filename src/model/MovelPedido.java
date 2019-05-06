@@ -26,6 +26,9 @@ public class MovelPedido implements Serializable {
     @ManyToOne
     @JoinColumn(name = "pedido_id")
     private Pedido pedido;
+    
+    private int quantidade;
+    
 
     public MovelPedido(Long id, Movel movel, Pedido pedido) {
         this.id = id;
@@ -72,6 +75,14 @@ public class MovelPedido implements Serializable {
     @Override
     public String toString() {
         return  id +"-"+ movel + "-" + pedido;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
     
     
