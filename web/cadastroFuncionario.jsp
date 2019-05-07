@@ -71,7 +71,7 @@
                                 <label for="cep">CEP</label>
                             </td>
                             <td colspan="1">
-                                    <input class="form-control" type="text" required name="cep" id="cep" value="${funcionario.cep}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                    <input class="form-control" type="text" required name="cep" id="cep" value="${funcionario.cep}" onblur="pesquisacep(this.value)" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                             </td>
                         </tr>
                         <tr>
@@ -79,7 +79,7 @@
                                 <label for="logradouro">Logradouro</label>
                             </td>
                             <td colspan="4">
-                                <input class="form-control" type="text" required maxlength="45" minlength="3" name="logradouro" id="logradouro" value="${funcionario.logradouro}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                <input class="form-control" type="text" required maxlength="45" minlength="3" name="logradouro" id="logradouro" value="${funcionario.logradouro}" readonly>
                             </td>
                         </tr>
                         <tr>
@@ -93,7 +93,7 @@
                                 <label for="bairro">Bairro</label>
                             </td>
                             <td>
-                                <input class="form-control" type="text" required maxlength="45" minlength="3" name="bairro" id="bairro" value="${funcionario.bairro}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                <input class="form-control" type="text" required maxlength="45" minlength="3" name="bairro" id="bairro" value="${funcionario.bairro}" readonly>
                             </td>
                         </tr>
                         <tr>
@@ -101,41 +101,13 @@
                                 <label for="uf">UF</label>
                             </td>
                             <td>
-                                <select name="uf" id="uf" class="form-control">
-                                    <option value="AC" <c:if test="${funcionario.uf.equals('AC')}"> selected</c:if>>AC</option>
-                                <option value="AL" <c:if test="${funcionario.uf.equals('AL')}"> selected</c:if>>AL</option>
-                                <option value="AM" <c:if test="${funcionario.uf.equals('AM')}"> selected</c:if>>AM</option>
-                                <option value="AP" <c:if test="${funcionario.uf.equals('AP')}"> selected</c:if>>AP</option>
-                                <option value="BA" <c:if test="${funcionario.uf.equals('BA')}"> selected</c:if>>BA</option>
-                                <option value="CE" <c:if test="${funcionario.uf.equals('CE')}"> selected</c:if>>CE</option>
-                                <option value="DF" <c:if test="${funcionario.uf.equals('DF')}"> selected</c:if>>DF</option>
-                                <option value="ES" <c:if test="${funcionario.uf.equals('ES')}"> selected</c:if>>ES</option>
-                                <option value="GO" <c:if test="${funcionario.uf.equals('GO')}"> selected</c:if>>GO</option>
-                                <option value="MA" <c:if test="${funcionario.uf.equals('MA')}"> selected</c:if>>MA</option>
-                                <option value="MT" <c:if test="${funcionario.uf.equals('MT')}"> selected</c:if>>MT</option>
-                                <option value="MS" <c:if test="${funcionario.uf.equals('MS')}"> selected</c:if>>MS</option>
-                                <option value="MG" <c:if test="${funcionario.uf.equals('MG')}"> selected</c:if>>MG</option>
-                                <option value="PA" <c:if test="${funcionario.uf.equals('PA')}"> selected</c:if>>PA</option>
-                                <option value="PB" <c:if test="${funcionario.uf.equals('PB')}"> selected</c:if>>PB</option>
-                                <option value="PR" <c:if test="${funcionario.uf.equals('PR')}"> selected</c:if>>PR</option>
-                                <option value="PE" <c:if test="${funcionario.uf.equals('PE')}"> selected</c:if>>PE</option>
-                                <option value="PI" <c:if test="${funcionario.uf.equals('PI')}"> selected</c:if>>PI</option>
-                                <option value="RJ" <c:if test="${funcionario.uf.equals('RJ')}"> selected</c:if>>RJ</option>
-                                <option value="RN" <c:if test="${funcionario.uf.equals('RN')}"> selected</c:if>>RN</option>
-                                <option value="RS" <c:if test="${funcionario.uf.equals('RS')}"> selected</c:if>>RS</option>
-                                <option value="RO" <c:if test="${funcionario.uf.equals('RO')}"> selected</c:if>>RO</option>
-                                <option value="RR" <c:if test="${funcionario.uf.equals('RR')}"> selected</c:if>>RR</option>
-                                <option value="SC" <c:if test="${funcionario.uf.equals('SC')}"> selected</c:if>>SC</option>
-                                <option value="SP" <c:if test="${funcionario.uf.equals('SP')}"> selected</c:if>>SP</option>
-                                <option value="SE" <c:if test="${funcionario.uf.equals('SE')}"> selected</c:if>>SE</option>
-                                <option value="TO" <c:if test="${funcionario.uf.equals('TO')}"> selected</c:if>>TO</option>
-                                </select>
+                                <input class="form-control" type="text" name="uf" id="uf" value="${funcionario.uf}" required  readonly>
                             </td>
                             <td>
                                 <label for="cidade">Cidade</label>
                             </td>
                             <td>
-                                <input class="form-control" type="text" required maxlength="45" minlength="3" name="cidade" id="cidade" value="${funcionario.cidade}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                <input class="form-control" type="text" required maxlength="45" minlength="3" name="cidade" id="cidade" value="${funcionario.cidade}" readonly>
                             </td>
                         </tr>
                         <tr>
@@ -203,6 +175,7 @@
         </div>
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="javascripto.js" type="text/javascript"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
