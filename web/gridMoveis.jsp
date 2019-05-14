@@ -6,7 +6,7 @@
 <html lang="pt-br">
     <head>
         <%@ include file="/shared/head.jsp" %>
-        <title>Grid MÃ³veis</title>
+        <title>Grid Móveis</title>
         <script src="main.js"></script>
     </head>
 
