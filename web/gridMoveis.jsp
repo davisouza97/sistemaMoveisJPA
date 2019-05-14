@@ -10,7 +10,8 @@
         <title>Grid Móveis</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" >
+        
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
         <script src="main.js"></script>
     </head>
 
@@ -18,13 +19,17 @@
         <div class="container">
 
             <table class="table table-striped table-bordered table-condensed table-hover" id="lista">
-                <tr>
-                    <th colspan="4">Grid Moveis</th>
+                <tr style="background-color: darkgray;">
+                    <th colspan="2">Grid Moveis</th>
+                    <th><input id="filtro-nome"/></th>
                 </tr>
+                
+                    
+                
                 <tr>
                     <th>nome</th>
-                    <th colspan="1">Ações</th>
-                    <th colspan="1"><input id="filtro-nome"/></th>
+                    <th colspan="2">Ações</th>
+                    
                 </tr>
                 <c:forEach items="${moveis}" var="movel">
                     <tr>
