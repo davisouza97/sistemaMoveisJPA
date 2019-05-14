@@ -6,7 +6,7 @@
 <html lang="pt-br">
     <head>
         <%@ include file="/shared/head.jsp" %>
-        <title>Grid Móveis</title>
+        <title>Grid MÃ³veis</title>
         <script src="main.js"></script>
     </head>
 
@@ -15,13 +15,17 @@
         <div class="container">
 
             <table class="table table-striped table-bordered table-condensed table-hover" id="lista">
-                <tr>
-                    <th colspan="4">Grid Moveis</th>
+                <tr style="background-color: darkgray;">
+                    <th colspan="2">Grid Moveis</th>
+                    <th>Busca: <input id="filtro-nome" style=" width: 80%; " placeholder="&#8981;"></th>
                 </tr>
+                
+                    
+                
                 <tr>
                     <th>nome</th>
-                    <th colspan="1">Ações</th>
-                    <th colspan="1"><input id="filtro-nome"/></th>
+                    <th colspan="2">Aï¿½ï¿½es</th>
+                    
                 </tr>
                 <c:forEach items="${moveis}" var="movel">
                     <tr>
@@ -33,7 +37,8 @@
                     </tr>
                 </c:forEach>
                 <td><a class="btn btn-danger" href="home.jsp">Voltar</a></td>
-                <td colspan="3"><a class="btn btn-primary" href="ManterMoveisController?acao=prepararOperacao&operacao=Incluir">Incluir</a></td>
+                <td><a class="btn btn-primary" href="ManterMoveisController?acao=prepararOperacao&operacao=Incluir">Incluir</a></td>
+                <td></td>
             </table>
 
         </div>

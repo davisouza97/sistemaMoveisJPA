@@ -89,7 +89,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <label for="numero">Número</label>
+                                <label for="numero">Nï¿½mero</label>
                             </td>
                             <td>
                                 <input class="form-control" type="number" maxlenght="6" minlength="1" name="numero" required id="numero" value="${cliente.numero}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
