@@ -21,7 +21,7 @@
             <table class="table table-striped table-bordered table-condensed table-hover" id="lista">
                 <tr style="background-color: darkgray;">
                     <th colspan="2">Grid Moveis</th>
-                    <th><input id="filtro-nome"/></th>
+                    <th>Busca: <input id="filtro-nome"></th>
                 </tr>
                 
                     
