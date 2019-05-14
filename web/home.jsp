@@ -11,11 +11,7 @@
 
         <script type="text/javascript" src="jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        <style>
-            a {
-                float: right;
-            }
-        </style>
+       
     </head>
     <c:if test="${sessionScope.nome != null}">
     
