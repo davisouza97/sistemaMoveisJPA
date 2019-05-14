@@ -24,7 +24,7 @@
                 
                 <tr>
                     <th>nome</th>
-                    <th colspan="2">Aï¿½ï¿½es</th>
+                    <th colspan="2">Ações</th>
                     
                 </tr>
                 <c:forEach items="${moveis}" var="movel">
