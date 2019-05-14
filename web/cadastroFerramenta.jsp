@@ -28,7 +28,7 @@
                                 <label for="nome">Nome</label>
                             </td>
                             <td colspan="4">
-                                <input class="form-control" type="text" required maxlength="45" minlength="3" name="nome" id="nome" value="${ferramenta.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                <input class="form-control" type="text" size="40" required maxlength="45" minlength="3" name="nome" id="nome" value="${ferramenta.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                             </td>
                         </tr>
                         <tr>
@@ -68,7 +68,7 @@
                             <td>
                                 <label for="idFornecedor">Fornecedor</label>
                             </td>
-                            <td> 
+                            <td colspan="4"> 
                                 <select class="form-control" required name="idFornecedor" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                                 <option required value="0" <c:if test="${ferramenta.fornecedor == null}"> selected</c:if>> </option>  
                                 <c:forEach items="${fornecedores}" var="fornecedor">

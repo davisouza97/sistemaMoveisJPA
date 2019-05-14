@@ -27,7 +27,7 @@
                                 <label for="nome">Nome</label>
                             </td>
                             <td colspan="4">
-                                <input class="form-control" type="text" required maxlength="45" minlength="2" name="nome" id="nome" value="${material.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                <input class="form-control" type="text" size="40" required maxlength="45" minlength="2" name="nome" id="nome" value="${material.nome}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                             </td>
                         </tr>
                         <tr>
