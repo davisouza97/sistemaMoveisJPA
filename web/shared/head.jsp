@@ -10,3 +10,8 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" type="text/css">
+
+<link rel="icon" href="images/abacate.png" type="image/x-icon" />
+<link rel="shortcut icon" href="images/abacate.png" type="image/x-icon" />
+
+<script></script>
