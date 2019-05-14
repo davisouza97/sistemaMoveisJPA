@@ -1,6 +1,5 @@
 package model;
 
-import dao.MovelPedidoDAO;
 import dao.PedidoDAO;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 
 @Entity
 public class Pedido implements Serializable {

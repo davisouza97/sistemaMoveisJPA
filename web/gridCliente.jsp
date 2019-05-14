@@ -5,19 +5,14 @@
 <html lang="pt-br">
 
     <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Grid Cliente</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" >
-
+        <%@ include file="/shared/head.jsp" %>
         <script src="main.js"></script>
 
 
     </head>
 
     <body>
+        <%@ include file="/shared/navbar.jsp" %>
         <div class="container">
 
             <table class="table table-striped table-bordered table-condensed table-hover">

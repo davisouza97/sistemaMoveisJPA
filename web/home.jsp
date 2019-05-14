@@ -4,10 +4,8 @@
 <html>
 
     <head>
-        <meta charset="utf-8" />
+        <%@ include file="/shared/head.jsp" %>
         <title>Sistema Interno</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" >
 
@@ -22,12 +20,8 @@
     <c:if test="${sessionScope.nome != null}">
     
     <body>
-        <nav class="navbar navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">Sistema Interno</a>
-            <div style="color: white; padding-left: 1000px">${sessionScope.nome} |</div>
-            <div><form action="DeslogarController" method="POST"><input class="btn btn-danger" type="submit" value="Logout"></form></div>
-
-        </nav>
+        
+        <%@ include file="/shared/navbar.jsp" %>
         <br>
  
         <div class="container">
