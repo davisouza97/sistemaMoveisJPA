@@ -9,7 +9,7 @@ public abstract class BD {
     public static Connection getConexao() throws ClassNotFoundException, SQLException {
         Connection conexao = null;
         Class.forName("com.mysql.jdbc.Driver");
-        return DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "");
+        return DriverManager.getConnection("jdbc:mysql://localhost/movelbd", "root", "");
     }
 
     public static void fecharConexao(Connection conexao, Statement comando) {
