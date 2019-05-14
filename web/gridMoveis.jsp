@@ -17,13 +17,14 @@
     <body>
         <div class="container">
 
-            <table class="table table-striped table-bordered table-condensed table-hover">
+            <table class="table table-striped table-bordered table-condensed table-hover" id="lista">
                 <tr>
                     <th colspan="4">Grid Moveis</th>
                 </tr>
                 <tr>
                     <th>nome</th>
-                    <th colspan="2">Ações</th>
+                    <th colspan="1">Ações</th>
+                    <th colspan="1"><input id="filtro-nome"/></th>
                 </tr>
                 <c:forEach items="${moveis}" var="movel">
                     <tr>
@@ -77,6 +78,19 @@
         </div>
 
         <!-- Optional JavaScript -->
+        <script>
+            var filtro = document.getElementById('filtro-nome');
+            var tabela = document.getElementById('lista');
+            filtro.onkeyup = function () {
+                var nomeFiltro = filtro.value;
+                nomeFiltro = nomeFiltro.toLowerCase();
+                for (var i = 2; i < tabela.rows.length-1; i++) {
+                    var conteudoCelula = tabela.rows[i].cells[0].innerText;
+                    var corresponde = conteudoCelula.toLowerCase().indexOf(nomeFiltro) >= 0;
+                    tabela.rows[i].style.display = corresponde ? '' : 'none';
+                }
+            };
+        </script>
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
