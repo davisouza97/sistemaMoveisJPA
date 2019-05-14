@@ -16,7 +16,8 @@
 
             <table class="table table-striped table-bordered table-condensed table-hover">
                 <tr>
-                    <th colspan="4">Grid Pedido</th>
+                    <th colspan="2">Grid Pedido</th>
+                    <th> <%@ include file="/shared/busca.jsp" %></th>
                 </tr>
                 <tr>
                     <th>Codigo Pedido</th>
@@ -83,6 +84,7 @@
 
 
         <!-- Optional JavaScript -->
+        <%@ include file="/shared/scriptBusca.jsp" %>
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>

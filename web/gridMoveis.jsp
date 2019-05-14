@@ -17,7 +17,7 @@
             <table class="table table-striped table-bordered table-condensed table-hover" id="lista">
                 <tr style="background-color: darkgray;">
                     <th colspan="2">Grid Moveis</th>
-                    <th>Busca: <input id="filtro-nome" style=" width: 80%; " placeholder="&#8981;"></th>
+                    <th> <%@ include file="/shared/busca.jsp" %></th>
                 </tr>
                 
                     
@@ -80,19 +80,7 @@
         </div>
 
         <!-- Optional JavaScript -->
-        <script>
-            var filtro = document.getElementById('filtro-nome');
-            var tabela = document.getElementById('lista');
-            filtro.onkeyup = function () {
-                var nomeFiltro = filtro.value;
-                nomeFiltro = nomeFiltro.toLowerCase();
-                for (var i = 2; i < tabela.rows.length-1; i++) {
-                    var conteudoCelula = tabela.rows[i].cells[0].innerText;
-                    var corresponde = conteudoCelula.toLowerCase().indexOf(nomeFiltro) >= 0;
-                    tabela.rows[i].style.display = corresponde ? '' : 'none';
-                }
-            };
-        </script>
+            <%@ include file="/shared/scriptBusca.jsp" %>
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>

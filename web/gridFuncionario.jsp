@@ -20,9 +20,10 @@
         <%@ include file="/shared/navbar.jsp" %>
         <div class="container">
 
-            <table class="table table-striped table-bordered table-condensed table-hover">
+            <table class="table table-striped table-bordered table-condensed table-hover" id="lista">
                 <tr>
-                    <th colspan="4">Grid Funcionario</th>
+                    <th colspan="2">Grid Funcionario</th>
+                    <th> <%@ include file="/shared/busca.jsp" %></th>
                 </tr>
                 <tr>
                     <th>nome</th>
@@ -79,6 +80,7 @@
         </div>
 
         <!-- Optional JavaScript -->
+        <%@ include file="/shared/scriptBusca.jsp" %>
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
