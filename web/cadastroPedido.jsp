@@ -97,41 +97,65 @@
                         </tr>
                         <tr>
                             <td>
-
                             <c:if test="${true}">
-                                <select id="MA" size="5" multiple name="listaMoveis" title="Selecione para remover">
-                                    <c:forEach items="${moveisDoPedido}" var="movelPedido">
-                                        <option onclick="removeMovel()" value="${movelPedido.movel.id}"> ${movelPedido.movel.nome}</option>
+                                <table id="tabelaProdutos" border="1">
+                                    <tr>
+                                        <td>Produto</td>
+                                        <td>Valor</td>
+                                        <td>Quantidade</td>
+                                        <td>Valor Total</td>
+                                        <td>Ação</td>
+                                        <%
+                                            //https://www.caelum.com.br/apostila-java-web/javaserver-pages/#exerccios-primeiro-jsp
+                                            int j = 1;
+                                        %>
+                                        <c:forEach items="${moveisDoPedido}" var="movelPedido">
+                                        <tr>
+                                            <td>${movelPedido.movel.nome}</td>
+                                            <td><input type='text' id="preco<%out.print(j);%>" value="${movelPedido.movel.preco}" readonly></td>
+                                            <td><input type="number" id="qtd<%out.print(j);%>" name="qtd<%out.print(j);%>" value="${movelPedido.quantidade}" min="1" oninput="mudarValor(this)" ></td>
+                                            <td><input type="number" id="vt<%out.print(j);%>" name="vt<%out.print(j);%>" value="${movelPedido.quantidade*movelPedido.movel.preco}" readonly></td>
+                                            <td><button  onclick="removeLinha(this)"> Remover</button></td>
+                                            <td><input type='number' id="id<%out.print(j);%>" name="id<%out.print(j++);%>" value="${movelPedido.movel.id}" hidden></td>
+                                        </tr>
                                     </c:forEach>
-                                </select>
-                            </c:if>
-                        </td>
-                        <td></td>
-                        <c:if test="${true}">
-                            <td>
-                                <select id="MR" size="5" multiple name="listaMoveisAdd" title="Selecione para adicionar">
-                                    <c:forEach items="${moveis}" var="movel">
-                                        <option onclick="addMovel(${movel.id}, '${movel.nome}')" value="${movel.id}" > ${movel.nome}</option>
-                                    </c:forEach>
-                                </select>
-                            </td>
-                        </c:if>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="PesquisaPedidoController">
-                                <input class="btn btn-danger" type="button" value="voltar">
-                            </a>
-                        </td>
-                        <td colspan="2" class="tdsalvar">
-                            <input class="btn btn-success" type="submit" name="" onclick="selectAll()" value="Confirmar">
-                        </td>
-                        <td>
-                            <a href="home.jsp">
-                                <input class="btn btn-primary" type="button" value="Home">
-                            </a>
-                        </td>
-                    </tr>
+                        </tr>
+                    </table>
+                </c:if>
+                </td>
+                <td></td>
+                <c:if test="${true}">
+                    <td>
+                        <select id="MR" size="5" multiple name="listaMoveisAdd" title="Selecione para adicionar">
+                            //https://stackoverflow.com/questions/1490139/evaluate-list-contains-string-in-jstl
+                            <c:forEach items="${moveis}" var="movel">
+                                <c:set var="contains" value="false" />
+                                <c:forEach var="item" items="${moveisDoPedido}">
+                                    <c:if test="${item.movel.nome eq movel.nome}">
+                                        <c:set var="contains" value="true" />
+                                    </c:if>
+                                </c:forEach>
+                                <option onclick="adicionaLinha(${movel.id}, '${movel.nome}', '${movel.preco}', this)" value="${movel.id}" <c:if test="${contains}"> disabled </c:if>> ${movel.nome} </option>
+                            </c:forEach>
+                        </select>
+                    </td>
+                </c:if>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="PesquisaPedidoController">
+                            <input class="btn btn-danger" type="button" value="voltar">
+                        </a>
+                    </td>
+                    <td colspan="2" class="tdsalvar">
+                        <input class="btn btn-success" type="submit" name="" onclick="selectAll()" value="Confirmar">
+                    </td>
+                    <td>
+                        <a href="home.jsp">
+                            <input class="btn btn-primary" type="button" value="Home">
+                        </a>
+                    </td>
+                </tr>
                 </table>
             </form>
         </div>

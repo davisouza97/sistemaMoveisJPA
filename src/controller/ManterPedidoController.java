@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -58,7 +59,30 @@ public class ManterPedidoController extends HttpServlet {
         if (!operacao.equals("Incluir")) {
             id = Long.parseLong(request.getParameter("id"));
         }
-        String[] listaMoveis = request.getParameterValues("listaMoveis");
+        //String[] listaMoveis = request.getParameterValues("listaMoveis");
+        
+        //qtd moveis banco
+        int qtdMoveis = MovelDAO.getInstance().findAll().size();
+        
+        Map<String, String[]> all = request.getParameterMap();
+        
+        ArrayList<String> qt = new ArrayList();
+        for (int i = 1; i <= qtdMoveis; i++) {
+            String aux = request.getParameter("qtd"+i);
+            if (aux == null) {
+                break;
+            }
+            qt.add(aux);   //qunatidade dos moveis
+        }
+        
+        ArrayList<String> ids = new ArrayList();
+        for (int i = 1; i <= qtdMoveis; i++) {
+            String aux = request.getParameter("id"+i);
+            if (aux == null) {
+                break;
+            }
+            ids.add(aux);   //id dos moveis
+        }
         
         try {
             Cliente cliente = null;
@@ -74,29 +98,29 @@ public class ManterPedidoController extends HttpServlet {
                 Pedido pedido = new Pedido(cliente, funcionario, dtCriado, dtEntrega);
                 pedido.save();
                 
-                if (listaMoveis != null) {
+                if (ids != null) {
                     pedido.setMovelPedidos(new ArrayList<MovelPedido>());
-                    for (String movel : listaMoveis) {
-                        Movel m = MovelDAO.getInstance().find(Long.parseLong(movel));
-                        MovelPedido mp = new MovelPedido(m, pedido);
+                    for(int i = 0;i<ids.size();i++){
+                        Movel m = MovelDAO.getInstance().find(Long.parseLong(ids.get(i)));
+                        MovelPedido mp = new MovelPedido(m, pedido,Integer.parseInt(qt.get(i)));
                         MovelPedidoDAO.getInstance().save(mp);
                         pedido.getMovelPedidos().add(mp);
                     }
                 }   
                 pedido.save();
             } else if (operacao.equals("Editar")) {
-
                 Pedido pedido = PedidoDAO.getInstance().find(id);
                 pedido.removeMovelPedido();
                 pedido.setMovelPedidos(new ArrayList<MovelPedido>());     //esvaziando o que tem no banco pra preencher com o que tem no jsp
-                if (listaMoveis != null) {
-                    for (String movel : listaMoveis) {
-                        Movel m = MovelDAO.getInstance().find(Long.parseLong(movel));
-                        MovelPedido mp = new MovelPedido(m, pedido);
+                if (ids != null) {
+                    pedido.setMovelPedidos(new ArrayList<MovelPedido>());
+                    for(int i = 0;i<ids.size();i++){
+                        Movel m = MovelDAO.getInstance().find(Long.parseLong(ids.get(i)));
+                        MovelPedido mp = new MovelPedido(m, pedido,Integer.parseInt(qt.get(i)));
                         MovelPedidoDAO.getInstance().save(mp);
                         pedido.getMovelPedidos().add(mp);
                     }
-                }   
+                }      
                 pedido.setCliente(cliente);
                 pedido.setFuncionario(funcionario);
                 pedido.setDataEntrega(dtEntrega);

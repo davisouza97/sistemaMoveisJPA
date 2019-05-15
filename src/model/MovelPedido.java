@@ -26,19 +26,34 @@ public class MovelPedido implements Serializable {
     @ManyToOne
     @JoinColumn(name = "pedido_id")
     private Pedido pedido;
+    
+    private int quantidade;
 
-    public MovelPedido(Long id, Movel movel, Pedido pedido) {
+    public MovelPedido(Long id, Movel movel, Pedido pedido , int quantidade) {
         this.id = id;
         this.movel = movel;
         this.pedido = pedido;
+        this.quantidade = quantidade;
     }
 
     public MovelPedido() {
     }
 
-    public MovelPedido(Movel m, Pedido p) {
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    
+    
+    public MovelPedido(Movel m, Pedido p , int quant) {
     this.movel = m;
     this.pedido = p;
+    this.quantidade = quant;
+    
     }
 
     public void delete(){

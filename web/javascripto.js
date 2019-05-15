@@ -105,3 +105,38 @@ function pesquisacep(valor) {
         }
     }
 }
+
+//pedido
+//https://gist.github.com/macsousa/be5b8c5075720c5463c349710fdfb0c8
+
+  //Funcao adiciona uma nova linha na tabela
+            function adicionaLinha(id,nome,preco,isso) {
+                isso.disabled = true;
+                var tabela = document.getElementById("tabelaProdutos");
+                var numeroLinhas = tabela.rows.length;
+                var linha = tabela.insertRow(numeroLinhas);
+                var celula1 = linha.insertCell(0);
+                var celula2 = linha.insertCell(1);   
+                var celula3 = linha.insertCell(2); 
+                var celula4 = linha.insertCell(3);   
+                var celula5 = linha.insertCell(4); 
+                var celula6 = linha.insertCell(5); 
+                celula1.innerHTML = nome;
+                celula2.innerHTML =  `<input type='text' id="preco${numeroLinhas}" value="${preco}" readonly>`; 
+                celula3.innerHTML =  `<input type='number' id="qtd${numeroLinhas}" name="qtd${numeroLinhas}" value='1' min="1" oninput="mudarValor(this)">`;
+                celula4.innerHTML =  `<input type='number' id="vt${numeroLinhas}" value="${preco}" readonly>`;
+                celula5.innerHTML =  "<button onclick='removeLinha(this)'>Remover</button>";
+                celula6.innerHTML =  `<input type='number' id="id${numeroLinhas}"  name="id${numeroLinhas}" value="${id}" hidden>`;
+            }
+            
+            // funcao remove uma linha da tabela
+            function removeLinha(linha) {
+              var i=linha.parentNode.parentNode.rowIndex;
+              console.log(i);
+              document.getElementById('tabelaProdutos').deleteRow(i);
+            }            
+            
+            function mudarValor(isso){
+                var valorTotal = document.getElementById(`vt${isso.parentNode.parentNode.rowIndex}`);
+                valorTotal.value = (isso.value*document.getElementById(`preco${isso.parentNode.parentNode.rowIndex}`).value).toFixed(2);
+            }
