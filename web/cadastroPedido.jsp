@@ -44,7 +44,7 @@
                             <label for="valorTotal">Valor Total</label>
                         </td>
                         <td colspan="4">
-                            <input class="form-control" type="number" min="0" name="valorTotal" id="valorTotal" <c:if
+                            <input class="form-control" type="number" min="0"  name="valorTotal" id="valorTotal" <c:if
                                        test="${operacao == 'Incluir'}">value="0"</c:if>
                                    <c:if test="${operacao != 'Incluir'}">value="${pedido.valorTotal}"</c:if>
                                        readonly>

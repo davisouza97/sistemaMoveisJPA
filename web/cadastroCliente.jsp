@@ -85,39 +85,42 @@
                             </td>
                             <td colspan="4">
                                 <input class="form-control" type="text" required name="logradouro" maxlenght="45" minlength="3" id="logradouro" value="${cliente.logradouro}" readonly>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="numero">Nï¿½mero</label>
-                            </td>
-                            <td>
-                                <input class="form-control" type="number" maxlenght="6" minlength="1" name="numero" required id="numero" value="${cliente.numero}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="numero">Número</label>
+                        </td>
+                        <td>
+                            <input class="form-control" type="number" maxlenght="6" minlength="1" name="numero" required id="numero" value="${cliente.numero}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                             </td>
                             <td>
                                 <label for="bairro">Bairro</label>
                             </td>
                             <td>
                                 <input class="form-control" type="text" name="bairro" id="bairro" value="${cliente.bairro}" readonly>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="uf" required>UF</label>
-                            </td>
-                            <td>
-                                <input class="form-control" type="text" name="uf" id="uf" value="${cliente.uf}" required readonly>
-                            </td>
-                            <td>
-                                <label for="cidade">Cidade</label>
-                            </td>
-                            <td>
-                                <input class="form-control" type="text" maxlenght="45" minlength="2" required name="cidade" id="cidade" value="${cliente.cidade}" readonly>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="complemento">Complemento</label></td><td><input class="form-control" type="text" maxlenght="45" name="complemento" id="complemento" value="${cliente.complemento}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="uf" required>UF</label>
+                        </td>
+                        <td>
+                            <input class="form-control" type="text" name="uf" id="uf" value="${cliente.uf}" required readonly>
+                        </td>
+                        <td>
+                            <label for="cidade">Cidade</label>
+                        </td>
+                        <td>
+                            <input class="form-control" type="text" maxlenght="45" minlength="2" required name="cidade" id="cidade" value="${cliente.cidade}" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="complemento">Complemento</label>
+                        </td>
+                        <td colspan="4">
+                            <input class="form-control" type="text" maxlenght="45" name="complemento" id="complemento" value="${cliente.complemento}" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                         </td>
                     </tr>
 

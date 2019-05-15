@@ -15,7 +15,7 @@
         <%@ include file="/shared/navbar.jsp" %>
         <div class="container">
 
-            <table class="table table-striped table-bordered table-condensed table-hover">
+            <table class="table table-striped table-bordered table-condensed table-hover" id="lista">
                 <tr>
                     <th colspan="2">Grid Cliente</th>
                     <th> <%@ include file="/shared/busca.jsp" %></th>
