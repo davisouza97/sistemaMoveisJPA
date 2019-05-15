@@ -4,10 +4,10 @@ function dataHoje() {
     var mes = data.getMonth() + 1;
     var ano = data.getFullYear();
 
-    if (mes.toString().length == 1) {
+    if (mes.toString().length === 1) {
         mes = "0" + mes;
     }
-    if (dia.toString().length == 1) {
+    if (dia.toString().length === 1) {
         dia = "0" + dia;
     }
     var x = ano + "-" + mes + "-" + dia;
@@ -67,37 +67,41 @@ function meu_callback(conteudo) {
     }
 }
 
-
 function pesquisacep(valor) {
 
     //Nova variável "cep" somente com dígitos.
     var cep = valor.replace(/\D/g, '');
+    console.log(cep);
+    limpa_formulario_cep();
+    if (cep.lenght < 8) {
+        console.log("aeee");
+    } else {
+        //Verifica se campo cep possui valor informado.
+        if (cep !== "") {
 
-    //Verifica se campo cep possui valor informado.
-    if (cep !== "") {
+            //Expressão regular para validar o CEP.
+            var validacep = /^[0-9]{8}$/;
 
-        //Expressão regular para validar o CEP.
-        var validacep = /^[0-9]{8}$/;
+            //Valida o formato do CEP.
+            if (validacep.test(cep)) {
 
-        //Valida o formato do CEP.
-        if (validacep.test(cep)) {
-
-            //Preenche os campos com "..." enquanto consulta webservice.
-            document.getElementById('logradouro').value = "...";
-            document.getElementById('bairro').value = "...";
-            document.getElementById('cidade').value = "...";
-            document.getElementById('uf').value = "...";
+                //Preenche os campos com "..." enquanto consulta webservice.
+                document.getElementById('logradouro').value = "...";
+                document.getElementById('bairro').value = "...";
+                document.getElementById('cidade').value = "...";
+                document.getElementById('uf').value = "...";
 
 
-            //Cria um elemento javascript.
-            var script = document.createElement('script');
+                //Cria um elemento javascript.
+                var script = document.createElement('script');
 
-            //Sincroniza com o callback.
-            script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
+                //Sincroniza com o callback.
+                script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
 
-            //Insere script no documento e carrega o conteúdo.
-            document.body.appendChild(script);
+                //Insere script no documento e carrega o conteúdo.
+                document.body.appendChild(script);
 
+            }
         }
     }
 }

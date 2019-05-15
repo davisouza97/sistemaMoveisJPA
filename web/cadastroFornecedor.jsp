@@ -63,7 +63,7 @@
                                 <label for="cep">CEP</label>
                             </td>
                             <td colspan="1">
-                                <input class="form-control" type="text" required min="1" name="cep" id="cep" value="${fornecedor.cep}" onblur="pesquisacep(this.value)" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
+                                <input class="form-control" type="text" required min="1" name="cep" id="cep" value="${fornecedor.cep}" oninput="pesquisacep(this.value)" <c:if test="${operacao == 'Excluir'}"> readonly</c:if>>
                             </td>
                         </tr>
                         <tr>
