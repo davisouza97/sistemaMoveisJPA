@@ -9,7 +9,6 @@
         <%@ include file="/shared/head.jsp" %>
         <title>Grid Pedido</title>
         </head>
-
     <body>
         <%@ include file="/shared/navbar.jsp" %>
         <div class="container">
