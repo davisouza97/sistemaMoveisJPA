@@ -129,10 +129,8 @@ public class Pedido implements Serializable {
     private void updateValorTotal() {
         double x = 0;
         for (MovelPedido movelPedido : movelPedidos) {
-            if (movelPedido.getMovel() == null) {//evitar inconsistencia do banco
-               // movelPedido.delete();
-            } else {
-                x += movelPedido.getMovel().getPreco()*movelPedido.getQuantidade();
+            if (movelPedido.getMovel() != null) {//evitar inconsistencia do banco
+                x += movelPedido.getMovel().getPreco() * movelPedido.getQuantidade();
             }
         }
         this.valorTotal = x;
