@@ -120,12 +120,14 @@ function pesquisacep(valor) {
                 var celula3 = linha.insertCell(2); 
                 var celula4 = linha.insertCell(3);   
                 var celula5 = linha.insertCell(4); 
-                var celula6 = linha.insertCell(5); 
-                celula1.innerHTML = nome;
-                celula2.innerHTML =  `<input type='text' id="preco${numeroLinhas}" value="${preco}" readonly>`; 
-                celula3.innerHTML =  `<input type='number' id="qtd${numeroLinhas}" name="qtd${numeroLinhas}" value='1' min="1" oninput="mudarValor(this)">`;
-                celula4.innerHTML =  `<input type='number' id="vt${numeroLinhas}" value="${preco}" readonly>`;
-                celula5.innerHTML =  "<button onclick='removeLinha(this)'>Remover</button>";
+                var celula6 = linha.insertCell(5);
+               
+                celula1.innerHTML = `<input class="form-control" type='text' id="nome${numeroLinhas}" value="${nome}" readonly>`;
+                
+                celula2.innerHTML =  `<input class="form-control" type='text' id="preco${numeroLinhas}" value="${preco}" readonly>`; 
+                celula3.innerHTML =  `<input class="form-control" type='number' id="qtd${numeroLinhas}" name="qtd${numeroLinhas}" value='1' min="1" oninput="mudarValor(this)">`;
+                celula4.innerHTML =  `<input class="form-control" type='number' id="vt${numeroLinhas}" value="${preco}" readonly>`;
+                celula5.innerHTML = `<button class="btn btn-danger" onclick='removeLinha(this)'>Remover</button>`;
                 celula6.innerHTML =  `<input type='number' id="id${numeroLinhas}"  name="id${numeroLinhas}" value="${id}" hidden>`;
             }
             
