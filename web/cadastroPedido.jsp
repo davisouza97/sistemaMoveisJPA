@@ -15,7 +15,7 @@
 
 
         <div class="container">
-            <div style="float: left; max-width: 35%">
+            <div style="float: left; max-width: 33%">
                 <form action="ManterPedidoController?acao=confirmarOperacao&operacao=${operacao}" method="POST">
                     <table>
                         <tr>
@@ -121,7 +121,7 @@
                     </form>
                 </div>
 
-                <div class="container" style="float: left; max-width: 55%">
+                <div class="container" style="float: left; max-width: 60%">
                     <table class="table">
                         <tr>
                             <td>
@@ -160,7 +160,7 @@
                 </tr>
                 </table>
             </div>   
-            <div class="container" style="float: right; max-width: 10%">
+            <div class="container" style="float: right; max-width: 7%">
                 <table>
                     <tr>
                         <td>
