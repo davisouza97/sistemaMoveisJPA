@@ -169,7 +169,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <select id="MR" size="5" multiple name="listaMoveisAdd" title="Selecione para adicionar">
+                            <select id="MR" size="${moveis.size()}" multiple name="listaMoveisAdd" title="Selecione para adicionar">
                                 //https://stackoverflow.com/questions/1490139/evaluate-list-contains-string-in-jstl
                                 <c:forEach items="${moveis}" var="movel">
                                     <c:set var="contains" value="false" />
