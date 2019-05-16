@@ -134,7 +134,8 @@ function pesquisacep(valor) {
             // funcao remove uma linha da tabela
             function removeLinha(linha) {
               var i=linha.parentNode.parentNode.rowIndex;
-              console.log(i);
+              var selectMoveis = document.getElementById("MR");
+              console.log(selectMoveis);
               document.getElementById('tabelaProdutos').deleteRow(i);
             }            
             
