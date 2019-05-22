@@ -109,37 +109,44 @@ function pesquisacep(valor) {
 //pedido
 //https://gist.github.com/macsousa/be5b8c5075720c5463c349710fdfb0c8
 
-  //Funcao adiciona uma nova linha na tabela
-            function adicionaLinha(id,nome,preco,isso) {
-                isso.disabled = true;
-                var tabela = document.getElementById("tabelaProdutos");
-                var numeroLinhas = tabela.rows.length;
-                var linha = tabela.insertRow(numeroLinhas);
-                var celula1 = linha.insertCell(0);
-                var celula2 = linha.insertCell(1);   
-                var celula3 = linha.insertCell(2); 
-                var celula4 = linha.insertCell(3);   
-                var celula5 = linha.insertCell(4); 
-                var celula6 = linha.insertCell(5);
-               
-                celula1.innerHTML = `<input class="form-control" type='text' id="nome${numeroLinhas}" value="${nome}" readonly>`;
-                
-                celula2.innerHTML =  `<input class="form-control" type='text' id="preco${numeroLinhas}" value="${preco}" readonly>`; 
-                celula3.innerHTML =  `<input class="form-control" type='number' id="qtd${numeroLinhas}" name="qtd${numeroLinhas}" value='1' min="1" oninput="mudarValor(this)">`;
-                celula4.innerHTML =  `<input class="form-control" type='number' id="vt${numeroLinhas}" value="${preco}" readonly>`;
-                celula5.innerHTML = `<button class="btn btn-danger" onclick='removeLinha(this)'>Remover</button>`;
-                celula6.innerHTML =  `<input type='number' id="id${numeroLinhas}"  name="id${numeroLinhas}" value="${id}" hidden>`;
-            }
-            
-            // funcao remove uma linha da tabela
-            function removeLinha(linha) {
-              var i=linha.parentNode.parentNode.rowIndex;
-              var selectMoveis = document.getElementById("MR");
-              console.log(selectMoveis);
-              document.getElementById('tabelaProdutos').deleteRow(i);
-            }            
-            
-            function mudarValor(isso){
-                var valorTotal = document.getElementById(`vt${isso.parentNode.parentNode.rowIndex}`);
-                valorTotal.value = (isso.value*document.getElementById(`preco${isso.parentNode.parentNode.rowIndex}`).value).toFixed(2);
-            }
+//Funcao adiciona uma nova linha na tabela
+function adicionaLinha(id, nome, preco, isso) {
+    isso.disabled = true;
+    var tabela = document.getElementById("tabelaProdutos");
+    var numeroLinhas = tabela.rows.length;
+    var linha = tabela.insertRow(numeroLinhas);
+    var celula1 = linha.insertCell(0);
+    var celula2 = linha.insertCell(1);
+    var celula3 = linha.insertCell(2);
+    var celula4 = linha.insertCell(3);
+    var celula5 = linha.insertCell(4);
+    var celula6 = linha.insertCell(5);
+
+    celula1.innerHTML = `<input class="form-control" type='text' id="nome${numeroLinhas}" value="${nome}" readonly>`;
+
+    celula2.innerHTML = `<input class="form-control" type='text' id="preco${numeroLinhas}" value="${preco}" readonly>`;
+    celula3.innerHTML = `<input class="form-control" type='number' id="qtd${numeroLinhas}" name="qtd${numeroLinhas}" value='1' min="1" oninput="mudarValor(this)">`;
+    celula4.innerHTML = `<input class="form-control" type='number' id="vt${numeroLinhas}" value="${preco}" readonly>`;
+    celula5.innerHTML = `<button class="btn btn-danger" onclick='removeLinha(this)'>Remover</button>`;
+    celula6.innerHTML = `<input type='number' id="id${numeroLinhas}"  name="id${numeroLinhas}" value="${id}" hidden>`;
+}
+
+// funcao remove uma linha da tabela
+function removeLinha(linha) {
+    var movelRemovido = linha.parentNode.parentNode.children[0].children[0].value;//pega onome do movel
+    var indexLinha = linha.parentNode.parentNode.rowIndex;
+    var listaSelectMoveis = document.getElementById("MR").children;
+    console.log(listaSelectMoveis[0]);
+    for (var index = 0; index < listaSelectMoveis.length; index++) {
+        if (listaSelectMoveis[index].label === movelRemovido) {
+            listaSelectMoveis[index].disabled = false;
+        }
+    }
+    console.log(listaSelectMoveis);
+    document.getElementById('tabelaProdutos').deleteRow(indexLinha);
+}
+
+function mudarValor(isso) {
+    var valorTotal = document.getElementById(`vt${isso.parentNode.parentNode.rowIndex}`);
+    valorTotal.value = (isso.value * document.getElementById(`preco${isso.parentNode.parentNode.rowIndex}`).value).toFixed(2);
+}
