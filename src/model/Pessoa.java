@@ -17,8 +17,6 @@ public abstract class Pessoa implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nome;
-    private String cpf;
-    private String dataNascimento;
     private String email;
     private String cep;
     private String logradouro;
@@ -33,10 +31,8 @@ public abstract class Pessoa implements Serializable{
     public Pessoa() {
     }
 
-    public Pessoa(String nome, String cpf, String dataNascimento, String email, String cep, String logradouro, String numero, String complemento, String bairro, String uf, String cidade, String telefone, String celular) {
+    public Pessoa(String nome, String email, String cep, String logradouro, String numero, String complemento, String bairro, String uf, String cidade, String telefone, String celular) {
         this.nome = nome;
-        this.cpf = cpf;
-        this.dataNascimento = dataNascimento;
         this.email = email;
         this.cep = cep;
         this.logradouro = logradouro;
@@ -60,28 +56,12 @@ public abstract class Pessoa implements Serializable{
         this.nome = nome;
     }
 
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getDataNascimento() {
-        return dataNascimento;
-    }
-
     public Long getId() {
         return id;
     }
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public void setDataNascimento(String dataNascimento) {
-        this.dataNascimento = dataNascimento;
     }
 
     public String getEmail() {

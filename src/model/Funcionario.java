@@ -17,6 +17,8 @@ public class Funcionario extends Pessoa implements Serializable {
     private double salario;
     private String comissao;
     private String senha;
+    private String cpf;
+    private String dataNascimento;
 
     public Funcionario() {
         
@@ -26,14 +28,31 @@ public class Funcionario extends Pessoa implements Serializable {
             String nome, String cpf, String dataNascimento, String email, String cep,
             String logradouro, String numero, String complemento, String bairro,
             String uf, String cidade, String telefone, String celular) {
-        super(nome, cpf, dataNascimento, email, cep, logradouro, numero, complemento, bairro, uf, cidade, telefone, celular);
+        super(nome, email, cep, logradouro, numero, complemento, bairro, uf, cidade, telefone, celular);
         this.cargo = cargo;
         this.salario = salario;
         this.comissao = comissao;
         this.senha = senha;
+        this.cpf = cpf;
+        this.dataNascimento = dataNascimento;
+    }
+
+    public String getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(String dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
     
-
     public void save() {
         FuncionarioDAO.getInstance().save(this);
     }
