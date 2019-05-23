@@ -62,14 +62,14 @@ public class ManterClienteController extends HttpServlet {
         String celular = request.getParameter("celular");
         Long id = null;
         if (!operacao.equals("Incluir")) {
-         id = Long.parseLong(request.getParameter("id"));    
+            id = Long.parseLong(request.getParameter("id"));
         }
-        
+
         try {
             Cliente cliente = new Cliente(nome, cpf, dataNascimento, email, cep, logradouro, numero, complemento, bairro, uf, cidade, telefone, celular);
-           
+
             if (operacao.equals("Incluir")) {
-                
+
                 cliente.save();
             } else if (operacao.equals("Editar")) {
                 cliente.setId(id);

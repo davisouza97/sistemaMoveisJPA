@@ -9,12 +9,33 @@ import javax.persistence.Entity;
 @Entity
 public class Cliente extends Pessoa implements Serializable {
 
+    private String cpf;
+    private String dataNascimento;
+
     public Cliente(String nome, String cpf, String dataNascimento, String email, String cep, String logradouro, String numero, String complemento, String bairro, String uf, String cidade, String telefone, String celular) {
-        super(nome, cpf, dataNascimento, email, cep, logradouro, numero, complemento, bairro, uf, cidade, telefone, celular);
+        super(nome, email, cep, logradouro, numero, complemento, bairro, uf, cidade, telefone, celular);
+        this.cpf = cpf;
+        this.dataNascimento = dataNascimento;
+    }
+
+    public String getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(String dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public Cliente(Long id) {
         super(id);
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public Cliente() {
