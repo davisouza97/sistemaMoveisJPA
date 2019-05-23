@@ -15,8 +15,9 @@
 
 
         <div class="container">
-            <div style="float: left; max-width: 33%">
-                <form action="ManterPedidoController?acao=confirmarOperacao&operacao=${operacao}" method="POST">
+            <form action="ManterPedidoController?acao=confirmarOperacao&operacao=${operacao}" method="POST">
+                <div style="float: left; max-width: 33%">
+
                     <table>
                         <tr>
                         <input class="form-control" type="Hidden" min="0" name="id" id="id" value="${pedido.id}" readonly>
@@ -118,73 +119,74 @@
                                 </td>
                             </tr>
                         </table>
-                    </form>
-                </div>
 
-                <div class="container" style="float: left; max-width: 60%">
-                    <table class="table">
+                    </div>
+
+                    <div class="container" style="float: left; max-width: 60%">
+                        <table class="table">
+                            <tr>
+                                <td>
+                                    Móveis já adicionados
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+
+                                    <table id="tabelaProdutos" class="table">
+                                        <tr>
+                                            <td>Produto</td>
+                                            <td>Valor</td>
+                                            <td>Quantidade</td>
+                                            <td>Valor Total</td>
+                                            <td>Ação</td>
+                                        <%
+                                            //https://www.caelum.com.br/apostila-java-web/javaserver-pages/#exerccios-primeiro-jsp
+                                            int j = 1;
+                                        %>
+                                        <c:forEach items="${moveisDoPedido}" var="movelPedido">
+                                        <tr>
+                                            <td class="form-control">${movelPedido.movel.nome}</td>
+                                            <td ><input type='text' id="preco<%out.print(j);%>" value="${movelPedido.movel.preco}" readonly></td>
+                                            <td ><input type="number" id="qtd<%out.print(j);%>" name="qtd<%out.print(j);%>" value="${movelPedido.quantidade}" min="1" oninput="mudarValor(this)" ></td>
+                                            <td><input  type="number" id="vt<%out.print(j);%>" name="vt<%out.print(j);%>" value="${movelPedido.quantidade*movelPedido.movel.preco}" readonly></td>
+                                            <td><button class="btn btn-danger" onclick="removeLinha(this)"> Remover</button></td>
+                                            <td><input type='number' id="id<%out.print(j);%>" name="id<%out.print(j++);%>" value="${movelPedido.movel.id}" hidden></td>
+                                        </tr>
+                                    </c:forEach>
+
+                        </tr>
+                    </table>
+
+                    </td>
+                    </tr>
+                    </table>
+                </div>   
+                <div class="container" style="float: right; max-width: 7%">
+                    <table>
                         <tr>
                             <td>
-                                Móveis já adicionados
+                                Todos os Móveis
                             </td>
                         </tr>
                         <tr>
                             <td>
-
-                                <table id="tabelaProdutos" class="table">
-                                    <tr>
-                                        <td>Produto</td>
-                                        <td>Valor</td>
-                                        <td>Quantidade</td>
-                                        <td>Valor Total</td>
-                                        <td>Ação</td>
-                                    <%
-                                        //https://www.caelum.com.br/apostila-java-web/javaserver-pages/#exerccios-primeiro-jsp
-                                        int j = 1;
-                                    %>
-                                    <c:forEach items="${moveisDoPedido}" var="movelPedido">
-                                    <tr>
-                                        <td class="form-control">${movelPedido.movel.nome}</td>
-                                        <td ><input type='text' id="preco<%out.print(j);%>" value="${movelPedido.movel.preco}" readonly></td>
-                                        <td ><input type="number" id="qtd<%out.print(j);%>" name="qtd<%out.print(j);%>" value="${movelPedido.quantidade}" min="1" oninput="mudarValor(this)" ></td>
-                                        <td><input  type="number" id="vt<%out.print(j);%>" name="vt<%out.print(j);%>" value="${movelPedido.quantidade*movelPedido.movel.preco}" readonly></td>
-                                        <td><button class="btn btn-danger" onclick="removeLinha(this)"> Remover</button></td>
-                                        <td><input type='number' id="id<%out.print(j);%>" name="id<%out.print(j++);%>" value="${movelPedido.movel.id}" hidden></td>
-                                    </tr>
-                                </c:forEach>
-
-                    </tr>
-                </table>
-
-                </td>
-                </tr>
-                </table>
-            </div>   
-            <div class="container" style="float: right; max-width: 7%">
-                <table>
-                    <tr>
-                        <td>
-                            Todos os Móveis
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <select id="MR" size="${moveis.size()}" multiple name="listaMoveisAdd" title="Selecione para adicionar">
-                                //https://stackoverflow.com/questions/1490139/evaluate-list-contains-string-in-jstl
-                                <c:forEach items="${moveis}" var="movel">
-                                    <c:set var="contains" value="false" />
-                                    <c:forEach var="item" items="${moveisDoPedido}">
-                                        <c:if test="${item.movel.nome eq movel.nome}">
-                                            <c:set var="contains" value="true" />
-                                        </c:if>
+                                <select id="MR" size="${moveis.size()}" multiple name="listaMoveisAdd" title="Selecione para adicionar">
+                                    //https://stackoverflow.com/questions/1490139/evaluate-list-contains-string-in-jstl
+                                    <c:forEach items="${moveis}" var="movel">
+                                        <c:set var="contains" value="false" />
+                                        <c:forEach var="item" items="${moveisDoPedido}">
+                                            <c:if test="${item.movel.nome eq movel.nome}">
+                                                <c:set var="contains" value="true" />
+                                            </c:if>
+                                        </c:forEach>
+                                        <option onclick="adicionaLinha(${movel.id}, '${movel.nome}', '${movel.preco}', this)" value="${movel.id}" <c:if test="${contains}"> disabled </c:if>> ${movel.nome} </option>
                                     </c:forEach>
-                                    <option onclick="adicionaLinha(${movel.id}, '${movel.nome}', '${movel.preco}', this)" value="${movel.id}" <c:if test="${contains}"> disabled </c:if>> ${movel.nome} </option>
-                                </c:forEach>
-                            </select>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </form>
         </div>
 
     </body>
