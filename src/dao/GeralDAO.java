@@ -11,6 +11,7 @@ import model.Movel;
 public abstract class GeralDAO {
     
     public void save(Object objeto) throws NoSuchMethodException {
+        
         Method metodo = objeto.getClass().getMethod("getId", null);
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
