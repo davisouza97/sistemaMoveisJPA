@@ -8,10 +8,20 @@ import javax.persistence.TypedQuery;
 import model.Ferramenta;
 import model.Movel;
 
-public abstract class GeralDAO {
+public class GeralDAO {
+
+    private static GeralDAO instance = new GeralDAO();
+
+    public static GeralDAO getInstance() {
+        return instance;
+    }
+
+    private GeralDAO() {
+
+    }
 
     public void save(Object objeto) throws NoSuchMethodException {
-        
+
         Method metodo = objeto.getClass().getMethod("getId", null);
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -102,7 +112,7 @@ public abstract class GeralDAO {
         return objetos;
     }
 
-    public Object findByParameter(String parametro,String campo) throws ClassNotFoundException {
+    public Object findByParameter(String parametro, String campo) throws ClassNotFoundException {
         StackTraceElement[] ste = new Throwable().getStackTrace();
         String nomeClasse = ste[1].getClassName();
         Class classe = Class.forName(nomeClasse);
@@ -113,7 +123,7 @@ public abstract class GeralDAO {
         Object objeto = null;
         try {
             tx.begin();
-            TypedQuery<Object> query = em.createQuery("select x From "+nomeTabela+" x where x."+campo+" LIKE :parametro", classe);
+            TypedQuery<Object> query = em.createQuery("select x From " + nomeTabela + " x where x." + campo + " LIKE :parametro", classe);
             query.setParameter("parametro", parametro);
             objeto = query.getSingleResult();
             tx.commit();

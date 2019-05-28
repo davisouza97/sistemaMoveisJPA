@@ -1,6 +1,6 @@
 package model;
 
-import dao.ClienteDAO;
+import dao.GeralDAO;
 import java.io.Serializable;
 
 import java.util.List;
@@ -22,19 +22,19 @@ public class Cliente extends Pessoa implements Serializable {
     }
 
     public void save() throws NoSuchMethodException {
-        ClienteDAO.getInstance().save(this);
+        GeralDAO.getInstance().save(this);
     }
 
     public void remove() throws NoSuchMethodException {
-        ClienteDAO.getInstance().remove(this);
+        GeralDAO.getInstance().remove(this);
     }
 
     public static Cliente find(Long id) throws ClassNotFoundException{
-        return (Cliente) ClienteDAO.getInstance().find(id);
+        return (Cliente) GeralDAO.getInstance().find(id);
     }
 
     public static List<Object> findAll() throws ClassNotFoundException{
-        return ClienteDAO.getInstance().findAll();
+        return GeralDAO.getInstance().findAll();
     }
 
     public String getDataNascimento() {

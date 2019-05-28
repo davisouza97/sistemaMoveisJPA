@@ -1,6 +1,6 @@
 package model;
 
-import dao.MovelDAO;
+import dao.GeralDAO;
 import java.io.Serializable;
 
 import java.sql.SQLException;
@@ -69,19 +69,19 @@ public class Movel implements Serializable {
     }
 
     public void save() throws NoSuchMethodException {
-        MovelDAO.getInstance().save(this);
+        GeralDAO.getInstance().save(this);
     }
 
     public void remove() throws NoSuchMethodException {
-        MovelDAO.getInstance().remove(this);
+        GeralDAO.getInstance().remove(this);
     }
 
     public static Movel find(Long id) throws ClassNotFoundException {
-        return (Movel) MovelDAO.getInstance().find(id);
+        return (Movel) GeralDAO.getInstance().find(id);
     }
 
     public static List<Object> findAll() throws ClassNotFoundException {
-        return MovelDAO.getInstance().findAll();
+        return GeralDAO.getInstance().findAll();
     }
 
     public Long getId() {

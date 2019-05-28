@@ -1,8 +1,7 @@
 package model;
 
-import dao.FornecedorDAO;
+import dao.GeralDAO;
 import java.io.Serializable;
-
 import java.util.List;
 import javax.persistence.Entity;
 
@@ -30,19 +29,19 @@ public class Fornecedor extends Pessoa implements Serializable {
     }
 
     public void save() throws NoSuchMethodException {
-        FornecedorDAO.getInstance().save(this);
+        GeralDAO.getInstance().save(this);
     }
 
     public void remove() throws NoSuchMethodException {
-        FornecedorDAO.getInstance().remove(this);
+        GeralDAO.getInstance().remove(this);
     }
 
     public static Fornecedor find(Long id) throws ClassNotFoundException {
-        return (Fornecedor) FornecedorDAO.getInstance().find(id);
+        return (Fornecedor) GeralDAO.getInstance().find(id);
     }
 
     public static List<Object> findAll() throws ClassNotFoundException {
-        return FornecedorDAO.getInstance().findAll();
+        return GeralDAO.getInstance().findAll();
     }
 
     public String getCnpj() {

@@ -1,6 +1,6 @@
 package model;
 
-import dao.MovelPedidoDAO;
+import dao.GeralDAO;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -50,7 +50,7 @@ public class MovelPedido implements Serializable {
     }
 
     public void delete() throws NoSuchMethodException{
-        MovelPedidoDAO.getInstance().remove(this);
+        GeralDAO.getInstance().remove(this);
     }
     
     public Long getId() {

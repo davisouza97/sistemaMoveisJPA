@@ -1,7 +1,6 @@
 package model;
 
-import dao.FerramentaDAO;
-
+import dao.GeralDAO;
 import java.sql.SQLException;
 import java.util.List;
 import javax.persistence.Entity;
@@ -17,18 +16,18 @@ public class Ferramenta extends MaterialFerramenta {
     }
 
     public void save() throws NoSuchMethodException {
-        FerramentaDAO.getInstance().save(this);
+        GeralDAO.getInstance().save(this);
     }
 
     public void remove() throws NoSuchMethodException {
-        FerramentaDAO.getInstance().remove(this);
+        GeralDAO.getInstance().remove(this);
     }
 
     public static Ferramenta find(Long id) throws ClassNotFoundException {
-        return (Ferramenta) FerramentaDAO.getInstance().find(id);
+        return (Ferramenta) GeralDAO.getInstance().find(id);
     }
 
     public static List<Object> findAll() throws ClassNotFoundException {
-        return FerramentaDAO.getInstance().findAll();
+        return GeralDAO.getInstance().findAll();
     }
 }
