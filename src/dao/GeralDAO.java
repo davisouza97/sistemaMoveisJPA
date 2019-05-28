@@ -1,29 +1,31 @@
 package dao;
 
-import model.Cliente;
-import java.util.List;
+import java.lang.reflect.Method;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.persistence.TypedQuery;
+import model.Ferramenta;
+import model.Movel;
 
-public class ClienteDAO {
-    private static ClienteDAO instance = new ClienteDAO();
-    public static ClienteDAO getInstance(){
+public class GeralDAO {
+    
+    private static GeralDAO instance = new GeralDAO();
+    public static GeralDAO getInstance() {
         return instance;
     }
-    private ClienteDAO(){
-        
-    }
 
-    public void save(Cliente cliente)  {
+    
+    public void save(Object objeto) throws NoSuchMethodException {
+   
+        Method metodo = objeto.getClass().getMethod("getId", null);
+        
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         try {
             tx.begin();
-            if(cliente.getId() != null){
-                em.merge(cliente);
+            if(metodo != null){
+                em.merge(objeto);
             }else{
-            em.persist(cliente);
+            em.persist(objeto);
         }
          tx.commit();       
         } catch (Exception e) {
@@ -34,14 +36,16 @@ public class ClienteDAO {
         }finally{
             PersistenceUtil.close(em);
         }
-       
     }
-    public void remove(Cliente cliente) {
+    
+    public void remove(Object objeto) throws NoSuchMethodException {
+        Method metodo = objeto.getClass().getMethod("getId", null);
+        
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         try {
             tx.begin();
-            em.remove(em.getReference(Cliente.class, cliente.getId()));
+            em.remove(em.getReference(objeto.getClass(), metodo.invoke(objeto)));
             tx.commit();       
         } catch (Exception e) {
             if(tx != null && tx.isActive()){
@@ -53,13 +57,13 @@ public class ClienteDAO {
         }
     }
 
-    public Cliente find(Long id) {
+    public Object find(Long id) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
-        Cliente cliente = null;
+        Object objeto = null;
         try {
             tx.begin();
-            cliente = em.find(Cliente.class, id);
+            objeto = em.find(Movel.class, id);
             tx.commit();       
         } catch (Exception e) {
             if(tx != null && tx.isActive()){
@@ -69,27 +73,6 @@ public class ClienteDAO {
         }finally{
             PersistenceUtil.close(em);
         }
-        return cliente;
-        
-    }
-    public List<Cliente> findAll(){
-       EntityManager em = PersistenceUtil.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        List<Cliente> clientes = null;
-        try {
-           tx.begin();
-           TypedQuery<Cliente> query = em.createQuery("select c From Cliente c", Cliente.class);
-           clientes = query.getResultList();
-         tx.commit();       
-        } catch (Exception e) {
-            if(tx != null && tx.isActive()){
-                tx.rollback();
-            }
-            throw new RuntimeException(e);
-        }finally{
-            PersistenceUtil.close(em);
-        }
-        return clientes;
-        
+        return objeto;
     }
 }

@@ -69,16 +69,16 @@ public class Movel implements Serializable {
         this.material = material;
     }
 
-    public void save() {
+    public void save() throws NoSuchMethodException {
         MovelDAO.getInstance().save(this);
     }
 
-    public void remove() {
+    public void remove() throws NoSuchMethodException {
         MovelDAO.getInstance().remove(this);
     }
 
     public static Movel find(Long id) {
-        return MovelDAO.getInstance().find(id);
+        return (Movel) MovelDAO.getInstance().find(id);
     }
 
     public static List<Movel> findAll() {

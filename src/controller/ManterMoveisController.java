@@ -1,5 +1,6 @@
 package controller;
 
+import dao.GeralDAO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -17,9 +18,9 @@ import model.Pedido;
 
 @WebServlet(name = "ManterMoveisController", urlPatterns = "/ManterMoveisController")
 public class ManterMoveisController extends HttpServlet {
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException, ClassNotFoundException {
+            throws ServletException, IOException, SQLException, ClassNotFoundException, NoSuchMethodException {
         String acao = request.getParameter("acao");
         if (acao.equals("confirmarOperacao")) {
             confirmarOperacao(request, response);
@@ -29,7 +30,7 @@ public class ManterMoveisController extends HttpServlet {
             }
         }
     }
-
+    
     public void prepararOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
         String operacao = request.getParameter("operacao");
         request.setAttribute("operacao", operacao);
@@ -42,8 +43,8 @@ public class ManterMoveisController extends HttpServlet {
         }
         request.getRequestDispatcher("cadastroMoveis.jsp").forward(request, response);
     }
-
-    protected void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+    
+    protected void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException, NoSuchMethodException {
         String operacao = request.getParameter("operacao");
         String nome = request.getParameter("nome");
         double preco = Double.parseDouble(request.getParameter("preco"));
@@ -52,11 +53,10 @@ public class ManterMoveisController extends HttpServlet {
         double largura = Double.parseDouble(request.getParameter("largura"));
         double comprimento = Double.parseDouble(request.getParameter("comprimento"));
         double peso = Double.parseDouble(request.getParameter("peso"));
-
+        
         Long idFerramenta = Long.parseLong(request.getParameter("idFerramenta"));
-
+        
         Long idMaterial = Long.parseLong(request.getParameter("idMaterial"));
-       
         
         Long idMovel = null;
         if (!operacao.equals("Incluir")) {
@@ -64,7 +64,7 @@ public class ManterMoveisController extends HttpServlet {
         }
         try {
             Ferramenta ferramenta = null;
-            if(idFerramenta != 0){
+            if (idFerramenta != 0) {
                 ferramenta = Ferramenta.find(idFerramenta);
             }
             
@@ -72,17 +72,18 @@ public class ManterMoveisController extends HttpServlet {
             if (idMaterial != 0) {
                 material = Material.find(idMaterial);
             }
-           
+            
             Movel movel = new Movel(nome, preco, tipo, altura, largura, comprimento, peso, ferramenta, material);
+            if (!operacao.equals("Incluir")) {
+                movel.setId(idMovel);
+            }
+            Object objeto = movel;
             if (operacao.equals("Incluir")) {
-                movel.save();
+                GeralDAO.getInstance().save(objeto);
             } else if (operacao.equals("Editar")) {
-                movel.setId(idMovel);
-                movel.save();
-                System.out.println("Bring edit");
+                GeralDAO.getInstance().save(objeto);
             } else if (operacao.equals("Excluir")) {
-                movel.setId(idMovel);
-                movel.remove();
+                GeralDAO.getInstance().remove(objeto);
             }
             RequestDispatcher view = request.getRequestDispatcher("PesquisaMovelController");
             view.forward(request, response);
@@ -92,7 +93,7 @@ public class ManterMoveisController extends HttpServlet {
             throw e;
         }
     }
-
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -102,9 +103,11 @@ public class ManterMoveisController extends HttpServlet {
             Logger.getLogger(ManterMoveisController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ManterMoveisController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchMethodException ex) {
+            Logger.getLogger(ManterMoveisController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -114,9 +117,11 @@ public class ManterMoveisController extends HttpServlet {
             Logger.getLogger(ManterMoveisController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ManterMoveisController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchMethodException ex) {
+            Logger.getLogger(ManterMoveisController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     @Override
     public String getServletInfo() {
         return "Short description";

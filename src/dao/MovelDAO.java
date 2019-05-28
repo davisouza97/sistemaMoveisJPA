@@ -7,7 +7,7 @@ import javax.persistence.TypedQuery;
 import model.Movel;
 import model.Pedido;
 
-public class MovelDAO {
+public class MovelDAO extends GeralDAO{
 
     private static MovelDAO instance = new MovelDAO();
 
@@ -16,64 +16,6 @@ public class MovelDAO {
     }
 
     private MovelDAO() {
-    }
-
-    public void save(Movel movel) {
-        EntityManager em = PersistenceUtil.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        try {
-            tx.begin();
-            if (movel.getId() != null) {
-                em.merge(movel);
-            } else {
-                em.persist(movel);
-            }
-            tx.commit();
-
-        } catch (Exception e) {
-            if (tx != null && tx.isActive()) {
-                tx.rollback();
-            }
-            throw new RuntimeException(e);
-        } finally {
-            PersistenceUtil.close(em);
-        }
-    }
-
-    public void remove(Movel movel) {
-        EntityManager em = PersistenceUtil.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        try {
-            tx.begin();
-            em.remove(em.getReference(Movel.class, movel.getId()));
-            tx.commit();
-        } catch (Exception e) {
-            if (tx != null && tx.isActive()) {
-                tx.rollback();
-            }
-            throw new RuntimeException(e);
-        } finally {
-            PersistenceUtil.close(em);
-        }
-    }
-
-    public Movel find(Long id) {
-        EntityManager em = PersistenceUtil.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        Movel movel = null;
-        try {
-            tx.begin();
-            movel = em.find(Movel.class, id);
-            tx.commit();
-        } catch (Exception e) {
-            if (tx != null && tx.isActive()) {
-                tx.rollback();
-            }
-            throw new RuntimeException(e);
-        } finally {
-            PersistenceUtil.close(em);
-        }
-        return movel;
     }
 
     public List<Movel> findAll() {

@@ -118,7 +118,7 @@ public class ManterPedidoController extends HttpServlet {
         if (listaIdDosMoveis != null || listaQuantidadePorMovel!=null) {
             pedido.setMovelPedidos(new ArrayList<MovelPedido>());
             for (int i = 0; i < listaIdDosMoveis.size(); i++) {
-                Movel m = MovelDAO.getInstance().find(Long.parseLong(listaIdDosMoveis.get(i)));
+                Movel m = (Movel)MovelDAO.getInstance().find(Long.parseLong(listaIdDosMoveis.get(i)));
                 MovelPedido mp = new MovelPedido(m, pedido, Integer.parseInt(listaQuantidadePorMovel.get(i)));
                 MovelPedidoDAO.getInstance().save(mp);
                 pedido.getMovelPedidos().add(mp);
