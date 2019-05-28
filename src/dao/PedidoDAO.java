@@ -20,4 +20,5 @@ public class PedidoDAO extends GeralDAO {
 
     private PedidoDAO() {
     }
+
 }
