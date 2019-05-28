@@ -58,7 +58,7 @@ public class Movel implements Serializable {
     }
 
     public Movel(String nome, double preco, String tipo, double altura, double largura, double comprimento, double peso, Ferramenta ferramenta, Material material) {
-         this.nome = nome;
+        this.nome = nome;
         this.preco = preco;
         this.tipo = tipo;
         this.altura = altura;
@@ -77,11 +77,11 @@ public class Movel implements Serializable {
         MovelDAO.getInstance().remove(this);
     }
 
-    public static Movel find(Long id) {
+    public static Movel find(Long id) throws ClassNotFoundException {
         return (Movel) MovelDAO.getInstance().find(id);
     }
 
-    public static List<Movel> findAll() {
+    public static List<Object> findAll() throws ClassNotFoundException{
         return MovelDAO.getInstance().findAll();
     }
 
