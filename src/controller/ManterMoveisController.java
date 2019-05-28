@@ -53,9 +53,7 @@ public class ManterMoveisController extends HttpServlet {
         double largura = Double.parseDouble(request.getParameter("largura"));
         double comprimento = Double.parseDouble(request.getParameter("comprimento"));
         double peso = Double.parseDouble(request.getParameter("peso"));
-        
         Long idFerramenta = Long.parseLong(request.getParameter("idFerramenta"));
-        
         Long idMaterial = Long.parseLong(request.getParameter("idMaterial"));
         
         Long idMovel = null;
@@ -79,11 +77,11 @@ public class ManterMoveisController extends HttpServlet {
             }
             Object objeto = movel;
             if (operacao.equals("Incluir")) {
-                GeralDAO.getInstance().save(objeto);
+                movel.save();
             } else if (operacao.equals("Editar")) {
-                GeralDAO.getInstance().save(objeto);
+                movel.save();
             } else if (operacao.equals("Excluir")) {
-                GeralDAO.getInstance().remove(objeto);
+                movel.remove();
             }
             RequestDispatcher view = request.getRequestDispatcher("PesquisaMovelController");
             view.forward(request, response);

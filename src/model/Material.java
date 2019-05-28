@@ -1,10 +1,9 @@
 package model;
 
 import dao.MaterialDAO;
-
-import java.sql.SQLException;
 import java.util.List;
 import javax.persistence.Entity;
+
 @Entity
 public class Material extends MaterialFerramenta {
       

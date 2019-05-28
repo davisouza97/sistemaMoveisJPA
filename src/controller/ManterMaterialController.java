@@ -35,7 +35,6 @@ public class ManterMaterialController extends HttpServlet {
         if (!operacao.equals("Incluir")) {
            Material material = Material.find(Long.parseLong(request.getParameter("id")));
            request.setAttribute("material", material);
-          
         }
         request.getRequestDispatcher("cadastroMaterial.jsp").forward(request, response);
     }

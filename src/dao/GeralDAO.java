@@ -1,23 +1,17 @@
 package dao;
 
 import java.lang.reflect.Method;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 import model.Ferramenta;
 import model.Movel;
 
-public class GeralDAO {
-    
-    private static GeralDAO instance = new GeralDAO();
-    public static GeralDAO getInstance() {
-        return instance;
-    }
-
+public abstract class GeralDAO {
     
     public void save(Object objeto) throws NoSuchMethodException {
-   
         Method metodo = objeto.getClass().getMethod("getId", null);
-        
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         try {
@@ -40,7 +34,6 @@ public class GeralDAO {
     
     public void remove(Object objeto) throws NoSuchMethodException {
         Method metodo = objeto.getClass().getMethod("getId", null);
-        
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         try {
@@ -75,4 +68,5 @@ public class GeralDAO {
         }
         return objeto;
     }
+    //objeto.getClass().getSimpleName();
 }
