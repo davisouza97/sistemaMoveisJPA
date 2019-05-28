@@ -16,11 +16,11 @@ public class Ferramenta extends MaterialFerramenta {
     public Ferramenta() {
     }
     
-    public void save() {
+    public void save() throws NoSuchMethodException {
         FerramentaDAO.getInstance().save(this);
     }
 
-    public void remove() {
+    public void remove() throws NoSuchMethodException {
         FerramentaDAO.getInstance().remove(this);
     }
 

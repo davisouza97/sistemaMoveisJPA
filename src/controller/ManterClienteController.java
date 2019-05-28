@@ -25,7 +25,7 @@ import model.Cliente;
 @WebServlet(name = "ManterClienteController", urlPatterns = "/ManterClienteController")
 public class ManterClienteController extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException, NoSuchMethodException {
         String acao = request.getParameter("acao");
         if (acao.equals("confirmarOperacao")) {
             confirmarOperacao(request, response);
@@ -45,7 +45,7 @@ public class ManterClienteController extends HttpServlet {
         request.getRequestDispatcher("cadastroCliente.jsp").forward(request, response);
     }
 
-    protected void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+    protected void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException, NoSuchMethodException {
         String operacao = request.getParameter("operacao");
         String nome = request.getParameter("nome");
         String cpf = request.getParameter("cpf");
@@ -95,6 +95,8 @@ public class ManterClienteController extends HttpServlet {
             processRequest(request, response);
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(ManterClienteController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchMethodException ex) {
+            Logger.getLogger(ManterClienteController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -104,6 +106,8 @@ public class ManterClienteController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ManterClienteController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchMethodException ex) {
             Logger.getLogger(ManterClienteController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

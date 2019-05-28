@@ -10,7 +10,7 @@ import javax.persistence.TypedQuery;
 import model.Movel;
 import model.MovelPedido;
 
-public class PedidoDAO {
+public class PedidoDAO extends GeralDAO{
 
     private static PedidoDAO instance = new PedidoDAO();
 
@@ -19,45 +19,6 @@ public class PedidoDAO {
     }
 
     private PedidoDAO() {
-    }
-
-    public void save(Pedido pedido) {
-        EntityManager em = PersistenceUtil.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        try {
-            tx.begin();
-            if (pedido.getId() != null) {
-                em.merge(pedido);
-            } else {
-                em.persist(pedido);
-            }
-            tx.commit();
-
-        } catch (Exception e) {
-            if (tx != null && tx.isActive()) {
-                tx.rollback();
-            }
-            throw new RuntimeException(e);
-        } finally {
-            PersistenceUtil.close(em);
-        }
-    }
-
-    public void remove(Pedido pedido) {
-        EntityManager em = PersistenceUtil.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        try {
-            tx.begin();
-            em.remove(em.getReference(Pedido.class, pedido.getId()));
-            tx.commit();
-        } catch (Exception e) {
-            if (tx != null && tx.isActive()) {
-                tx.rollback();
-            }
-            throw new RuntimeException(e);
-        } finally {
-            PersistenceUtil.close(em);
-        }
     }
 
     public Pedido find(Long id) {

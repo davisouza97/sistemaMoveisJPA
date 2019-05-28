@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
-public class ClienteDAO {
+public class ClienteDAO extends GeralDAO{
     private static ClienteDAO instance = new ClienteDAO();
     public static ClienteDAO getInstance(){
         return instance;
@@ -15,44 +15,7 @@ public class ClienteDAO {
         
     }
 
-    public void save(Cliente cliente)  {
-        EntityManager em = PersistenceUtil.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        try {
-            tx.begin();
-            if(cliente.getId() != null){
-                em.merge(cliente);
-            }else{
-            em.persist(cliente);
-        }
-         tx.commit();       
-        } catch (Exception e) {
-            if(tx != null && tx.isActive()){
-                tx.rollback();
-            }
-            throw new RuntimeException(e);
-        }finally{
-            PersistenceUtil.close(em);
-        }
-       
-    }
-    public void remove(Cliente cliente) {
-        EntityManager em = PersistenceUtil.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        try {
-            tx.begin();
-            em.remove(em.getReference(Cliente.class, cliente.getId()));
-            tx.commit();       
-        } catch (Exception e) {
-            if(tx != null && tx.isActive()){
-                tx.rollback();
-            }
-            throw new RuntimeException(e);
-        }finally{
-            PersistenceUtil.close(em);
-        }
-    }
-
+    
     public Cliente find(Long id) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();

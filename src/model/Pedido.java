@@ -53,11 +53,11 @@ public class Pedido implements Serializable {
         valorTotal = 0d;
     }
 
-    public void save() {
+    public void save() throws NoSuchMethodException {
         PedidoDAO.getInstance().save(this);
     }
 
-    public void remove() {
+    public void remove() throws NoSuchMethodException {
         PedidoDAO.getInstance().remove(this);
     }
 
@@ -136,7 +136,7 @@ public class Pedido implements Serializable {
         this.valorTotal = x;
     }
 
-    public void removeMovelPedido() {
+    public void removeMovelPedido() throws NoSuchMethodException {
         for (MovelPedido movelPedido : movelPedidos) {
             movelPedido.delete();
         }

@@ -10,7 +10,7 @@ import model.MovelPedido;
 
 
 
-public class MovelPedidoDAO {
+public class MovelPedidoDAO extends GeralDAO{
     private static MovelPedidoDAO instance = new MovelPedidoDAO();
     public static MovelPedidoDAO getInstance(){
         return instance;
@@ -19,44 +19,7 @@ public class MovelPedidoDAO {
         
     }
 
-    public void save(MovelPedido mp)  {
-        EntityManager em = PersistenceUtil.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        try {
-            tx.begin();
-            if(mp.getId() != null){
-                em.merge(mp);
-            }else{
-            em.persist(mp);
-        }
-         tx.commit();       
-        } catch (Exception e) {
-            if(tx != null && tx.isActive()){
-                tx.rollback();
-            }
-            throw new RuntimeException(e);
-        }finally{
-            PersistenceUtil.close(em);
-        }
-       
-    }
-    public void remove(MovelPedido mp) {
-        EntityManager em = PersistenceUtil.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        try {
-            tx.begin();
-            em.remove(em.getReference(MovelPedido.class, mp.getId()));
-            tx.commit();       
-        } catch (Exception e) {
-            if(tx != null && tx.isActive()){
-                tx.rollback();
-            }
-            throw new RuntimeException(e);
-        }finally{
-            PersistenceUtil.close(em);
-        }
-    }
-
+   
     public MovelPedido find(Long id) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();

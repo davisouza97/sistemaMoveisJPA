@@ -49,7 +49,7 @@ public class MovelPedido implements Serializable {
     
     }
 
-    public void delete(){
+    public void delete() throws NoSuchMethodException{
         MovelPedidoDAO.getInstance().remove(this);
     }
     
