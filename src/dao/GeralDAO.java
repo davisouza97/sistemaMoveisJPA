@@ -16,7 +16,8 @@ public abstract class GeralDAO {
         EntityTransaction tx = em.getTransaction();
         try {
             tx.begin();
-            if(metodo != null){
+            //(perguntar pro Marco merge edita e salva )
+            if(metodo.invoke(objeto) != null){
                 em.merge(objeto);
             }else{
             em.persist(objeto);
@@ -50,13 +51,17 @@ public abstract class GeralDAO {
         }
     }
 
-    public Object find(Long id) {
+    public Object find(Long id) throws ClassNotFoundException {
+        
+        StackTraceElement [] ste = new Throwable().getStackTrace();
+        String nomeClasse = ste[1].getClassName();
+        Class classe = Class.forName(nomeClasse);
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         Object objeto = null;
         try {
             tx.begin();
-            objeto = em.find(Movel.class, id);
+            objeto = em.find(classe, id);
             tx.commit();       
         } catch (Exception e) {
             if(tx != null && tx.isActive()){
@@ -68,5 +73,30 @@ public abstract class GeralDAO {
         }
         return objeto;
     }
-    //objeto.getClass().getSimpleName();
+    
+    public List<Object> findAll() throws ClassNotFoundException {
+        
+        StackTraceElement [] ste = new Throwable().getStackTrace();
+        String nomeClasse = ste[1].getClassName();
+        Class classe = Class.forName(nomeClasse);
+        
+        EntityManager em = PersistenceUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        List<Object> objetos = null;
+        try {
+            tx.begin();
+            TypedQuery<Object> query
+                    = em.createQuery("select x from "+nomeClasse.replace("model.", "")+" x", classe);
+            objetos = query.getResultList();
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
+        } finally {
+            PersistenceUtil.close(em);
+        }
+        return objetos;
+    }
 }
