@@ -75,7 +75,7 @@ public class ManterMoveisController extends HttpServlet {
             if (!operacao.equals("Incluir")) {
                 movel.setId(idMovel);
             }
-            Object objeto = movel;
+            
             if (operacao.equals("Incluir")) {
                 movel.save();
             } else if (operacao.equals("Editar")) {
@@ -123,6 +123,6 @@ public class ManterMoveisController extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
     
 }
