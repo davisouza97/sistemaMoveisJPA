@@ -8,6 +8,8 @@ package controller;
 import dao.FuncionarioDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,14 +22,14 @@ import model.Funcionario;
 @WebServlet(name = "LoginController", urlPatterns = "/LoginController")
 public class LogarController extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ClassNotFoundException {
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
 
         RequestDispatcher view = null;
         String mensagem = "ok";
 
-        Funcionario funcionario = FuncionarioDAO.findFuncionarioByCpf(login);
+        Funcionario funcionario = (Funcionario)Funcionario.findByParameter(login, "cpf");
         if (funcionario == null) {
             mensagem = "erro";
             request.setAttribute("mensagem", mensagem);
@@ -61,7 +63,11 @@ public class LogarController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LogarController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -75,7 +81,11 @@ public class LogarController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LogarController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
