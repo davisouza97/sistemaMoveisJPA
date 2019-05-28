@@ -81,7 +81,7 @@ public class Movel implements Serializable {
         return (Movel) MovelDAO.getInstance().find(id);
     }
 
-    public static List<Movel> findAll() {
+    public static List<Movel> findAll(){
         return MovelDAO.getInstance().findAll();
     }
 

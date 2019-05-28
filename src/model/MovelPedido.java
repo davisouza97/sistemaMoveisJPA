@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 import dao.MovelPedidoDAO;
@@ -46,8 +41,6 @@ public class MovelPedido implements Serializable {
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
-
-    
     
     public MovelPedido(Movel m, Pedido p , int quant) {
     this.movel = m;
@@ -88,6 +81,5 @@ public class MovelPedido implements Serializable {
     public String toString() {
         return  id +"-"+ movel + "-" + pedido;
     }
-    
     
 }

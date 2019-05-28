@@ -48,9 +48,6 @@ public class PedidoDAO {
         EntityTransaction tx = em.getTransaction();
         try {
             tx.begin();
-//            for (MovelPedido mp : pedido.getMovelPedidos()) {
-//                MovelPedidoDAO.getInstance().remove(mp);
-//            }
             em.remove(em.getReference(Pedido.class, pedido.getId()));
             tx.commit();
         } catch (Exception e) {
