@@ -49,7 +49,7 @@ public abstract class GeralDAO {
             PersistenceUtil.close(em);
         }
     }
-
+/*
     public Object find(Long id) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -68,5 +68,6 @@ public abstract class GeralDAO {
         }
         return objeto;
     }
+*/
     //objeto.getClass().getSimpleName();
 }

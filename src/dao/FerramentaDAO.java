@@ -8,7 +8,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import model.Cliente;
 
-public class FerramentaDAO {
+public class FerramentaDAO extends GeralDAO{
 
     private static FerramentaDAO instance = new FerramentaDAO();
     public static FerramentaDAO getInstance(){
@@ -18,44 +18,7 @@ public class FerramentaDAO {
         
     }
 
-    public void save(Ferramenta ferramenta)  {
-        EntityManager em = PersistenceUtil.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        try {
-            tx.begin();
-            if(ferramenta.getId() != null){
-                em.merge(ferramenta);
-            }else{
-            em.persist(ferramenta);
-        }
-         tx.commit();       
-        } catch (Exception e) {
-            if(tx != null && tx.isActive()){
-                tx.rollback();
-            }
-            throw new RuntimeException(e);
-        }finally{
-            PersistenceUtil.close(em);
-        }
-       
-    }
-    public void remove(Ferramenta ferramenta) {
-        EntityManager em = PersistenceUtil.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        try {
-            tx.begin();
-            em.remove(em.getReference(Ferramenta.class, ferramenta.getId()));
-            tx.commit();       
-        } catch (Exception e) {
-            if(tx != null && tx.isActive()){
-                tx.rollback();
-            }
-            throw new RuntimeException(e);
-        }finally{
-            PersistenceUtil.close(em);
-        }
-    }
-
+   
     public Ferramenta find(Long id) {
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();

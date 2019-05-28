@@ -30,11 +30,11 @@ public class Fornecedor extends Pessoa implements Serializable {
 
     }
 
-    public void save() {
+    public void save() throws NoSuchMethodException {
         FornecedorDAO.getInstance().save(this);
     }
 
-    public void remove() {
+    public void remove() throws NoSuchMethodException {
         FornecedorDAO.getInstance().remove(this);
     }
 

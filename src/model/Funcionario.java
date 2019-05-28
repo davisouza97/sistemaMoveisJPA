@@ -53,11 +53,11 @@ public class Funcionario extends Pessoa implements Serializable {
         this.cpf = cpf;
     }
     
-    public void save() {
+    public void save() throws NoSuchMethodException {
         FuncionarioDAO.getInstance().save(this);
     }
 
-    public void remove() {
+    public void remove() throws NoSuchMethodException {
         FuncionarioDAO.getInstance().remove(this);
     }
     

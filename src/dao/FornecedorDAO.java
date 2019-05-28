@@ -9,7 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
-public class FornecedorDAO {
+public class FornecedorDAO extends GeralDAO{
 
     private static FornecedorDAO instance = new FornecedorDAO();
 
@@ -20,44 +20,6 @@ public class FornecedorDAO {
         
     }
 
-    public void save(Fornecedor fornecedor) {
-        EntityManager em = PersistenceUtil.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        try {
-            tx.begin();
-            if (fornecedor.getId() != null) {
-                em.merge(fornecedor);
-            } else {
-                em.persist(fornecedor);
-            }
-            tx.commit();
-        } catch (Exception e) {
-            if (tx != null && tx.isActive()) {
-                tx.rollback();
-            }
-            throw new RuntimeException(e);
-        } finally {
-            PersistenceUtil.close(em);
-        }
-    }
-
-    public void remove(Fornecedor fornecedor) {
-        EntityManager em = PersistenceUtil.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        try {
-            tx.begin();
-            em.remove(em.getReference(Fornecedor.class, fornecedor.getId()));
-            tx.commit();
-        } catch (Exception e) {
-            if (tx != null && tx.isActive()) {
-                tx.rollback();
-            }
-            throw new RuntimeException(e);
-        } finally {
-            PersistenceUtil.close(em);
-        }
-
-    }
 
     public Fornecedor find(Long id) {
         EntityManager em = PersistenceUtil.getEntityManager();

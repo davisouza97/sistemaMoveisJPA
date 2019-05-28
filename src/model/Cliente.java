@@ -41,14 +41,16 @@ public class Cliente extends Pessoa implements Serializable {
     public Cliente() {
     }
 
-    public void save() {
+   public void save() throws NoSuchMethodException {
         ClienteDAO.getInstance().save(this);
     }
 
-    public void remove() {
+    public void remove() throws NoSuchMethodException {
         ClienteDAO.getInstance().remove(this);
     }
-
+    
+    
+    
     public static Cliente find(Long id) {
         return ClienteDAO.getInstance().find(id);
     }
