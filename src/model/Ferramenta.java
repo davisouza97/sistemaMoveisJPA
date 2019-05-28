@@ -15,7 +15,7 @@ public class Ferramenta extends MaterialFerramenta {
 
     public Ferramenta() {
     }
-    
+
     public void save() throws NoSuchMethodException {
         FerramentaDAO.getInstance().save(this);
     }
@@ -24,11 +24,11 @@ public class Ferramenta extends MaterialFerramenta {
         FerramentaDAO.getInstance().remove(this);
     }
 
-    public static Ferramenta find(Long id) {
-        return FerramentaDAO.getInstance().find(id);
+    public static Ferramenta find(Long id) throws ClassNotFoundException {
+        return (Ferramenta) FerramentaDAO.getInstance().find(id);
     }
 
-    public static List<Ferramenta> findAll() {
+    public static List<Object> findAll() throws ClassNotFoundException {
         return FerramentaDAO.getInstance().findAll();
     }
 }

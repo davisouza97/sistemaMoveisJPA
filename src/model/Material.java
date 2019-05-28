@@ -23,11 +23,11 @@ public class Material extends MaterialFerramenta {
         MaterialDAO.getInstance().remove(this);
     }
     
-    public static Material find(Long id){
-        return MaterialDAO.getInstance().find(id);
+    public static Material find(Long id) throws ClassNotFoundException{
+        return (Material) MaterialDAO.getInstance().find(id);
     }
     
-    public static List<Material> findAll(){
+    public static List<Object> findAll() throws ClassNotFoundException{
         return MaterialDAO.getInstance().findAll();
     } 
 }

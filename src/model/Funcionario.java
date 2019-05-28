@@ -61,15 +61,15 @@ public class Funcionario extends Pessoa implements Serializable {
         FuncionarioDAO.getInstance().remove(this);
     }
     
-    public static Funcionario find(Long id){
-        return FuncionarioDAO.getInstance().find(id);
+    public static Funcionario find(Long id) throws ClassNotFoundException{
+        return (Funcionario) FuncionarioDAO.getInstance().find(id);
     }
     
     public static Object findByParameter(String parametro,String campo) throws ClassNotFoundException{
         return FuncionarioDAO.getInstance().findByParameter(parametro, campo);
     }
     
-    public static List<Funcionario> findAll(){
+    public static List<Object> findAll() throws ClassNotFoundException{
         return FuncionarioDAO.getInstance().findAll();
     } 
     

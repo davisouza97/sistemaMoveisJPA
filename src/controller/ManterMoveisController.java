@@ -44,7 +44,7 @@ public class ManterMoveisController extends HttpServlet {
         request.getRequestDispatcher("cadastroMoveis.jsp").forward(request, response);
     }
     
-    protected void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException, NoSuchMethodException {
+    protected void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException, NoSuchMethodException, ClassNotFoundException {
         String operacao = request.getParameter("operacao");
         String nome = request.getParameter("nome");
         double preco = Double.parseDouble(request.getParameter("preco"));

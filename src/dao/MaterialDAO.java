@@ -6,9 +6,8 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import model.Material;
 
-public class MaterialDAO extends GeralDAO{
+public class MaterialDAO extends GeralDAO {
 
-    
     private static MaterialDAO instance = new MaterialDAO();
 
     public static MaterialDAO getInstance() {
@@ -16,45 +15,6 @@ public class MaterialDAO extends GeralDAO{
     }
 
     private MaterialDAO() {
-    }
-
-    public Material find(Long id) {
-        EntityManager em = PersistenceUtil.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        Material material = null;
-        try {
-            tx.begin();
-            material = em.find(Material.class, id);
-            tx.commit();
-        } catch (Exception e) {
-            if (tx != null && tx.isActive()) {
-                tx.rollback();
-            }
-            throw new RuntimeException(e);
-        } finally {
-            PersistenceUtil.close(em);
-        }
-        return material;
-    }
-
-    public List<Material> findAll() {
-        EntityManager em = PersistenceUtil.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        List<Material> materiais = null;
-        try {
-            tx.begin();
-            TypedQuery<Material> query
-                    = em.createQuery("select m From Material m", Material.class);
-            materiais = query.getResultList();
-            tx.commit();
-        } catch (Exception e) {
-            if (tx != null && tx.isActive()) {
-                tx.rollback();
-            }
-            throw new RuntimeException(e);
-        } finally {
-            PersistenceUtil.close(em);
-        }
-        return materiais;
+        
     }
 }

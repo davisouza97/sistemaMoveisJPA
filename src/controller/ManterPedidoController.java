@@ -25,7 +25,7 @@ import utils.Strings;
 @WebServlet(name = "ManterPedidoController", urlPatterns = "/ManterPedidoController")
 public class ManterPedidoController extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException, ParseException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException, ParseException, NoSuchMethodException {
         String acao = request.getParameter("acao");
         if (acao.equals("confirmarOperacao")) {
             confirmarOperacao(request, response);
@@ -48,7 +48,7 @@ public class ManterPedidoController extends HttpServlet {
         request.getRequestDispatcher("cadastroPedido.jsp").forward(request, response);
     }
 
-    protected void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException, ParseException {
+    protected void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException, ParseException, ClassNotFoundException, NoSuchMethodException {
         String operacao = request.getParameter("operacao");
         Long idFuncionario = Long.parseLong(request.getParameter("idFuncionario"));
         Long idCliente = Long.parseLong(request.getParameter("idCliente"));
@@ -93,7 +93,7 @@ public class ManterPedidoController extends HttpServlet {
                 SalvarMoveisDoPedido(listaIdDosMoveis, pedido, listaQuantidadePorMovel);
                 pedido.save();
             } else if (operacao.equals("Editar")) {
-                Pedido pedido = PedidoDAO.getInstance().find(id);
+                Pedido pedido = (Pedido) PedidoDAO.getInstance().find(id);
                 pedido.removeMovelPedido();
                 pedido.setMovelPedidos(new ArrayList<MovelPedido>());
                 SalvarMoveisDoPedido(listaIdDosMoveis, pedido, listaQuantidadePorMovel);
@@ -114,7 +114,7 @@ public class ManterPedidoController extends HttpServlet {
         }
     }
 
-    private void SalvarMoveisDoPedido(ArrayList<String> listaIdDosMoveis, Pedido pedido, ArrayList<String> listaQuantidadePorMovel) throws NumberFormatException {
+    private void SalvarMoveisDoPedido(ArrayList<String> listaIdDosMoveis, Pedido pedido, ArrayList<String> listaQuantidadePorMovel) throws NumberFormatException, ClassNotFoundException, NoSuchMethodException {
         if (listaIdDosMoveis != null || listaQuantidadePorMovel!=null) {
             pedido.setMovelPedidos(new ArrayList<MovelPedido>());
             for (int i = 0; i < listaIdDosMoveis.size(); i++) {
@@ -129,7 +129,11 @@ public class ManterPedidoController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            processRequest(request, response);
+            try {
+                processRequest(request, response);
+            } catch (NoSuchMethodException ex) {
+                Logger.getLogger(ManterPedidoController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(ManterPedidoController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
@@ -140,7 +144,11 @@ public class ManterPedidoController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            processRequest(request, response);
+            try {
+                processRequest(request, response);
+            } catch (NoSuchMethodException ex) {
+                Logger.getLogger(ManterPedidoController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ManterPedidoController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

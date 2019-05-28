@@ -7,7 +7,7 @@ import javax.persistence.TypedQuery;
 import model.Movel;
 import model.Pedido;
 
-public class MovelDAO extends GeralDAO{
+public class MovelDAO extends GeralDAO {
 
     private static MovelDAO instance = new MovelDAO();
 

@@ -25,7 +25,7 @@ import model.Funcionario;
 @WebServlet(name = "ManterFuncionarioController", urlPatterns = "/ManterFuncionarioController")
 public class ManterFuncionarioController extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException, NoSuchMethodException {
         String acao = request.getParameter("acao");
         if (acao.equals("confirmarOperacao")) {
             confirmarOperacao(request, response);
@@ -45,7 +45,7 @@ public class ManterFuncionarioController extends HttpServlet {
         request.getRequestDispatcher("cadastroFuncionario.jsp").forward(request, response);
     }
 
-    protected void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+    protected void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException, NoSuchMethodException {
         String operacao = request.getParameter("operacao");
         String nome = request.getParameter("nome");
         String cpf = request.getParameter("cpf");
@@ -100,7 +100,11 @@ public class ManterFuncionarioController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processRequest(request, response);
+            try {
+                processRequest(request, response);
+            } catch (NoSuchMethodException ex) {
+                Logger.getLogger(ManterFuncionarioController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ManterFuncionarioController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -112,7 +116,11 @@ public class ManterFuncionarioController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processRequest(request, response);
+            try {
+                processRequest(request, response);
+            } catch (NoSuchMethodException ex) {
+                Logger.getLogger(ManterFuncionarioController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ManterFuncionarioController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

@@ -61,11 +61,11 @@ public class Pedido implements Serializable {
         PedidoDAO.getInstance().remove(this);
     }
 
-    public static Pedido find(Long id) {
-        return PedidoDAO.getInstance().find(id);
+    public static Pedido find(Long id) throws ClassNotFoundException {
+        return (Pedido) PedidoDAO.getInstance().find(id);
     }
 
-    public static List<Pedido> findAll() {
+    public static List<Object> findAll() throws ClassNotFoundException {
         return PedidoDAO.getInstance().findAll();
     }
 

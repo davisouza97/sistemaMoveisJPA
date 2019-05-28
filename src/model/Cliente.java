@@ -18,6 +18,25 @@ public class Cliente extends Pessoa implements Serializable {
         this.dataNascimento = dataNascimento;
     }
 
+    public Cliente() {
+    }
+
+    public void save() throws NoSuchMethodException {
+        ClienteDAO.getInstance().save(this);
+    }
+
+    public void remove() throws NoSuchMethodException {
+        ClienteDAO.getInstance().remove(this);
+    }
+
+    public static Cliente find(Long id) throws ClassNotFoundException{
+        return (Cliente) ClienteDAO.getInstance().find(id);
+    }
+
+    public static List<Object> findAll() throws ClassNotFoundException{
+        return ClienteDAO.getInstance().findAll();
+    }
+
     public String getDataNascimento() {
         return dataNascimento;
     }
@@ -38,24 +57,4 @@ public class Cliente extends Pessoa implements Serializable {
         this.cpf = cpf;
     }
 
-    public Cliente() {
-    }
-
-   public void save() throws NoSuchMethodException {
-        ClienteDAO.getInstance().save(this);
-    }
-
-    public void remove() throws NoSuchMethodException {
-        ClienteDAO.getInstance().remove(this);
-    }
-    
-    
-    
-    public static Cliente find(Long id) {
-        return ClienteDAO.getInstance().find(id);
-    }
-
-    public static List<Cliente> findAll() {
-        return ClienteDAO.getInstance().findAll();
-    }
 }

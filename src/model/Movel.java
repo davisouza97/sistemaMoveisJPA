@@ -21,7 +21,6 @@ public class Movel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -36,12 +35,12 @@ public class Movel implements Serializable {
     private Ferramenta ferramenta;
     @ManyToOne
     private Material material;
-    
+
     @OneToMany(mappedBy = "movel")
     private ArrayList<MovelPedido> movelPedidos;
 
     public Movel(String nome, Double preco, String tipo, Double altura, Double largura, Double comprimento, Double peso, Ferramenta ferramenta, Material material, ArrayList<MovelPedido> movelPedidos) {
-        
+
         this.nome = nome;
         this.preco = preco;
         this.tipo = tipo;
@@ -81,14 +80,10 @@ public class Movel implements Serializable {
         return (Movel) MovelDAO.getInstance().find(id);
     }
 
-    public static List<Object> findAll() throws ClassNotFoundException{
+    public static List<Object> findAll() throws ClassNotFoundException {
         return MovelDAO.getInstance().findAll();
     }
 
-    public static List<Movel> findAllByPedido(Pedido pedido) {
-        return MovelDAO.getInstance().findAllByPedido(pedido);
-    }
-    
     public Long getId() {
         return id;
     }
@@ -169,12 +164,11 @@ public class Movel implements Serializable {
         this.movelPedidos = movelPedidos;
     }
 
-
     @Override
     public String toString() {
-        return "Movel{"+ this.nome + '}';
+        return "Movel{" + this.nome + '}';
     }
-    
+
     public Ferramenta getFerramenta() {
         return ferramenta;
     }
@@ -182,6 +176,5 @@ public class Movel implements Serializable {
     public void setFerramenta(Ferramenta ferramenta) {
         this.ferramenta = ferramenta;
     }
-    
 
 }

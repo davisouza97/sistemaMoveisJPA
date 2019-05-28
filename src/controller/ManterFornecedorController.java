@@ -25,7 +25,7 @@ import model.Fornecedor;
 public class ManterFornecedorController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException, SQLException, NoSuchMethodException {
         try {
             String acao = request.getParameter("acao");
             if (acao.equals("confirmarOperacao")) {
@@ -60,7 +60,7 @@ public class ManterFornecedorController extends HttpServlet {
         }
     }
 
-    protected void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+    protected void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException, NoSuchMethodException {
         String operacao = request.getParameter("operacao");
         String nome = request.getParameter("nome");
         String cnpj = request.getParameter("cnpj");
@@ -104,7 +104,11 @@ public class ManterFornecedorController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processRequest(request, response);
+            try {
+                processRequest(request, response);
+            } catch (NoSuchMethodException ex) {
+                Logger.getLogger(ManterFornecedorController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ManterFornecedorController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -114,7 +118,11 @@ public class ManterFornecedorController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processRequest(request, response);
+            try {
+                processRequest(request, response);
+            } catch (NoSuchMethodException ex) {
+                Logger.getLogger(ManterFornecedorController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ManterFornecedorController.class.getName()).log(Level.SEVERE, null, ex);
         }
