@@ -12,7 +12,7 @@
     </head>
 
     <body>
-
+    <%@ include file="/shared/navbar.jsp" %>
         <div class="container">
             <form action="ManterClienteController?acao=confirmarOperacao&operacao=${operacao}" method="POST" autofocus>
                 <table>
