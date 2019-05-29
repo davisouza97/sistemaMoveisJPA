@@ -137,8 +137,6 @@ public class ManterPedidoController extends HttpServlet {
             Logger.getLogger(ManterPedidoController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
             Logger.getLogger(ManterPedidoController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NoSuchMethodException ex) {
-            Logger.getLogger(ManterPedidoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -155,8 +153,6 @@ public class ManterPedidoController extends HttpServlet {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ManterPedidoController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
-            Logger.getLogger(ManterPedidoController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NoSuchMethodException ex) {
             Logger.getLogger(ManterPedidoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
