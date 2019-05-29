@@ -16,7 +16,7 @@ import model.Material;
 public class ManterMaterialController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException, ClassNotFoundException {
+            throws ServletException, IOException, SQLException, ClassNotFoundException, NoSuchMethodException {
         String acao = request.getParameter("acao");
         if (acao.equals("confirmarOperacao")) {
             confirmarOperacao(request, response);
@@ -39,7 +39,7 @@ public class ManterMaterialController extends HttpServlet {
         request.getRequestDispatcher("cadastroMaterial.jsp").forward(request, response);
     }
     
-     protected void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException{
+     protected void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException, NoSuchMethodException, ClassNotFoundException{
         String operacao = request.getParameter("operacao");
          String nome = request.getParameter("nome");
          String tipo = request.getParameter("tipo");
@@ -79,7 +79,11 @@ public class ManterMaterialController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processRequest(request, response);
+            try {
+                processRequest(request, response);
+            } catch (NoSuchMethodException ex) {
+                Logger.getLogger(ManterMaterialController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ManterMaterialController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -91,7 +95,11 @@ public class ManterMaterialController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processRequest(request, response);
+            try {
+                processRequest(request, response);
+            } catch (NoSuchMethodException ex) {
+                Logger.getLogger(ManterMaterialController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ManterMaterialController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

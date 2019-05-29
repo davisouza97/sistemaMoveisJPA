@@ -1,6 +1,6 @@
 package model;
 
-import dao.FuncionarioDAO;
+import dao.GeralDAO;
 import java.io.Serializable;
 
 import java.sql.SQLException;
@@ -54,23 +54,23 @@ public class Funcionario extends Pessoa implements Serializable {
     }
     
     public void save() throws NoSuchMethodException {
-        FuncionarioDAO.getInstance().save(this);
+        GeralDAO.getInstance().save(this);
     }
 
     public void remove() throws NoSuchMethodException {
-        FuncionarioDAO.getInstance().remove(this);
+        GeralDAO.getInstance().remove(this);
     }
     
-    public static Funcionario find(Long id){
-        return FuncionarioDAO.getInstance().find(id);
+    public static Funcionario find(Long id) throws ClassNotFoundException{
+        return (Funcionario) GeralDAO.getInstance().find(id);
     }
     
     public static Object findByParameter(String parametro,String campo) throws ClassNotFoundException{
-        return FuncionarioDAO.getInstance().findByParameter(parametro, campo);
+        return GeralDAO.getInstance().findByParameter(parametro, campo);
     }
     
-    public static List<Funcionario> findAll(){
-        return FuncionarioDAO.getInstance().findAll();
+    public static List<Object> findAll() throws ClassNotFoundException{
+        return GeralDAO.getInstance().findAll();
     } 
     
     public String getCargo() {

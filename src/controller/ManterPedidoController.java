@@ -1,8 +1,6 @@
 package controller;
 
-import dao.MovelDAO;
-import dao.MovelPedidoDAO;
-import dao.PedidoDAO;
+import dao.GeralDAO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -55,7 +53,7 @@ public class ManterPedidoController extends HttpServlet {
         String dtCriado = request.getParameter("dataCriacao");
         String dtEntrega = request.getParameter("dataPrevista");
         Long id = null;
-        int qtdMoveis = MovelDAO.getInstance().findAll().size();
+        int qtdMoveis = Movel.findAll().size();
         ArrayList<String> listaIdDosMoveis = new ArrayList();
         ArrayList<String> listaQuantidadePorMovel = new ArrayList();
         for (int i = 1; i <= qtdMoveis; i++) {
@@ -93,7 +91,7 @@ public class ManterPedidoController extends HttpServlet {
                 SalvarMoveisDoPedido(listaIdDosMoveis, pedido, listaQuantidadePorMovel);
                 pedido.save();
             } else if (operacao.equals("Editar")) {
-                Pedido pedido = PedidoDAO.getInstance().find(id);
+                Pedido pedido = (Pedido) Pedido.find(id);
                 pedido.removeMovelPedido();
                 pedido.setMovelPedidos(new ArrayList<MovelPedido>());
                 SalvarMoveisDoPedido(listaIdDosMoveis, pedido, listaQuantidadePorMovel);
@@ -103,7 +101,8 @@ public class ManterPedidoController extends HttpServlet {
                 pedido.setDataPedido(dtCriado);
                 pedido.save();
             } else if (operacao.equals("Excluir")) {
-                PedidoDAO.getInstance().find(id).remove();
+                Pedido p = (Pedido) Pedido.find(id);
+                p.remove();
             }
             RequestDispatcher view = request.getRequestDispatcher("PesquisaPedidoController");
             view.forward(request, response);
@@ -118,9 +117,9 @@ public class ManterPedidoController extends HttpServlet {
         if (listaIdDosMoveis != null || listaQuantidadePorMovel!=null) {
             pedido.setMovelPedidos(new ArrayList<MovelPedido>());
             for (int i = 0; i < listaIdDosMoveis.size(); i++) {
-                Movel m = (Movel)MovelDAO.getInstance().find(Long.parseLong(listaIdDosMoveis.get(i)));
+                Movel m = (Movel)Movel.find(Long.parseLong(listaIdDosMoveis.get(i)));
                 MovelPedido mp = new MovelPedido(m, pedido, Integer.parseInt(listaQuantidadePorMovel.get(i)));
-                MovelPedidoDAO.getInstance().save(mp);
+                GeralDAO.getInstance().save(mp);
                 pedido.getMovelPedidos().add(mp);
             }
         }
@@ -129,7 +128,11 @@ public class ManterPedidoController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            processRequest(request, response);
+            try {
+                processRequest(request, response);
+            } catch (NoSuchMethodException ex) {
+                Logger.getLogger(ManterPedidoController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(ManterPedidoController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
@@ -142,7 +145,11 @@ public class ManterPedidoController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            processRequest(request, response);
+            try {
+                processRequest(request, response);
+            } catch (NoSuchMethodException ex) {
+                Logger.getLogger(ManterPedidoController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ManterPedidoController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

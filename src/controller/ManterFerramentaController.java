@@ -27,7 +27,7 @@ import model.Fornecedor;
 public class ManterFerramentaController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException, ClassNotFoundException {
+            throws ServletException, IOException, SQLException, ClassNotFoundException, NoSuchMethodException {
         String acao = request.getParameter("acao");
         if (acao.equals("confirmarOperacao")) {
             confirmarOperacao(request, response);
@@ -43,15 +43,15 @@ public class ManterFerramentaController extends HttpServlet {
         request.setAttribute("operacao", operacao);
         request.setAttribute("fornecedores", Fornecedor.findAll());
         if (!operacao.equals("Incluir")) {
-           Ferramenta ferramenta = Ferramenta.find(Long.parseLong(request.getParameter("id")));
-           request.setAttribute("ferramenta", ferramenta);
+            Ferramenta ferramenta = Ferramenta.find(Long.parseLong(request.getParameter("id")));
+            request.setAttribute("ferramenta", ferramenta);
 
         }
         request.getRequestDispatcher("cadastroFerramenta.jsp").forward(request, response);
 
     }
 
-    protected void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+    protected void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException, NoSuchMethodException, ClassNotFoundException {
         String operacao = request.getParameter("operacao");
         String nome = request.getParameter("nome");
         String tipo = request.getParameter("tipo");
@@ -60,17 +60,16 @@ public class ManterFerramentaController extends HttpServlet {
         String unidade = request.getParameter("unidade");
         Long idFornecedor = Long.parseLong(request.getParameter("idFornecedor"));
         Long idFerramenta = null;
-        if(!operacao.equals("Incluir")){
-        idFerramenta = Long.parseLong(request.getParameter("idFerramenta").trim());
+        if (!operacao.equals("Incluir")) {
+            idFerramenta = Long.parseLong(request.getParameter("idFerramenta").trim());
         }
-        
-        
+
         try {
             Fornecedor fornecedor = null;
-            if(idFornecedor != 0){
-              fornecedor = Fornecedor.find(idFornecedor);
+            if (idFornecedor != 0) {
+                fornecedor = Fornecedor.find(idFornecedor);
             }
-            Ferramenta ferramenta = new Ferramenta( nome, tipo, valorUnitario, qtdEstoque, unidade, fornecedor);
+            Ferramenta ferramenta = new Ferramenta(nome, tipo, valorUnitario, qtdEstoque, unidade, fornecedor);
             if (operacao.equals("Incluir")) {
                 ferramenta.save();
             } else if (operacao.equals("Editar")) {
@@ -94,7 +93,11 @@ public class ManterFerramentaController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processRequest(request, response);
+            try {
+                processRequest(request, response);
+            } catch (NoSuchMethodException ex) {
+                Logger.getLogger(ManterFerramentaController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ManterFerramentaController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -106,7 +109,11 @@ public class ManterFerramentaController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processRequest(request, response);
+            try {
+                processRequest(request, response);
+            } catch (NoSuchMethodException ex) {
+                Logger.getLogger(ManterFerramentaController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ManterFerramentaController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

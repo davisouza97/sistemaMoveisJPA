@@ -1,6 +1,6 @@
 package model;
 
-import dao.PedidoDAO;
+import dao.GeralDAO;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,19 +54,19 @@ public class Pedido implements Serializable {
     }
 
     public void save() throws NoSuchMethodException {
-        PedidoDAO.getInstance().save(this);
+        GeralDAO.getInstance().save(this);
     }
 
     public void remove() throws NoSuchMethodException {
-        PedidoDAO.getInstance().remove(this);
+        GeralDAO.getInstance().remove(this);
     }
 
     public static Pedido find(Long id) throws ClassNotFoundException {
-        return (Pedido) PedidoDAO.getInstance().find(id);
+        return (Pedido) GeralDAO.getInstance().find(id);
     }
 
     public static List<Object> findAll() throws ClassNotFoundException {
-        return PedidoDAO.getInstance().findAll();
+        return GeralDAO.getInstance().findAll();
     }
 
     public Long getId() {
