@@ -67,6 +67,7 @@ public class GeralDAO {
         StackTraceElement[] ste = new Throwable().getStackTrace();
         String nomeClasse = ste[1].getClassName();
         Class classe = Class.forName(nomeClasse);
+        
         EntityManager em = PersistenceUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         Object objeto = null;
