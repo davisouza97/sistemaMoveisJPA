@@ -9,7 +9,6 @@
 
 <nav class="navbar navbar-dark bg-dark">
     <a class="navbar-brand" href="home.jsp">Sistema Interno</a>
-    <a href="ManterFuncionarioController?acao=prepararOperacao&operacao=Editar=<c:out value="${funcionario.id}"/>> <div style="color: white;"><img src="images/abacate.png" width="35px">${sessionScope.nome}</div></a>
+    <a href="ManterFuncionarioController?acao=prepararOperacao&operacao=Editar&id=<c:out value="${sessionScope.id}"/>"><img src="images/abacate.png" width="35px">${sessionScope.nome}</div></a>
     <div><form action="DeslogarController" method="POST"><input class="btn btn-danger" type="submit" value="Logout"></form></div>
-
 </nav>
