@@ -88,13 +88,13 @@ public class ManterPedidoController extends HttpServlet {
             if (operacao.equals("Incluir")) {
                 Pedido pedido = new Pedido(cliente, funcionario, dtCriado, dtEntrega);
                 pedido.save();
-                SalvarMoveisDoPedido(listaIdDosMoveis, pedido, listaQuantidadePorMovel);
+                salvarMoveisDoPedido(listaIdDosMoveis, pedido, listaQuantidadePorMovel);
                 pedido.save();
             } else if (operacao.equals("Editar")) {
                 Pedido pedido = (Pedido) Pedido.find(id);
                 pedido.removeMovelPedido();
                 pedido.setMovelPedidos(new ArrayList<MovelPedido>());
-                SalvarMoveisDoPedido(listaIdDosMoveis, pedido, listaQuantidadePorMovel);
+                salvarMoveisDoPedido(listaIdDosMoveis, pedido, listaQuantidadePorMovel);
                 pedido.setCliente(cliente);
                 pedido.setFuncionario(funcionario);
                 pedido.setDataEntrega(dtEntrega);
@@ -113,7 +113,7 @@ public class ManterPedidoController extends HttpServlet {
         }
     }
 
-    private void SalvarMoveisDoPedido(ArrayList<String> listaIdDosMoveis, Pedido pedido, ArrayList<String> listaQuantidadePorMovel) throws NumberFormatException, ClassNotFoundException, NoSuchMethodException {
+    private void salvarMoveisDoPedido(ArrayList<String> listaIdDosMoveis, Pedido pedido, ArrayList<String> listaQuantidadePorMovel) throws NumberFormatException, ClassNotFoundException, NoSuchMethodException {
         if (listaIdDosMoveis != null || listaQuantidadePorMovel!=null) {
             pedido.setMovelPedidos(new ArrayList<MovelPedido>());
             for (int i = 0; i < listaIdDosMoveis.size(); i++) {
