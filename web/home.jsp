@@ -27,7 +27,7 @@
                     <div class="card mb-4 shadow-sm">
                         <div class="card-body">
                             <h4 class="card-title">Móveis</h4>
-                            <a href="PesquisaMovelController" class="btn btn-primary">Manter</a>
+                            <a href="PesquisaController?classe=Movel" class="btn btn-primary">Manter</a>
                         </div>
 
                     </div>
@@ -37,7 +37,7 @@
                     <div class="card mb-4 shadow-sm">
                         <div class="card-body">
                             <h4 class="card-title">Funcionário</h4>
-                            <a href="PesquisaFuncionarioController" class="btn btn-primary">Manter</a>
+                            <a href="PesquisaController?classe=Funcionario" class="btn btn-primary">Manter</a>
                         </div>
 
                     </div>
@@ -46,7 +46,7 @@
                     <div class="card mb-4 shadow-sm">
                         <div class="card-body">
                             <h4 class="card-title">Fornecedor</h4>
-                            <a href="PesquisaFornecedorController" class="btn btn-primary">Manter</a>
+                            <a href="PesquisaController?classe=Fornecedor" class="btn btn-primary">Manter</a>
                         </div>
 
                     </div>
@@ -56,7 +56,7 @@
                     <div class="card mb-4 shadow-sm">
                         <div class="card-body">
                             <h4 class="card-title">Cliente</h4>
-                            <a href="PesquisaClienteController" class="btn btn-primary">Manter</a>
+                            <a href="PesquisaController?classe=Cliente" class="btn btn-primary">Manter</a>
                         </div>
 
                     </div>
@@ -66,7 +66,7 @@
                     <div class="card mb-4 shadow-sm">
                         <div class="card-body">
                             <h4 class="card-title">Pedido</h4>
-                            <a href="PesquisaPedidoController" class="btn btn-primary">Manter</a>
+                            <a href="PesquisaController?classe=Pedido" class="btn btn-primary">Manter</a>
                         </div>
 
                     </div>
@@ -76,7 +76,7 @@
                     <div class="card mb-4 shadow-sm">
                         <div class="card-body">
                             <h4 class="card-title">Material</h4>
-                            <a href="PesquisaMaterialController" class="btn btn-primary">Manter</a>
+                            <a href="PesquisaController?classe=Material" class="btn btn-primary">Manter</a>
                         </div>
 
                     </div>
@@ -85,7 +85,7 @@
                     <div class="card mb-4 shadow-sm">
                         <div class="card-body">
                             <h4 class="card-title">Ferramenta</h4>
-                            <a href="PesquisaFerramentaController" class="btn btn-primary">Manter</a>
+                            <a href="PesquisaController?classe=Ferramenta" class="btn btn-primary">Manter</a>
                         </div>
 
                     </div>

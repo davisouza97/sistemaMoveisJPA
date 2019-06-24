@@ -55,20 +55,26 @@
                                 Relatorio Completo
                             </h5>
                             <div>
-                                <a href="RelatorioControllerMaterial" class="btn btn-success">Emitir Relatorio</a>
+                                <form action="RelatorioController" method="POST">
+                                    <input type="hidden" id="teste" name="teste" value="Materiais">
+                                    <input type="submit" value="Relatorio" class="btn btn-success"/>
+                                </form>
                             </div> 
                         </div>
                         <div class="modal-body">
                             <h5>
                                 Escolha o Tipo
                             </h5>
-                            <form action="RelatorioControllerMaterialPar" method="POST" autofocus>
+                            <form action="RelatorioControllerParametro" method="POST" autofocus>
                                 <select class="form-control" name="paramMaterial">
                                     
                                     <c:forEach items="${materiais}" var="material">
                                         <option value="${material.tipo}">${material.tipo}</option>  
                                     </c:forEach>
                                 </select>
+                                <input type="hidden" id="teste" name="teste" value="Ferramentas">
+                                <input type="hidden" id="parametro" name="parametroNome" value="Par_Material">
+                                
                                 <input type="submit" value="Enviar" class="btn btn-success"/>
 
                             </form>

@@ -8,7 +8,7 @@
     <head>
         <%@ include file="/shared/head.jsp" %>
         <title>Grid Pedido</title>
-        </head>
+    </head>
     <body>
         <%@ include file="/shared/navbar.jsp" %>
         <div class="container">
@@ -56,19 +56,24 @@
                                 Relatorio Completo
                             </h5>
                             <div>
-                                <a href="RelatorioControllerPedido" class="btn btn-success">Emitir Relatorio</a>
+                                <form action="RelatorioController" method="POST">
+                                    <input type="hidden" id="teste" name="teste" value="Pedidos">
+                                    <input type="submit" value="Relatorio" class="btn btn-success"/>
+                                </form>
                             </div> 
                         </div>
                         <div class="modal-body">
                             <h5>
                                 Escolha o Móvel
                             </h5>
-                            <form action="RelatorioControllerPedidoPar" method="POST" autofocus>
+                            <form action="RelatorioControllerParametro" method="POST" autofocus>
                                 <select class="form-control" name="paramPedido">
                                     <c:forEach items="${pedidos}" var="pedido">
                                         <option value="${pedido.id}">${pedido.id}</option>  
                                     </c:forEach>
                                 </select>
+                                <input type="hidden" id="teste" name="teste" value="Pedidos">
+                                <input type="hidden" id="parametro" name="parametroNome" value="Par_Pedido">
                                 <input type="submit" value="Enviar" class="btn btn-success"/>
                             </form>
                         </div>

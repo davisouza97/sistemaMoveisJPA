@@ -16,6 +16,18 @@
         <servlet-name>RelatorioControllerFerramentaPar</servlet-name>
         <servlet-class>relatorio.RelatorioControllerFerramentaPar</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RelatorioController</servlet-name>
+        <servlet-class>relatorio.RelatorioController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RelatorioControllerParametro</servlet-name>
+        <servlet-class>relatorio.RelatorioControllerParametro</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PesquisaController</servlet-name>
+        <servlet-class>controller.PesquisaController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LogarController</servlet-name>
         <url-pattern>/LogarController</url-pattern>
@@ -31,6 +43,18 @@
     <servlet-mapping>
         <servlet-name>RelatorioControllerFerramentaPar</servlet-name>
         <url-pattern>/RelatorioControllerFerramentaPar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RelatorioController</servlet-name>
+        <url-pattern>/RelatorioController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RelatorioControllerParametro</servlet-name>
+        <url-pattern>/RelatorioControllerParametro</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PesquisaController</servlet-name>
+        <url-pattern>/PesquisaController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

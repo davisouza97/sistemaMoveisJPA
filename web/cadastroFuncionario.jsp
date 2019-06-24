@@ -142,7 +142,7 @@
                         <tr>
                             <td>
                             <c:if test="${operacao != 'Cadastrar'}">
-                                <a href="PesquisaFuncionarioController">
+                                <a href="PesquisaController?classe=Funcionario">
                                     <input class="btn btn-danger" type="button" value="voltar">
                                 </a>
                             </c:if>

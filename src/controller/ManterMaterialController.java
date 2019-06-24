@@ -67,7 +67,7 @@ public class ManterMaterialController extends HttpServlet {
                 material.setId(idMaterial);
                 material.remove();
             }
-            request.getRequestDispatcher("PesquisaMaterialController").forward(request, response);
+            request.getRequestDispatcher("PesquisaController?classe=Material").forward(request, response);
         }catch(IOException e){
             throw new ServletException(e);
         }catch(ServletException e){

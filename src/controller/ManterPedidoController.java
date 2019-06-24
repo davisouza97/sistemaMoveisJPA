@@ -104,7 +104,7 @@ public class ManterPedidoController extends HttpServlet {
                 Pedido p = (Pedido) Pedido.find(id);
                 p.remove();
             }
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaPedidoController");
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaController?classe=Pedido");
             view.forward(request, response);
         } catch (IOException e) {
             throw new ServletException(e);

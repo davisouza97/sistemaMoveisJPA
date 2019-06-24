@@ -1,16 +1,20 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package relatorio;
 
 import dao.BD;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,27 +22,26 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import java.util.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
-@WebServlet(name = "RelatorioControllerCliente", urlPatterns = "/RelatorioControllerCliente")
-public class RelatorioControllerCliente extends HttpServlet {
+/**
+ *
+ * @author davis
+ */
+public class RelatorioController extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Connection conexao = null;
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy-HH:mm");
         Date date = new Date();
         String data = dateFormat.format(date);
+        String nome = request.getParameter("teste");
         try {
             conexao = BD.getConexao();
             HashMap parametros = new HashMap();
-            //parametros.put("Par_cidade", request.getParameter("paramCliente"));
-
-            String relatorio = getServletContext().getRealPath("/WEB-INF/classes/relatorio") + "/Clientes.jasper";
+            String relatorio = getServletContext().getRealPath("/WEB-INF/classes/relatorio") + "/" + nome + ".jasper";
             JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);
             byte[] relat = JasperExportManager.exportReportToPdf(jp);
-            response.setHeader("Content-Disposition", "attachment;filename=relatorioClientes-" + data + ".pdf");
+            response.setHeader("Content-Disposition", "attachment;filename=relatorio" + nome + "-" + data + ".pdf");
             response.setContentType("application/pdf");
             response.getOutputStream().write(relat);
         } catch (SQLException ex) {
@@ -59,7 +62,7 @@ public class RelatorioControllerCliente extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -97,4 +100,5 @@ public class RelatorioControllerCliente extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }

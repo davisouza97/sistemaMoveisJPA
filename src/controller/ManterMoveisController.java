@@ -83,7 +83,7 @@ public class ManterMoveisController extends HttpServlet {
             } else if (operacao.equals("Excluir")) {
                 movel.remove();
             }
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaMovelController");
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaController?classe=Movel");
             view.forward(request, response);
         } catch (IOException e) {
             throw new ServletException(e);

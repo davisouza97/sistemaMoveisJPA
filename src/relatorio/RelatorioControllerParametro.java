@@ -1,17 +1,20 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package relatorio;
 
 import dao.BD;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,26 +22,37 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import java.util.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
-@WebServlet(name = "RelatorioControllerFuncionario", urlPatterns = "/RelatorioControllerFuncionario")
-public class RelatorioControllerFuncionario extends HttpServlet {
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) {
- Connection conexao = null;
- DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy-HH:mm");
+/**
+ *
+ * @author davis
+ */
+public class RelatorioControllerParametro extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        Connection conexao = null;
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy-HH:mm");
         Date date = new Date();
         String data = dateFormat.format(date);
+        String nome = request.getParameter("teste");
         try {
             conexao = BD.getConexao();
             HashMap parametros = new HashMap();
-            //parametros.put("PAR_codCurso", Integer.parseInt(request.getParameter("txtCodCurso")));
-
-            String relatorio = getServletContext().getRealPath("/WEB-INF/classes/relatorio")+"/Funcionarios.jasper";
+            parametros.put(request.getParameter("parametroNome"), request.getParameter("parametroValor"));
+            String relatorio = getServletContext().getRealPath("/WEB-INF/classes/relatorio") + "/" + nome + "Param.jasper";
             JasperPrint jp = JasperFillManager.fillReport(relatorio, parametros, conexao);
             byte[] relat = JasperExportManager.exportReportToPdf(jp);
-            response.setHeader("Content-Disposition", "attachment;filename=relatorioFuncionario" + data + ".pdf");
+            response.setHeader("Content-Disposition", "attachment;filename=relatorio" + nome + "P-" + data + ".pdf");
             response.setContentType("application/pdf");
             response.getOutputStream().write(relat);
         } catch (SQLException ex) {
@@ -57,11 +71,13 @@ public class RelatorioControllerFuncionario extends HttpServlet {
             } catch (SQLException ex) {
             }
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -73,8 +89,9 @@ public class RelatorioControllerFuncionario extends HttpServlet {
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -86,12 +103,14 @@ public class RelatorioControllerFuncionario extends HttpServlet {
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }

@@ -81,7 +81,7 @@ public class ManterFuncionarioController extends HttpServlet {
             }
             RequestDispatcher view = null;
             if (!operacao.equals("Cadastrar")) {
-                view = request.getRequestDispatcher("PesquisaFuncionarioController");
+                view = request.getRequestDispatcher("PesquisaController?classe=Funcionario");
             } else {
                 view = request.getRequestDispatcher("DeslogarController");
             }

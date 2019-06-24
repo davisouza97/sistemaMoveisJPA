@@ -19,13 +19,9 @@
                     <th colspan="2">Grid Moveis</th>
                     <th> <%@ include file="/shared/busca.jsp" %></th>
                 </tr>
-                
-                    
-                
                 <tr>
                     <th>nome</th>
                     <th colspan="2">Ações</th>
-                    
                 </tr>
                 <c:forEach items="${moveis}" var="movel">
                     <tr>
@@ -55,19 +51,24 @@
                                 Relatorio Completo
                             </h5>
                             <div>
-                                <a href="RelatorioControllerMoveis" class="btn btn-success">Emitir Relatorio</a>
-                            </div> 
+                                <form action="RelatorioController" method="POST">
+                                    <input type="hidden" id="teste" name="teste" value="Moveis">
+                                    <input type="submit" value="Relatorio" class="btn btn-success"/>
+                                </form></div> 
                         </div>
                         <div class="modal-body">
                             <h5>
                                 Escolha o Tipo
                             </h5>
-                            <form action="RelatorioControllerMoveisPar" method="POST" autofocus>
-                                <select class="form-control" name="paramMovel">  
+                            <form action="RelatorioControllerParametro" method="POST" autofocus>
+                                <select class="form-control" name="paramValor">  
                                     <c:forEach items="${moveis}" var="movel">
                                         <option value="${movel.tipo}">${movel.tipo}</option>  
                                     </c:forEach>
                                 </select>
+                                <input type="hidden" id="teste" name="teste" value="Moveis">
+                                <input type="hidden" id="parametro" name="parametroNome" value="Par_Moveis">
+                                
                                 <input type="submit" value="Enviar" class="btn btn-success"/>
 
                             </form>

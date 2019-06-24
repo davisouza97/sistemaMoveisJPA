@@ -54,20 +54,26 @@
                                 Relatorio Completo
                             </h5>
                             <div>
-                                <a href="RelatorioControllerFornecedor" class="btn btn-success">Emitir Relatorio</a>
+                                <form action="RelatorioController" method="POST">
+                                    <input type="hidden" id="teste" name="teste" value="Fornecedores">
+                                    <input type="submit" value="Relatorio" class="btn btn-success"/>
+                                </form>
                             </div> 
                         </div>
                         <div class="modal-body">
                             <h5>
                                Escolha a Cidade
                             </h5>
-                            <form action="RelatorioControllerFornecedorPar" method="POST" autofocus>
+                            <form action="RelatorioControllerParametro" method="POST" autofocus>
                                 <select class="form-control" name="paramFornecedor">
                                      
                                     <c:forEach items="${fornecedores}" var="fornecedor">
                                         <option  value="${fornecedor.cidade}">${fornecedor.cidade}</option>  
                                     </c:forEach>
                                 </select>
+                                <input type="hidden" id="teste" name="teste" value="Fornecedores">
+                                <input type="hidden" id="parametro" name="parametroNome" value="Par_Fornecedor">
+                                
                                 <input type="submit" value="Enviar" class="btn btn-success"/>
 
                             </form>

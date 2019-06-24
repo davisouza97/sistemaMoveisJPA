@@ -52,20 +52,24 @@
                                 Relatorio Completo
                             </h5>
                             <div>
-                                <a href="RelatorioControllerCliente" class="btn btn-success">Emitir Relatorio</a>
+                                <form action="RelatorioController" method="POST">
+                                    <input type="hidden" id="teste" name="teste" value="Clientes">
+                                    <input type="submit" value="Relatorio" class="btn btn-success"/>
+                                </form>
                             </div> 
                         </div>
                         <div class="modal-body">
                             <h5>
                                 Escolha a Cidade
                             </h5>
-                            <form action="RelatorioControllerClientePar" method="POST" autofocus>
-                                <select class="form-control" name="paramCliente">
-                                     
+                            <form action="RelatorioControllerParametro" method="POST" autofocus>
+                                <select class="form-control" name="parametroValor">
                                     <c:forEach items="${clientes}" var="cliente">
                                         <option value="${cliente.cidade}" >${cliente.cidade}</option>  
                                     </c:forEach>
                                 </select>
+                                <input type="hidden" id="teste" name="teste" value="Clientes">
+                                <input type="hidden" id="parametro" name="parametroNome" value="Par_cidade">
                                 <input type="submit" value="Enviar" class="btn btn-success"/>
 
                             </form>
@@ -86,7 +90,6 @@
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-
     </body>
 
 </html>

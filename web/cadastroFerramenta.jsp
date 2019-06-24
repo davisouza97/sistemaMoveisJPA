@@ -79,7 +79,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <a href="PesquisaFerramentaController">
+                            <a href="PesquisaController?classe=Ferramenta">
                                 <input class="btn btn-danger" type="button" value="voltar">
                             </a>
                         </td>

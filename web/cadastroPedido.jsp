@@ -128,7 +128,7 @@
             <div class="container">
 
 
-                <a href="PesquisaPedidoController">
+                <a href="PesquisaController?classe=Pedido">
                     <input class="btn btn-danger" type="button" value="voltar">
                 </a>
 

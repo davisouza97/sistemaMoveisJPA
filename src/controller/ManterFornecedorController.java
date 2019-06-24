@@ -90,7 +90,7 @@ public class ManterFornecedorController extends HttpServlet {
                 fornecedor.setId(id);
                 fornecedor.remove();
             }
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaFornecedorController");
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaController?classe=Fornecedor");
             view.forward(request, response);
         } catch (IOException e) {
             throw new ServletException(e);

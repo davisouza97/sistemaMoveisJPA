@@ -80,7 +80,7 @@ public class ManterFerramentaController extends HttpServlet {
                 ferramenta.setId(idFerramenta);
                 ferramenta.remove();
             }
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaFerramentaController");
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaController?classe=Ferramenta");
             view.forward(request, response);
         } catch (IOException e) {
             throw new ServletException(e);

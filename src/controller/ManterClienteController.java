@@ -34,7 +34,6 @@ public class ManterClienteController extends HttpServlet {
         if (!operacao.equals("Incluir")) {
             Cliente cliente = Cliente.find(Long.parseLong(request.getParameter("id")));
             request.setAttribute("cliente", cliente);
-
         }
         request.getRequestDispatcher("cadastroCliente.jsp").forward(request, response);
     }
@@ -58,12 +57,9 @@ public class ManterClienteController extends HttpServlet {
         if (!operacao.equals("Incluir")) {
             id = Long.parseLong(request.getParameter("id"));
         }
-
         try {
             Cliente cliente = new Cliente(nome, cpf, dataNascimento, email, cep, logradouro, numero, complemento, bairro, uf, cidade, telefone, celular);
-
             if (operacao.equals("Incluir")) {
-
                 cliente.save();
             } else if (operacao.equals("Editar")) {
                 cliente.setId(id);
@@ -72,7 +68,7 @@ public class ManterClienteController extends HttpServlet {
                 cliente.setId(id);
                 cliente.remove();
             }
-            RequestDispatcher view = request.getRequestDispatcher("PesquisaClienteController");
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaController?classe=Cliente");
             view.forward(request, response);
         } catch (IOException e) {
             throw new ServletException(e);

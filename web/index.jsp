@@ -43,7 +43,7 @@
                     <input type="password" class="form-control" placeholder="Senha" name="senha">
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary btn-block" value="Logar">
+                    <button type="submit" class="btn btn-primary btn-block" value="Logar">Logar</button>
                 </div>     
             </form>
             <p class="text-center"><a href="ManterFuncionarioController?acao=prepararOperacao&operacao=Cadastrar">Criar Conta</a></p>
