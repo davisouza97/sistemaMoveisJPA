@@ -1,14 +1,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE html>
 <html lang="pt-br">
-
     <head>
         <%@ include file="/shared/head.jsp" %>
         <title>Cadastro de Pedidos</title>
         <link rel="stylesheet" type="text/css" href="styletelas.css">
     </head>
-
     <body <c:if test="${operacao == 'Incluir'}">  onload="dataHoje()"</c:if>>
         <%@ include file="/shared/navbar.jsp" %>
         <input class="form-control" type="HIDDEN" required min="1" name="idPedido" id="idPedido" value="${pedido.id}">
@@ -126,24 +123,16 @@
                 </select>
             </div></div>
             <div class="container">
-
-
                 <a href="PesquisaController?classe=Pedido">
                     <input class="btn btn-danger" type="button" value="voltar">
                 </a>
-
-                
                     <input class="btn btn-success" type="submit" name="" onclick="selectAll()" value="Confirmar">
-                
-
                 <a href="home.jsp">
                     <input class="btn btn-primary" type="button" value="Home">
                 </a>
             </div>
-
         </form>
     </body>
-
     <script src="javascripto.js"></script>
     <!-- links uteis-->
     <!--//https://www.caelum.com.br/apostila-java-web/javaserver-pages/#exerccios-primeiro-jsp -->
@@ -151,5 +140,4 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-
 </html>

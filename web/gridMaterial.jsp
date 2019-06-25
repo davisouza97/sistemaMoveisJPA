@@ -1,23 +1,15 @@
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
-
-
 <html lang="pt-br">
-
     <head>
         <%@ include file="/shared/head.jsp" %>
         <title>Grid Material</title>
         <script src="main.js"></script>
-
-
     </head>
-
     <body>
         <%@ include file="/shared/navbar.jsp" %>
         <div class="container">
-
             <table class="table table-striped table-bordered table-condensed table-hover" id="lista">
                 <tr>
                     <th colspan="2">Grid Material</th>
@@ -27,23 +19,20 @@
                     <th>nome</th>
                     <th colspan="2">Ações</th>
                 </tr>
-                <c:forEach items="${materiais}" var="material">
+                <c:forEach items="${material}" var="objetoMaterial">
                     <tr>
                         <td>
-                            <c:out value="${material.nome}" />
+                            <c:out value="${objetoMaterial.nome}" />
                         </td>
-                        <td><a class="btn btn-primary" href="ManterMaterialController?acao=prepararOperacao&operacao=Editar&id=<c:out value="${material.id}" />">Editar</a></td>
-                        <td><a class="btn btn-primary" href="ManterMaterialController?acao=prepararOperacao&operacao=Excluir&id=<c:out value="${material.id}" />">Excluir</a></td>
+                        <td><a class="btn btn-primary" href="ManterMaterialController?acao=prepararOperacao&operacao=Editar&id=<c:out value="${objetoMaterial.id}" />">Editar</a></td>
+                        <td><a class="btn btn-primary" href="ManterMaterialController?acao=prepararOperacao&operacao=Excluir&id=<c:out value="${objetoMaterial.id}" />">Excluir</a></td>
                     </tr>
                 </c:forEach>
                 <td><a class="btn btn-danger" href="home.jsp">Voltar</a></td>
                 <td colspan="3"><a class="btn btn-primary" href="ManterMaterialController?acao=prepararOperacao&operacao=Incluir">Incluir</a></td>
             </table>
-
         </div>
         <div class="container">
-
-
             <div>
                 <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modalMaterial">Relatorios</a>
             </div>
@@ -56,7 +45,7 @@
                             </h5>
                             <div>
                                 <form action="RelatorioController" method="POST">
-                                    <input type="hidden" id="teste" name="teste" value="Materiais">
+                                    <input type="hidden" id="classe" name="classe" value="Materiais">
                                     <input type="submit" value="Relatorio" class="btn btn-success"/>
                                 </form>
                             </div> 
@@ -67,25 +56,18 @@
                             </h5>
                             <form action="RelatorioControllerParametro" method="POST" autofocus>
                                 <select class="form-control" name="paramMaterial">
-                                    
-                                    <c:forEach items="${materiais}" var="material">
-                                        <option value="${material.tipo}">${material.tipo}</option>  
+                                    <c:forEach items="${materiai}" var="objetoMaterial">
+                                        <option value="${objetoMaterial.tipo}">${objetoMaterial.tipo}</option>  
                                     </c:forEach>
                                 </select>
-                                <input type="hidden" id="teste" name="teste" value="Ferramentas">
+                                <input type="hidden" id="classe" name="classe" value="Ferramentas">
                                 <input type="hidden" id="parametro" name="parametroNome" value="Par_Material">
-                                
                                 <input type="submit" value="Enviar" class="btn btn-success"/>
-
                             </form>
                         </div>
                         <div class="modal-footer">
-
-
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </div>

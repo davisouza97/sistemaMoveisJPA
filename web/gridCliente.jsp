@@ -8,13 +8,10 @@
         <%@ include file="/shared/head.jsp" %>
         <script src="main.js"></script>
 
-
     </head>
-
     <body>
         <%@ include file="/shared/navbar.jsp" %>
         <div class="container">
-
             <table class="table table-striped table-bordered table-condensed table-hover" id="lista">
                 <tr>
                     <th colspan="2">Grid Cliente</th>
@@ -24,23 +21,20 @@
                     <th>nome</th>
                     <th colspan="2">Ações</th>
                 </tr>
-                <c:forEach items="${clientes}" var="cliente">
+                <c:forEach items="${cliente}" var="objetoCliente">
                     <tr>   
                         <td>
-                            <c:out value="${cliente.nome}" />
+                            <c:out value="${objetoCliente.nome}"/>
                         </td>
-                        <td><a class="btn btn-primary" href="ManterClienteController?acao=prepararOperacao&operacao=Editar&id=<c:out value="${cliente.id}" />" >Editar</a></td>
-                        <td><a class="btn btn-primary" href="ManterClienteController?acao=prepararOperacao&operacao=Excluir&id=<c:out value="${cliente.id}" />" >Excluir</a></td>
+                        <td><a class="btn btn-primary" href="ManterClienteController?acao=prepararOperacao&operacao=Editar&id=<c:out value="${objetoCliente.id}" />" >Editar</a></td>
+                        <td><a class="btn btn-primary" href="ManterClienteController?acao=prepararOperacao&operacao=Excluir&id=<c:out value="${objetoCliente.id}" />" >Excluir</a></td>
                     </tr>
                 </c:forEach>
                 <td><a class="btn btn-danger" href="home.jsp">Voltar</a></td>
                 <td colspan="3"><a class="btn btn-primary" href="ManterClienteController?acao=prepararOperacao&operacao=Incluir">Incluir</a></td>
             </table>
-
         </div>
         <div class="container">
-
-
             <div>
                 <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modalCliente">Relatorios</a>
             </div>
@@ -53,7 +47,7 @@
                             </h5>
                             <div>
                                 <form action="RelatorioController" method="POST">
-                                    <input type="hidden" id="teste" name="teste" value="Clientes">
+                                    <input type="hidden" id="classe" name="classe" value="Clientes">
                                     <input type="submit" value="Relatorio" class="btn btn-success"/>
                                 </form>
                             </div> 
@@ -64,29 +58,22 @@
                             </h5>
                             <form action="RelatorioControllerParametro" method="POST" autofocus>
                                 <select class="form-control" name="parametroValor">
-                                    <c:forEach items="${clientes}" var="cliente">
-                                        <option value="${cliente.cidade}" >${cliente.cidade}</option>  
+                                    <c:forEach items="${cliente}" var="objetoCliente">
+                                        <option value="${objetoCliente.cidade}" >${objetoCliente.cidade}</option>  
                                     </c:forEach>
                                 </select>
-                                <input type="hidden" id="teste" name="teste" value="Clientes">
+                                <input type="hidden" id="classe" name="classe" value="Clientes">
                                 <input type="hidden" id="parametro" name="parametroNome" value="Par_cidade">
                                 <input type="submit" value="Enviar" class="btn btn-success"/>
-
                             </form>
                         </div>
                         <div class="modal-footer">
-
-
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </div>
-        <!-- Optional JavaScript -->
         <%@ include file="/shared/scriptBusca.jsp" %>
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>

@@ -44,7 +44,7 @@ public class RelatorioControllerParametro extends HttpServlet {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy-HH:mm");
         Date date = new Date();
         String data = dateFormat.format(date);
-        String nome = request.getParameter("teste");
+        String nome = request.getParameter("classe");
         try {
             conexao = BD.getConexao();
             HashMap parametros = new HashMap();

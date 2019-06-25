@@ -23,20 +23,20 @@
                     <th>Valor Total</th>
                     <th colspan="2">Ações</th>
                 </tr>
-                <c:forEach items="${pedidos}" var="pedido">
+                <c:forEach items="${pedido}" var="objetoPedido">
                     <tr>
                         <td>
-                            <c:out value="${pedido.id}" />
+                            <c:out value="${objetoPedido.id}" />
                         </td>
 
                         <td>
-                            <c:out value=" R$${pedido.valorTotal}" />
+                            <c:out value=" R$${objetoPedido.valorTotal}" />
                         </td>
 
                         <td><a class="btn btn-primary"
-                               href="ManterPedidoController?acao=prepararOperacao&Operacao=Editar&id=<c:out value="${pedido.id}" />">Editar</a></td>
+                               href="ManterPedidoController?acao=prepararOperacao&Operacao=Editar&id=<c:out value="${objetoPedido.id}" />">Editar</a></td>
                         <td><a class="btn btn-primary"
-                               href="ManterPedidoController?acao=prepararOperacao&Operacao=Excluir&id=<c:out value="${pedido.id}" />">Excluir</a></td>
+                               href="ManterPedidoController?acao=prepararOperacao&Operacao=Excluir&id=<c:out value="${objetoPedido.id}" />">Excluir</a></td>
                     </tr>
                 </c:forEach>
                 <td><a class="btn btn-danger" href="home.jsp">Voltar</a></td>
@@ -57,7 +57,7 @@
                             </h5>
                             <div>
                                 <form action="RelatorioController" method="POST">
-                                    <input type="hidden" id="teste" name="teste" value="Pedidos">
+                                    <input type="hidden" id="classe" name="classe" value="Pedidos">
                                     <input type="submit" value="Relatorio" class="btn btn-success"/>
                                 </form>
                             </div> 
@@ -68,11 +68,11 @@
                             </h5>
                             <form action="RelatorioControllerParametro" method="POST" autofocus>
                                 <select class="form-control" name="paramPedido">
-                                    <c:forEach items="${pedidos}" var="pedido">
-                                        <option value="${pedido.id}">${pedido.id}</option>  
+                                    <c:forEach items="${pedido}" var="objetoPedido">
+                                        <option value="${objetoPedido.id}">${objetoPedido.id}</option>  
                                     </c:forEach>
                                 </select>
-                                <input type="hidden" id="teste" name="teste" value="Pedidos">
+                                <input type="hidden" id="classe" name="classe" value="Pedidos">
                                 <input type="hidden" id="parametro" name="parametroNome" value="Par_Pedido">
                                 <input type="submit" value="Enviar" class="btn btn-success"/>
                             </form>

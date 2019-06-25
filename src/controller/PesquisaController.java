@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.logging.Level;
@@ -16,26 +10,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Ferramenta;
 
-/**
- *
- * @author davis
- */
 public class PesquisaController extends HttpServlet {
-
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, ClassNotFoundException, NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         String nomeClasse = request.getParameter("classe");
         Class classe = Class.forName("model."+nomeClasse);
         Method metodo = classe.getMethod("findAll", null);
         String nomeAtributo = nomeClasse.toLowerCase();
-        if (nomeAtributo.equalsIgnoreCase("movel")) {
-            nomeAtributo = "movei";
-        }if(nomeAtributo.equalsIgnoreCase("material")){
-            nomeAtributo = "materiai";
-        }
-        request.setAttribute(nomeAtributo+"s", metodo.invoke(classe));
+        request.setAttribute(nomeAtributo, metodo.invoke(classe));
         RequestDispatcher view = request.getRequestDispatcher("grid" + nomeClasse + ".jsp");
         view.forward(request, response);
     }

@@ -23,13 +23,13 @@
                     <th>nome</th>
                     <th colspan="2">Ações</th>
                 </tr>
-                <c:forEach items="${moveis}" var="movel">
+                <c:forEach items="${movel}" var="objetoMovel">
                     <tr>
                         <td>
-                            <c:out value="${movel.nome}" />
+                            <c:out value="${objetoMovel.nome}" />
                         </td>
-                        <td><a class="btn btn-primary" href="ManterMoveisController?acao=prepararOperacao&operacao=Editar&id=<c:out value="${movel.id}" />">Editar</a></td>
-                        <td><a class="btn btn-primary" href="ManterMoveisController?acao=prepararOperacao&operacao=Excluir&id=<c:out value="${movel.id}" />">Excluir</a></td>
+                        <td><a class="btn btn-primary" href="ManterMoveisController?acao=prepararOperacao&operacao=Editar&id=<c:out value="${objetoMovel.id}" />">Editar</a></td>
+                        <td><a class="btn btn-primary" href="ManterMoveisController?acao=prepararOperacao&operacao=Excluir&id=<c:out value="${objetoMovel.id}" />">Excluir</a></td>
                     </tr>
                 </c:forEach>
                 <td><a class="btn btn-danger" href="home.jsp">Voltar</a></td>
@@ -52,7 +52,7 @@
                             </h5>
                             <div>
                                 <form action="RelatorioController" method="POST">
-                                    <input type="hidden" id="teste" name="teste" value="Moveis">
+                                    <input type="hidden" id="classe" name="classe" value="Moveis">
                                     <input type="submit" value="Relatorio" class="btn btn-success"/>
                                 </form></div> 
                         </div>
@@ -62,11 +62,11 @@
                             </h5>
                             <form action="RelatorioControllerParametro" method="POST" autofocus>
                                 <select class="form-control" name="paramValor">  
-                                    <c:forEach items="${moveis}" var="movel">
-                                        <option value="${movel.tipo}">${movel.tipo}</option>  
+                                    <c:forEach items="${movel}" var="objetoMovel">
+                                        <option value="${objetoMovel.tipo}">${objetoMovel.tipo}</option>  
                                     </c:forEach>
                                 </select>
-                                <input type="hidden" id="teste" name="teste" value="Moveis">
+                                <input type="hidden" id="classe" name="classe" value="Moveis">
                                 <input type="hidden" id="parametro" name="parametroNome" value="Par_Moveis">
                                 
                                 <input type="submit" value="Enviar" class="btn btn-success"/>

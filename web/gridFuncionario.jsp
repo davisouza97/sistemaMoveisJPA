@@ -29,13 +29,13 @@
                     <th>nome</th>
                     <th colspan="2">Ações</th>
                 </tr>
-                <c:forEach items="${funcionarios}" var="funcionario">
+                <c:forEach items="${funcionario}" var="objetoFuncionario">
                     <tr>
                         <td>
-                            <c:out value="${funcionario.nome}" />
+                            <c:out value="${objetoFuncionario.nome}" />
                         </td>
-                        <td><a class="btn btn-primary" href="ManterFuncionarioController?acao=prepararOperacao&operacao=Editar&id=<c:out value="${funcionario.id}" />">Editar</a></td>
-                        <td><a class="btn btn-primary" href="ManterFuncionarioController?acao=prepararOperacao&operacao=Excluir&id=<c:out value="${funcionario.id}" />">Excluir</a></td>
+                        <td><a class="btn btn-primary" href="ManterFuncionarioController?acao=prepararOperacao&operacao=Editar&id=<c:out value="${objetoFuncionario.id}" />">Editar</a></td>
+                        <td><a class="btn btn-primary" href="ManterFuncionarioController?acao=prepararOperacao&operacao=Excluir&id=<c:out value="${objetoFuncionario.id}" />">Excluir</a></td>
                     </tr>
                 </c:forEach>
                 <td><a class="btn btn-danger" href="home.jsp">Voltar</a></td>
@@ -55,7 +55,7 @@
                             </h5>
                             <div>
                                 <form action="RelatorioController" method="POST">
-                                    <input type="hidden" id="teste" name="teste" value="Funcionarios">
+                                    <input type="hidden" id="classe" name="classe" value="Funcionarios">
                                     <input type="submit" value="Relatorio" class="btn btn-success"/>
                                 </form>
                             </div> 
@@ -67,11 +67,11 @@
                             <form action="RelatorioControllerParametro" method="POST" autofocus>
                                 <select class="form-control" name="paramFuncionario">
 
-                                    <c:forEach items="${funcionarios}" var="funcionario">
-                                        <option value="${funcionario.cargo}">${funcionario.cargo}</option>  
+                                    <c:forEach items="${funcionario}" var="objetoFuncionario">
+                                        <option value="${objetoFuncionario.cargo}">${objetoFuncionario.cargo}</option>  
                                     </c:forEach>
                                 </select>
-                                <input type="hidden" id="teste" name="teste" value="Ferramentas">
+                                <input type="hidden" id="classe" name="classe" value="Ferramentas">
                                 <input type="hidden" id="parametro" name="parametroNome" value="Par_Funcionario">
                             
                                 <input type="submit" value="Enviar" class="btn btn-success"/>

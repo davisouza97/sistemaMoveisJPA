@@ -49,6 +49,11 @@ public class MovelPedido implements Serializable {
     
     }
 
+    public MovelPedido(Movel movel, int quantidade) {
+        this.movel = movel;
+        this.quantidade = quantidade;
+    }
+    
     public void delete() throws NoSuchMethodException{
         GeralDAO.getInstance().remove(this);
     }

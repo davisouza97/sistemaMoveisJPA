@@ -54,24 +54,12 @@ public class ManterPedidoController extends HttpServlet {
         String dtEntrega = request.getParameter("dataPrevista");
         Long id = null;
         int qtdMoveis = Movel.findAll().size();
-        ArrayList<String> listaIdDosMoveis = new ArrayList();
-        ArrayList<String> listaQuantidadePorMovel = new ArrayList();
+        ArrayList<MovelPedido> listaMovelPedido = new ArrayList<>();
         for (int i = 1; i <= qtdMoveis; i++) {
-            String aux = request.getParameter("id" + i);
-            if (aux == null) {
-                break;
-            }
-            listaIdDosMoveis.add(aux);   //id dos moveis
+            String idMovel = request.getParameter("id" + i);
+            String qtdMovel = request.getParameter("qtd" + i);
+            listaMovelPedido.add(new MovelPedido((Movel) Movel.find(Long.parseLong(idMovel)), Integer.parseInt(qtdMovel)));
         }
-        for (int i = 1; i <= qtdMoveis; i++) {
-            String aux = request.getParameter("qtd" + i);
-            if (aux == null) {
-                break;
-            }
-            listaQuantidadePorMovel.add(aux);   //qunatidade dos moveis
-        }
-        
-        
         if (!operacao.equals("Incluir")) {
             id = Long.parseLong(request.getParameter("id"));
         }
@@ -84,17 +72,16 @@ public class ManterPedidoController extends HttpServlet {
             if (idCliente != 0) {
                 cliente = Cliente.find(idCliente);
             }
-
             if (operacao.equals("Incluir")) {
                 Pedido pedido = new Pedido(cliente, funcionario, dtCriado, dtEntrega);
                 pedido.save();
-                salvarMoveisDoPedido(listaIdDosMoveis, pedido, listaQuantidadePorMovel);
+                salvarMovelPedido(pedido, listaMovelPedido);
                 pedido.save();
             } else if (operacao.equals("Editar")) {
                 Pedido pedido = (Pedido) Pedido.find(id);
                 pedido.removeMovelPedido();
                 pedido.setMovelPedidos(new ArrayList<MovelPedido>());
-                salvarMoveisDoPedido(listaIdDosMoveis, pedido, listaQuantidadePorMovel);
+                salvarMovelPedido(pedido, listaMovelPedido);
                 pedido.setCliente(cliente);
                 pedido.setFuncionario(funcionario);
                 pedido.setDataEntrega(dtEntrega);
@@ -113,14 +100,13 @@ public class ManterPedidoController extends HttpServlet {
         }
     }
 
-    private void salvarMoveisDoPedido(ArrayList<String> listaIdDosMoveis, Pedido pedido, ArrayList<String> listaQuantidadePorMovel) throws NumberFormatException, ClassNotFoundException, NoSuchMethodException {
-        if (listaIdDosMoveis != null || listaQuantidadePorMovel!=null) {
+    private void salvarMovelPedido(Pedido pedido, ArrayList<MovelPedido> listaMovelPedido) throws NumberFormatException, ClassNotFoundException, NoSuchMethodException {
+        if (listaMovelPedido != null) {
             pedido.setMovelPedidos(new ArrayList<MovelPedido>());
-            for (int i = 0; i < listaIdDosMoveis.size(); i++) {
-                Movel m = (Movel)Movel.find(Long.parseLong(listaIdDosMoveis.get(i)));
-                MovelPedido mp = new MovelPedido(m, pedido, Integer.parseInt(listaQuantidadePorMovel.get(i)));
-                GeralDAO.getInstance().save(mp);
-                pedido.getMovelPedidos().add(mp);
+            for (int i = 0; i < listaMovelPedido.size(); i++) {
+                listaMovelPedido.get(i).setPedido(pedido);
+                GeralDAO.getInstance().save(listaMovelPedido.get(i));
+                pedido.getMovelPedidos().add(listaMovelPedido.get(i));
             }
         }
     }
@@ -161,5 +147,4 @@ public class ManterPedidoController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }
-
 }

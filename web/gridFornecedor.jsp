@@ -26,23 +26,20 @@
                     <th>nome</th>
                     <th colspan="2">Ações</th>
                 </tr>
-                <c:forEach items="${fornecedores}" var="fornecedor">
+                <c:forEach items="${fornecedor}" var="objetoFornecedor">
                     <tr>
                         <td>
-                            <c:out value="${fornecedor.nome}" />
+                            <c:out value="${objetoFornecedor.nome}" />
                         </td>
-                        <td><a class="btn btn-primary" href="ManterFornecedorController?acao=prepararOperacao&operacao=Editar&id=<c:out value="${fornecedor.id}"/> ">Editar</a></td>
-                        <td><a class="btn btn-primary" href="ManterFornecedorController?acao=prepararOperacao&operacao=Excluir&id=<c:out value="${fornecedor.id}"/> ">Excluir</a></td>
+                        <td><a class="btn btn-primary" href="ManterFornecedorController?acao=prepararOperacao&operacao=Editar&id=<c:out value="${objetoFornecedor.id}"/> ">Editar</a></td>
+                        <td><a class="btn btn-primary" href="ManterFornecedorController?acao=prepararOperacao&operacao=Excluir&id=<c:out value="${objetoFornecedor.id}"/> ">Excluir</a></td>
                     </tr>
                 </c:forEach>
                 <td><a class="btn btn-danger" href="home.jsp">Voltar</a></td>
                 <td colspan="3"><a class="btn btn-primary" href="ManterFornecedorController?acao=prepararOperacao&operacao=Incluir">Incluir</a></td>
             </table>
-
         </div>
         <div class="container">
-
-
             <div>
                 <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modalFornecedor">Relatorios</a>
             </div>
@@ -55,7 +52,7 @@
                             </h5>
                             <div>
                                 <form action="RelatorioController" method="POST">
-                                    <input type="hidden" id="teste" name="teste" value="Fornecedores">
+                                    <input type="hidden" id="classe" name="classe" value="Fornecedores">
                                     <input type="submit" value="Relatorio" class="btn btn-success"/>
                                 </form>
                             </div> 
@@ -66,34 +63,24 @@
                             </h5>
                             <form action="RelatorioControllerParametro" method="POST" autofocus>
                                 <select class="form-control" name="paramFornecedor">
-                                     
-                                    <c:forEach items="${fornecedores}" var="fornecedor">
-                                        <option  value="${fornecedor.cidade}">${fornecedor.cidade}</option>  
+                                    <c:forEach items="${fornecedore}" var="objetoFornecedor">
+                                        <option  value="${objetoFornecedor.cidade}">${objetoFornecedor.cidade}</option>  
                                     </c:forEach>
                                 </select>
-                                <input type="hidden" id="teste" name="teste" value="Fornecedores">
+                                <input type="hidden" id="classe" name="classe" value="Fornecedores">
                                 <input type="hidden" id="parametro" name="parametroNome" value="Par_Fornecedor">
-                                
                                 <input type="submit" value="Enviar" class="btn btn-success"/>
-
                             </form>
                         </div>
                         <div class="modal-footer">
-
-
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </div>
-        <!-- Optional JavaScript -->
         <%@ include file="/shared/scriptBusca.jsp" %>
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     </body>
-
 </html>
