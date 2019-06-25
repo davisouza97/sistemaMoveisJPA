@@ -50,15 +50,15 @@ public class ManterPedidoController extends HttpServlet {
         String operacao = request.getParameter("operacao");
         Long idFuncionario = Long.parseLong(request.getParameter("idFuncionario"));
         Long idCliente = Long.parseLong(request.getParameter("idCliente"));
-        String dtCriado = request.getParameter("dataCriacao");
-        String dtEntrega = request.getParameter("dataPrevista");
+        String dataCriado = request.getParameter("dataCriacao");
+        String dataEntrega = request.getParameter("dataPrevista");
         Long id = null;
-        int qtdMoveis = Movel.findAll().size();
+        int quantidadeMoveis = Movel.findAll().size();
         ArrayList<MovelPedido> listaMovelPedido = new ArrayList<>();
-        for (int i = 1; i <= qtdMoveis; i++) {
+        for (int i = 1; i <= quantidadeMoveis; i++) {
             String idMovel = request.getParameter("id" + i);
-            String qtdMovel = request.getParameter("qtd" + i);
-            listaMovelPedido.add(new MovelPedido((Movel) Movel.find(Long.parseLong(idMovel)), Integer.parseInt(qtdMovel)));
+            String quantidadeMovel = request.getParameter("qtd" + i);
+            listaMovelPedido.add(new MovelPedido((Movel) Movel.find(Long.parseLong(idMovel)), Integer.parseInt(quantidadeMovel)));
         }
         if (!operacao.equals("Incluir")) {
             id = Long.parseLong(request.getParameter("id"));
@@ -73,7 +73,7 @@ public class ManterPedidoController extends HttpServlet {
                 cliente = Cliente.find(idCliente);
             }
             if (operacao.equals("Incluir")) {
-                Pedido pedido = new Pedido(cliente, funcionario, dtCriado, dtEntrega);
+                Pedido pedido = new Pedido(cliente, funcionario, dataCriado, dataEntrega);
                 pedido.save();
                 salvarMovelPedido(pedido, listaMovelPedido);
                 pedido.save();
@@ -84,8 +84,8 @@ public class ManterPedidoController extends HttpServlet {
                 salvarMovelPedido(pedido, listaMovelPedido);
                 pedido.setCliente(cliente);
                 pedido.setFuncionario(funcionario);
-                pedido.setDataEntrega(dtEntrega);
-                pedido.setDataPedido(dtCriado);
+                pedido.setDataEntrega(dataEntrega);
+                pedido.setDataPedido(dataCriado);
                 pedido.save();
             } else if (operacao.equals("Excluir")) {
                 Pedido p = (Pedido) Pedido.find(id);

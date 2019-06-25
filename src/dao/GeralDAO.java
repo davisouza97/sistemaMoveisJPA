@@ -27,7 +27,6 @@ public class GeralDAO {
         EntityTransaction tx = em.getTransaction();
         try {
             tx.begin();
-            //(perguntar pro Marco merge edita e salva )
             if (metodo.invoke(objeto) != null) {
                 em.merge(objeto);
             } else {

@@ -12,10 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Cliente;
 
-/**
- *
- * @author Walter
- */
+
 @WebServlet(name = "ManterClienteController", urlPatterns = "/ManterClienteController")
 public class ManterClienteController extends HttpServlet {
 
@@ -105,6 +102,6 @@ public class ManterClienteController extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }

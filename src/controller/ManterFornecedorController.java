@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controller;
 
 import java.io.IOException;
@@ -17,10 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Fornecedor;
 
-/**
- *
- * @author Walter
- */
+
 @WebServlet(name = "ManterFornecedorController", urlPatterns = "/ManterFornecedorController")
 public class ManterFornecedorController extends HttpServlet {
 
@@ -131,6 +124,6 @@ public class ManterFornecedorController extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }
