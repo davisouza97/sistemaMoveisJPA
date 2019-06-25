@@ -58,6 +58,9 @@ public class ManterPedidoController extends HttpServlet {
         for (int i = 1; i <= quantidadeMoveis; i++) {
             String idMovel = request.getParameter("id" + i);
             String quantidadeMovel = request.getParameter("qtd" + i);
+            if(idMovel==null || quantidadeMovel==null){
+                break;
+            }
             listaMovelPedido.add(new MovelPedido((Movel) Movel.find(Long.parseLong(idMovel)), Integer.parseInt(quantidadeMovel)));
         }
         if (!operacao.equals("Incluir")) {
